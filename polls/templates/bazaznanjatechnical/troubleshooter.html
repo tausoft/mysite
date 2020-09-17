@@ -1,0 +1,74 @@
+{% load static %}
+<html>
+<head>
+<title>Baza znanja</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}"/>
+
+<link rel="stylesheet" href="{% static 'bazaznanja/style.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src={% static 'bazaznanja/main.js' %}></script>
+
+</head>
+
+<body bgcolor="#e0e0e0" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<!-- Header -->
+<div class="topnav" id="myTopnav">
+	<a href="{% url 'bazaznanja_cst' %}" class="active">početna</a>
+	<a href="#sabloni">šabloni</a>
+	<a href="#uputstva">uputstva</a>
+	<a href="{% url 'troubleshooter' %}">troubleshooter</a>
+
+	<a href="javascript:void(0);" class="icon" onclick="navBar()">
+	  <i class="fa fa-bars"></i>
+	</a>
+</div>
+
+<a href="">
+	<img class="myelement" id="BZlogo" src="{% static 'bazaznanja/images/logo_bz.png' %}" width="auto" height="auto">
+</a>
+
+<div style="background-color: #ffffff; text-align:center;">
+<a href="">
+	<img class="myelement" id="BZlogo_small" src="{% static 'bazaznanja/images/logo_bz_small.png' %}" width="auto" height="auto">
+</a>
+</div>
+<!-- Header -->
+
+
+<div style="background-color: #ffffff; text-align: center;">
+<br /><br /><br /><br /><br /><br /><br />
+
+<div class="row">
+	<div class="column">
+		</br>
+		<input style="text-align:center" id="imei" type="text" name="imei" value="{{ imei }}" autocomplete="off">
+		<br />
+		<br />
+		<input type="image" onclick="searchValidate()" id="ace" src="{% static 'images/buttonlowercut_pretrazi.png' %}"
+					onmouseover="this.src='{% static 'images/buttonlowercut_pretrazi_hover.png' %}';"
+					onmouseout="this.src='{% static 'images/buttonlowercut_pretrazi.png' %}';">
+	</div>
+</div>
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</div>
+
+  
+<!-- Footer -->
+<div style="background-color: #e0e0e0; text-align:center; padding:50px 40px;">
+	<a href="http://localhost:8000/polls"><font color="000000" size="4">ratbox</font></a>
+	<font color="000000" size="4"> | </font>
+	<a href="{% url 'about' %}"><font color="000000" size="4">o nama</font></a><br />
+{% if user.is_authenticated %}
+	<p id="loggedUser" style="text-align: right; columns: #000000;"><font color="000000" size="3"><b>{{request.user.username}} </font></b><a href="{% url 'logout' %}"><font color="ffffff" size="3">izloguj se</font></a></p>
+{% else %}
+	<p id="loggedUser" style="text-align: right; columns: #ffffff;"><a href="{% url 'login' %}"><font color="ffffff" size="3">uloguj se</font></a></p>
+{% endif %}
+</div>
+<!-- Footer -->
+
+</body>
+</html>

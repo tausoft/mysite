@@ -1,0 +1,230 @@
+{% load static %}
+<html>
+<head>
+<title>RA&T box</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}"/>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<script type="text/javascript" src={% static 'main.js' %} defer></script>
+<script class="jsbin" src=https://ajax.gogleapis.com/ajax/libs/jquery/1/jquery.min.js></script>
+<script>
+    var ace_alert = "{{ trigger }}";
+</script>
+
+</head>
+
+<body bgcolor="#8f153e" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<!-- Header -->
+<img id="header" src="{% static 'images/Header.png' %}" max width="100%" height="120px">
+<div style="background-color: #8f153e; padding:100px 80px;"></div>
+
+<img id="Viplogo" src="{% static 'images/vip.png' %}" width="75px" height="66px">
+<a href="{% url 'index' %}">
+<img id="RATlogo" src="{% static 'images/RAT_logo.png' %}" width="auto" height="auto">
+</a>
+<!-- Header -->
+
+<!-- Navigator -->
+<div class="bgimg-1">
+	<div class="navigatorimg">
+		<h2 style="text-align:center;">Dekodiranje - Admin</h2>
+  </div>
+</div>
+<!-- Navigator -->
+
+<!-- APPS -->
+
+<!-- DOWNLOAD VENDORS LIST -->
+<div style="background-color: #ffffff; overflow-x:auto; padding:50px 80px; text-align: center;">
+	<h3 style="text-align:center";>IMEI liste</h3>
+	<div class="row">
+		<div class="column">
+			<form class="contact-form" method="POST" action="/download_list/"> 
+				{% csrf_token %}
+				<input type="checkbox" onClick="toggleAll(this)" /> Obeleži sve<br/><br/>
+				<input type="checkbox" class="select_all" name="name0" value="alcatel"/> Alcatel
+				<input type="checkbox" class="select_all" name="name1" value="htc"/> HTC
+				<input type="checkbox" class="select_all" name="name2" value="huawei"/> Huawei
+				<input type="checkbox" class="select_all" name="name3" value="lg"/> LG
+				<input type="checkbox" class="select_all" name="name4" value="lumia"/> Lumia
+				<input type="checkbox" class="select_all" name="name5" value="samsung"/> Samsung
+				<input type="checkbox" class="select_all" name="name6" value="sony"/> Sony
+				<input type="checkbox" class="select_all" name="name7" value="zte"/> ZTE
+				<br><br>
+				<input type="image" onclick="checkboxChecker()" src="{% static 'images/button_lowercut.png' %}"
+								onmouseover="this.src='{% static 'images/button_lowercut_hover.png' %}';"
+								onmouseout="this.src='{% static 'images/button_lowercut.png' %}';">
+			</form>
+		</div>
+	</div>
+	<div class="ace-alert" style="background-color: #f15959">
+		<p style="color:#ffffff;" class="checkbox-alert" hidden>Neophodno je odabrati makar jednog proizvođača!</p>
+	</div>
+	<div class="row">
+		<div class="column">
+			<div class="ace-alert" style="background-color: #62eb62">
+				<p style="color:#ffffff;">{{ list_trigger }} </p>
+			</div>
+		</div>
+	</div>
+	<br><br>
+
+	<!-- NOKIA LIST -->
+	<h3 style="text-align:center";>Nokia liste</h3>
+	<p style="text-align:center";>Liste IMEI brojeva sortiranih prema tipu winlock-a:</p>
+	<div class="row">
+		<div class="column">
+			<form class="contact-form" method="POST" action="/nokia_list/"> 
+				{% csrf_token %}
+				<br>
+				<input type="image" src="{% static 'images/button_lowercut.png' %}"
+								onmouseover="this.src='{% static 'images/button_lowercut_hover.png' %}';"
+								onmouseout="this.src='{% static 'images/button_lowercut.png' %}';">
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="column">
+			<div class="ace-alert" style="background-color: #62eb62">
+				<p style="color:#ffffff;">{{ nokia_trigger }} </p>
+			</div>
+		</div>
+	</div>
+	<!-- NOKIA LIST -->
+
+</div>
+<!-- DOWNLOAD VENDORS LIST -->
+
+<div style="background-color: #e4e4e4; overflow-x:auto; padding:50px 80px; text-align: center;"></div>
+
+<!-- UPLOAD CSV -->
+<div style="background-color: #ffffff; padding:50px 80px;">
+	<h3 style="text-align:center";>Unos kodova za dekodiranje</h3>
+		<form name="myWebForm" method="POST" action="/upload_csv/" enctype="multipart/form-data">
+			{% csrf_token %}
+			<div class="form-group">
+				<div class="file-upload">
+					<div class="image-upload-wrap">
+						<input class="file-upload-input" type='file' name="upload_csv" onchange="readURL(this);" accept=".csv"/>
+						<div class="drag-text">
+							<h3>Prevuci ili izaberi CSV datoteku</h3>
+						</div>
+					</div>
+					<div class="file-upload-content">
+						<object data="{% static 'images/CSV_file.png' %}" type="image/png">
+							<img class="file-upload-image" src="#" alt="your image" />
+						</object>
+						<div class="image-title-wrap">
+							<p>Uspešno je učitana datoteka <span class="image-title">Uploaded Image</span></p> <br />
+							<div class="row">
+								<div class="column">
+									<input src='{% static "images/ocitaj.png" %}' type="image" class="file-submit-content"onchange="readURL(this);" hidden
+										onmouseover="this.src='{% static 'images/ocitaj_hover.png' %}';"
+										onmouseout="this.src='{% static 'images/ocitaj.png' %}';">
+									<input src='{% static "images/uklonidatoteku.png" %}' type="image" onclick="removeUpload()"
+										onmouseover="this.src='{% static 'images/uklonidatoteku_hover.png' %}';"
+										onmouseout="this.src='{% static 'images/uklonidatoteku.png' %}';">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+</div>
+
+</br>
+<!-- UPLOAD CSV -->
+
+<div style="background-color: #e4e4e4; overflow-x:auto; padding:50px 80px; text-align: center;"></div>
+
+<!-- ACE LIST AND TABLE-->
+<div style="background-color: #ffffff; padding:50px 80px; text-align: center;">
+	<h3 style="text-align:center";>Liste za ACE</h3>
+	<div class="row">
+		<div class="column">
+			<form class="contact-form" method="POST" action="/ace_list/"> 
+				{% csrf_token %}
+				<input type="image" onclick="fnValidate()" id = "demo" name = "{{ trigger }}" src="{% static 'images/button_lowercut.png' %}"
+								onmouseover="this.src='{% static 'images/button_lowercut_hover.png' %}';"
+								onmouseout="this.src='{% static 'images/button_lowercut.png' %}';">
+			</form>
+			<div class="ace-alert" style="background-color: #62eb62">
+				<p style="color:#ffffff;" class="ace-alert" hidden>Nema novih zahteva za preuzimanje!</p>
+			</div>
+			<!--  not in use - if there is need for pop-up alert message
+			{% if messages %}
+   			<script>
+    			{% for message in messages %}
+        			alert("{{ message }}");
+    			{% endfor %}
+   			</script>
+			{% endif %}
+			-->
+		</div>
+	</div>
+	</br>
+	<p>Kreirane ACE liste - preuzmi ponovo</p>
+	<div class="row">
+		<div class="column">
+			{% for item in ace_data reversed %}
+				{% if forloop.counter < 11 %}
+					<button type="submit" class="ace-download-btn">
+						<form class="contact-form" method="POST" action="/ace_table/">
+							{% csrf_token %}
+							<input style="background-color:#ffffff; color:#000000;" type="submit" id="ace_name" value='{{ item.datecreated|date:"d.m.Y - H:i" }}'>
+							</br>
+							<input id="ace_name" type="text" name="ace_name" value="{{ item.name }}"hidden>
+							<input type="image" id="ace" src="{% static 'images/button_lowercut.png' %}"
+								onmouseover="this.src='{% static 'images/button_lowercut_hover.png' %}';"
+								onmouseout="this.src='{% static 'images/button_lowercut.png' %}';">
+						</form>
+					</button>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+</div>
+<!-- ACE LIST AND TABLE-->
+
+<!-- APPS -->
+
+<!-- Stephen -->
+<div class="bgimg-2">
+</div>
+
+<div style="background-color: #ffffff; text-align:center;  padding:25px 80px; text-align: justify;">
+	<h3 style="text-align:center";>Quote</h3>
+	<p style="text-align:center";><i>"Intelligence is the ability to adapt to change."</i>
+	</p>
+	<p style="text-align:right";><b>Stephen Hawking</b>
+	</p>
+</div>
+<!-- Stephen -->
+
+<div style="background-color: #ffffff; text-align:center; padding:50px 80px; text-align: justify;"></div>
+  
+<!-- Footer -->
+<div style="background-color: #8f153e; text-align:center; padding:50px 80px;">
+	<a href="{% url 'about' %}"><font color="ffffff">o nama</font></a><br />
+	{% if user.is_authenticated %}
+		<p id="loggedUser" style="text-align: right; columns: #000000;"><b>{{request.user.username}} </b><a href="{% url 'logout' %}"><font 	color="ffffff">izloguj se</font></a></p>
+	{% else %}
+		<p id="loggedUser" style="text-align: right; columns: #ffffff;"><a href="{% url 'login' %}"><font color="ffffff">uloguj se</font></a></p>
+	{% endif %}
+</div>
+<!-- Footer -->
+
+</body>
+</html>

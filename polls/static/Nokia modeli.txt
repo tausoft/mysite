@@ -1,0 +1,496 @@
+1100
+1100 b
+1100 c
+1101
+1108
+1108 b
+1110
+1110 b
+1110 i
+1112
+1112 b
+1112 i
+1116
+1200
+1200 b
+1202
+1203
+1208
+1208 b
+1209
+1280
+1600
+1600 b
+1616
+1616 b
+1650
+1650 b
+1661
+1661
+1662
+1662
+1680 classic
+1681
+1682
+1800
+2100
+2220 slide
+2300
+2300 c
+2310
+2320 classic
+2323 classic
+2330 classic
+2600
+2600 b
+2600 classic
+2610
+2610 b
+2626
+2630
+2630 b
+2650
+2651
+2652
+2660
+2660 b
+2680 slide
+2690
+2700 classic
+2710 Navigation Edition
+2720 fold
+2720 fold
+2730 classic
+2760
+2760 b
+3100
+3100 b
+3108
+3109 classic
+3110 classic
+3110 Envolve
+3120
+3120 b
+3120 classic
+3200
+3200 b
+3220
+3220 b
+3230
+3250
+3310
+3315
+3330
+3390
+3390 b
+3395
+3410
+3500 classic
+3500 b classic
+3510
+3510 i
+3555
+3555 c
+3555 b
+3595
+3600 slide
+3600 slide
+3610 fold
+3650
+3710 fold
+3710 fold
+3711 fold
+3720 classic
+5000
+5000 b
+5030 XpressRadio
+5030 XpressRadio
+5070
+5100
+5100 i
+5110
+5130 XpressMusic
+5140
+5140 b
+5140 i
+5200
+5200 B
+5208
+5210
+5220 XpressMusic
+5230
+5230
+5228
+5233
+5235
+5235
+5250
+5300 XpressMusic
+5300 b XpressMusic
+5310 XpressMusic
+5310 XpressMusic
+5310 b XpressMusic
+5320 XpressMusic
+5320 XpressMusic 2G
+5320 b XpressMusic
+5330 Mobile TV Edition
+5500 Sport
+5510
+5530 XpressMusic
+5610 XpressMusic
+5610 XpressMusic
+5610 XpressMusic
+5610 XpressMusic
+5630 XpressMusic
+5630 XpressMusic
+5700
+5700 2G
+5730 XpressMusic
+5800 XpressMusic 2G
+5800 XpressMusic 2G
+5800 XpressMusic
+6010
+6020 
+6020 b
+6021
+6030
+6030b
+6060
+6060 i
+6060 v
+6061
+6070
+6070 b
+6080
+6080 b
+6085
+6086
+6086 B
+6100
+6101
+6101 b
+6101 h
+6102 
+6102 b
+6102 h
+6102 i
+6103
+6103 b
+6108
+6110
+6110 Navigator
+6110 Navigator 2G
+6111
+6120 classic
+6120 classic 2G
+6121 classic
+6121 classic
+6124 Classic / NM706i
+6125
+6126 b
+6126 h
+6131
+6131 NFC
+6133
+6133 b
+6133 h
+6136
+6150
+6151
+6170
+6200
+6202 classic
+6208 classic
+6210 Navigator
+6212 classic
+6216 classic
+6220
+6220 classic
+6220 classic 2G
+6230
+6230 b
+6230 i
+6233
+6234
+6260
+6260 Slide
+6263
+6267
+6270
+6280
+6282
+6288
+6288 b
+6290
+6300
+6300
+6300 i
+6301
+6301 b
+6303 classic
+6303 i
+6310
+6310 i
+6350
+6500 classic
+6500 classic
+6500 classic 2G
+6500 slide
+6500 slide
+6500 slide 2G
+6555
+6555 b
+6555 c
+6610
+6610 i
+6600 fold
+6600 i
+6600 slide
+6600 slide 2G
+6630
+6650
+6650 fold
+6680
+6681
+6682
+6700
+6700 slide
+6710 Navigator
+6720 classic
+6730 classic
+6730 classic
+6760 slide
+6790 slide
+6790 slide
+6820
+6822
+7020
+7070 Prism
+7100 Supernova
+7200
+7210
+7210 Supernova
+7230
+7250
+7250 i
+7260
+7270
+7280
+7310Supernova
+7360
+7370
+7373
+7376
+7380
+7390
+7500 Prism
+7500 b Prism
+7510 Supernova
+7510 Supernova
+7610 Supernova
+7650
+7900 Crystal Prism
+7900 Prism
+8210
+8310
+8600 Luna
+8800
+8800 a 4GB Carbon Arte
+8800 Sirocco
+8800 d
+8800 Arte
+8800 Sapphire Arte
+8801
+8850
+8855
+8890
+8910
+8910 i
+9300
+9300
+9300 i
+9500
+C1-00
+C1-01
+C1-02
+C2-00
+C2-01
+C2-02
+C2-03
+C2-05
+C2-06
+C3-00
+C3-01
+C3-01.5	C3-01i
+C5-00
+C5-00.1
+C5-03
+C5-04
+C5-00.2
+C6-00
+C6-00.1
+C6-01
+C6-01.3
+C7-00
+E5-00
+E5-00.1
+E6-00
+E7-00
+E50-1
+E50-2
+E50-3
+E51-1
+E51-2
+E52-1
+E52-2
+E55
+E60
+E61-1
+E61	i -1
+E62
+E63-1
+E63-2
+E63-3
+E65-5
+E66-1
+E66-3
+E66-? (2G)
+E70
+E70	b
+E71	(2G)
+E71-1
+E71-2
+E71-3
+E72
+E72-1
+E72-2
+E73
+E75
+E90-1 Communicator
+N8
+N9
+N70
+N70	Music Edition
+N71
+N71
+N72
+N73-1
+N73-5
+N73	Music Edition
+N75
+N76-1
+N76
+N77
+N78
+N79-1
+N80-1
+N80-2
+N80
+N80	Internet Edition
+N81	2G
+N81-1
+N81-3 8GB
+N82
+N82
+N85
+N86
+N86	8MP
+N91
+N91-5
+N91-2 8GB
+N92
+N93
+N93	i
+N95-1
+N95-3
+N95-5 2G
+N95	8GB
+N95	8GB
+N96
+N96-1
+N96-3
+N97
+N97-1
+N97-3
+N97-4 Mini
+N97-5 Mini
+100
+101
+105
+106
+107DS
+108
+109
+110
+1100
+111
+112
+113
+130
+206
+206 DS
+207
+208
+220
+225
+301
+301DS
+500
+515
+600
+603
+700
+701
+808
+N770
+N800
+N810
+N810 WiMAX Edition
+N900
+N-Gage
+X1-00
+X1-01
+X2-00
+X2-01, -02
+X2-02
+X2-01.1
+X2-05
+X3-00
+X3-01.5, -01i
+X3-02
+X5-01
+X6-00
+X6-00.1
+X6-00m
+X7-00
+CS-10
+CS-12, CS-15, CS-17, CS-18
+CS-19
+CS-20
+Asha 200
+Asha 201
+Asha 202
+Asha 203
+Asha 205
+Asha 205 DS/Nokia Asha 2050
+Asha 210
+Asha 210 DS
+Asha 230/230 DS
+Asha 300
+Asha 302
+Asha 303
+Asha 305
+Asha 306
+Asha 308
+Asha 309
+Asha 310
+Asha 311
+Asha 500
+Asha 501
+Asha 501DS
+Asha 502
+Asha 503
+All WP 7 devices
+X
+XL
+X2

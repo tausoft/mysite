@@ -1,0 +1,462 @@
+<style>
+
+<!-- Vip logo -->
+body { 
+	margin: 0;
+}
+
+#Viplogo {
+	z-index: 99;
+	position: fixed;
+	top: 20;
+	right: 4;
+	}
+<!-- Vip logo -->
+
+<!-- RAT Logo -->
+
+body { 
+	margin: 0;
+}
+
+#RATlogo {
+	z-index: 98;
+	position: fixed;
+	top: 10;
+  left: 10;
+	}
+<!-- RAT Logo -->
+
+
+<!-- RAT Logo -->
+
+#loggedUser {
+	z-index: 100;
+	position: fixed;
+	top: 50;
+	right: 4;
+	}
+
+/*main*/
+
+@font-face {
+    font-family: "FuturaBold";
+    src: url('fonts/FuturaCom-Bold.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "FuturaLight";
+    src: url('fonts/FuturaCom-Light.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+table th , table td{
+  text-align: center;
+}
+
+.pagination li:hover{
+  cursor: pointer;
+}
+
+
+/*table*/
+
+table#t1 {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td#t1 {
+  text-align: center;
+}
+
+tr#t1:hover {
+  background-color:#e9e9e9;
+}
+
+/*table*/
+
+h2 {
+  font: 55px "FuturaLight";
+  color: #ffffff;
+}
+
+h3 {
+  font: 45px "FuturaLight";
+  color: #000000;
+}
+
+h5 {
+  font: 14px "FuturaBold";
+  color: #000000;
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+  font: 25px "FuturaLight";
+  color: #000000;
+}
+
+#header {
+	z-index: 98;
+	position: fixed;
+	top: 0;
+	}
+	
+/*main*/
+
+.ace-download-btn {
+  background-color: #ffffff;
+  border: none;
+  color: #000000;
+  text-align: center;
+  font: 20px "FuturaLight";
+	padding: 5px 15px;
+}
+
+.input-btn {
+  background-color: #ffffff;
+  border: none;
+  color: #000000;
+  text-align: center;
+  font: 20px "FuturaLight";
+	padding: 5px 15px;
+}
+
+.chart-btn {
+  background-color: #ffffff;
+  border: none;
+  color: #000000;
+  text-align: center;
+  font: 20px "FuturaLight";
+  padding: 5px 15px;
+  width: 90%;
+}
+
+.input-btn-hidden {
+  background-color: #ffffff;
+  border: none;
+  color: #000000;
+  text-align: center;
+  font: 20px "FuturaLight";
+	padding: 5px 15px;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+/*file uploader*/
+
+.file-upload {
+  background-color: #ffffff;
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.file-upload-btn {
+  font: 20px "FuturaLight";
+  padding: 5px 15px; 
+  background: #8f153e; 
+  color: #ffffff;
+  border: 0 none;
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; 
+  width: 100%;
+}
+
+.file-upload-btn:hover {
+  background: #8f153e;
+  color: #ffffff;
+  transition: all .2s ease;
+  cursor: pointer;
+}
+
+.file-upload-btn:active {
+  border: 0;
+  transition: all .2s ease;
+}
+
+.file-upload-content {
+  display: none;
+  text-align: center;
+}
+
+.file-upload-input {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.image-upload-wrap {
+  border: 4px dashed #ebebeb;
+  position: relative;
+}
+
+.image-dropping,
+.image-upload-wrap:hover {
+  background-color: #ebebeb;
+  border: 4px dashed #8f153e;
+}
+
+.image-title-wrap {
+  padding: 0 15px 15px 15px;
+  color: #222;
+}
+
+.drag-text {
+  text-align: center;
+}
+
+.drag-text h3 {
+  font-weight: 100;
+  color: #8f153e;
+  padding: 60px 0;
+}
+
+.file-upload-image {
+  max-height: 200px;
+  max-width: 200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.remove-image {
+  font: 20px "FuturaLight";
+  padding: 5px 15px; 
+  background: #8f153e; 
+  opacity: 0.3;
+  color: #ffffff;
+  border: 0 none;
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; 
+  transition: all .2s ease;
+  outline: none;
+  width: auto;
+}
+
+.remove-image:hover {
+  background: #8f153e;
+  color: #ffffff;
+  transition: all .2s ease;
+  cursor: pointer;
+}
+
+.remove-image:active {
+  border: 0;
+  transition: all .2s ease;
+}
+
+/*file uploader*/
+
+/*parallax*/
+
+.bgimg-1, .bgimg-2 {
+  position: relative;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.bgimg-1 {
+  background-image: url("images/navigator.jpg");
+  background-color: 8f153e;
+  min-height: 20%;
+}
+
+.bgimg-2 {
+  background-image: url("images/stephen.jpg");
+  background-color: ffffff;
+  min-height: 45%;
+}
+
+ .navigatorimg {
+  position: absolute;
+  left: 0;
+  top: 15%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+  
+ .stephenimg {
+  position: absolute;
+  left: 0;
+  top: 55%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+  
+}
+
+/*parallax*/
+
+/*forms*/
+
+::placeholder {
+  color: black;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ color: black;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+ color: black;
+}
+
+input[type=text], select {
+	font: 20px "FuturaLight";
+    padding:5px; 
+    border:2px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+	font-family: "FuturaLight";
+	font-size: 13px;
+}
+
+input[type=submit] {
+	font: 20px "FuturaLight";
+    padding: 5px 15px; 
+    background: #8f153e; 
+	color: #ffffff;
+    border: 0 none;
+    cursor: pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+}
+
+input[type=password] {
+	font: 20px "FuturaLight";
+    padding:5px; 
+    border:2px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+	font-family: "FuturaLight";
+	font-size: 13px;
+}
+
+input[type=username] {
+	font: 20px "FuturaLight";
+    padding:5px; 
+    border:2px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+	font-family: "FuturaLight";
+	font-size: 13px;
+}
+
+select {
+	width: 150px;
+	font: 20px "FuturaLight";
+    padding:5px; 
+    border:2px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+	font-family: "FuturaLight";
+	font-size: 13px;
+}
+
+/*forms*/
+
+/*link*/
+
+a {
+    color: #000000;
+    background-color: transparent;
+    text-decoration: none;
+	font: 25px;
+
+a:link {
+    color: #000000;
+    background-color: transparent;
+    text-decoration: none;
+	font: 25px;
+}
+a:visited {
+    color: #000000;
+    background-color: transparent;
+    text-decoration: none;
+	font: 25px;
+}
+a:hover {
+    color: #000000;
+    background-color: transparent;
+	font: 25px;
+}
+a:active {
+    color: #000000;
+    background-color: transparent;
+    text-decoration: underline;
+	font: 25px;
+}
+
+/*link*/
+
+/*responsive*/
+
+.row_chart {
+  background-color: #ffffff;
+  margin:0 !important;
+}
+
+.column_chart {
+  width: 100%; 
+  min-height: 450px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
+/*responsive*/
+
+
+</style>

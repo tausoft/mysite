@@ -1,0 +1,154 @@
+{% load static %}
+<html>
+<head>
+	<title>RA&T box</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}"/>
+	
+	<link rel="stylesheet" href="{% static 'style.css' %}">
+	<script type="text/javascript" src={% static 'main.js' %} defer></script>
+	<script class="jsbin" src=https://ajax.gogleapis.com/ajax/libs/jquery/1/jquery.min.js></script>
+</head>
+
+<body bgcolor="#8f153e" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<!-- Header -->
+<img id="header" src="{% static 'images/Header.png' %}" max width="100%" height="100px">
+<div style="background-color: #8f153e; padding:100px 80px;"></div>
+
+<img id="Viplogo" src="{% static 'images/vip.png' %}" width="75px" height="66px">
+<a href="{% url 'index' %}">
+<img id="RATlogo" src="{% static 'images/RAT_logo.png' %}" width="auto" height="auto">
+</a>
+<!-- Header -->
+
+<!-- Navigator -->
+<div class="bgimg-1">
+	<div class="navigatorimg">
+		<h2 style="text-align:center;">Unos kodova</h2>
+  	</div>
+</div>
+<!-- Navigator -->
+
+<div style="background-color: #ffffff; overflow-x:auto; text-align:center;  padding:20px 20px; text-align: justify;">
+		<table align="center" id= "table-id">
+			<thead>
+				<tr>
+					<td>
+						IMEI
+					</td>
+					<td>
+						Kod
+					</td>
+				</tr>
+			</thead>
+			<tbody>
+				{% for item in pages %}
+					<tr>
+						<td>
+							<input id = "list" type = "text" name = "list" value = "{{ item.0 }}" style="text-align:center;" readonly>
+						</td>
+						<td>
+							<input id = "list" type = "text" name = "list" value = "{{ item.1 }}" style="text-align:center;" readonly>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	<div class="pagination" style="text-align: center;">
+		<span class="step-links">
+
+			{% if pages.has_previous %}
+				<a href="?page=1">
+					<img src="{% static 'images/prva_strana.png' %}"
+						onmouseover="this.src='{% static 'images/prva_strana_hover.png' %}';"
+						onmouseout="this.src='{% static 'images/prva_strana.png' %}';">
+				</a>
+				<a href="?page={{ pages.previous_page_number }}">
+					<img src="{% static 'images/prethodni.png' %}"
+						onmouseover="this.src='{% static 'images/prethodni_hover.png' %}';"
+						onmouseout="this.src='{% static 'images/prethodni.png' %}';">
+				</a>
+			{% endif %}
+
+			{% if pages.has_next %}
+				<a href="?page={{ pages.next_page_number }}">
+					<img src="{% static 'images/sledeci.png' %}"
+						onmouseover="this.src='{% static 'images/sledeci_hover.png' %}';"
+						onmouseout="this.src='{% static 'images/sledeci.png' %}';">
+				</a>
+				<a href="?page={{ pages.paginator.num_pages }}">
+					<img src="{% static 'images/poslenja_strana.png' %}"
+						onmouseover="this.src='{% static 'images/poslenja_strana_hover.png' %}';"
+						onmouseout="this.src='{% static 'images/poslenja_strana.png' %}';">
+				</a>
+			{% endif %}
+			</br>
+			<span class="current">
+				Strana {{ pages.number }} od {{ pages.paginator.num_pages }}
+			</span>
+		</span>
+		
+	</div>	
+
+	<br \>
+
+	{% for i in input_text %}
+		{% if forloop.counter < 2 %}
+			<div style="background-color:#ffffff; text-align:center;">
+				<div class="row">
+					<div class="column">
+						<form name = "myWebForm" method = "POST" action = "/reset_csv/">
+							{% csrf_token %}
+							<input type="image" value="reset" src="{% static 'images/ponisti.png' %}"
+								onmouseover="this.src='{% static 'images/ponisti_hover.png' %}';"
+								onmouseout="this.src='{% static 'images/ponisti.png' %}';">
+						</form>
+						<form name = "myWebForm" method = "POST" action = "/validate_csv/">
+							{% csrf_token %}
+							<input type="image" value="validate" src="{% static 'images/preuzmisacuvaj.png' %}"
+								onmouseover="this.src='{% static 'images/preuzmisacuvaj_hover.png' %}';"
+								onmouseout="this.src='{% static 'images/preuzmisacuvaj.png' %}';">
+						</form>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+	{% endfor %}
+
+	<br />
+
+<!-- Navigator -->
+
+<!-- Stephen -->
+<div class="bgimg-2">
+</div>
+
+<div style="background-color: #ffffff; text-align:center;  padding:25px 80px; text-align: justify;">
+	<h3 style="text-align:center";>Quote</h3>
+	<p style="text-align:center";><i>"Intelligence is the ability to adapt to change."</i>
+	</p>
+	<p style="text-align:right";><b>Stephen Hawking</b>
+	</p>
+</div>
+<!-- Stephen -->
+
+<div style="background-color: #ffffff; text-align:center; padding:50px 80px; text-align: justify;"></div>
+  
+<!-- Footer -->
+<div style="background-color: #8f153e; text-align:center; padding:50px 80px;">
+	<a href="{% url 'about' %}"><font color="ffffff">o nama</font></a><br />
+	{% if user.is_authenticated %}
+		<p id="loggedUser" style="text-align: right; columns: #000000;"><b>{{request.user.username}} </b><a href="{% url 'logout' %}"><font 	color="ffffff">izloguj se</font></a></p>
+	{% else %}
+		<p id="loggedUser" style="text-align: right; columns: #ffffff;"><a href="{% url 'login' %}"><font color="ffffff">uloguj se</font></a></p>
+	{% endif %}
+</div>
+<!-- Footer -->
+
+</body>
+
+<script src="{% static 'main.js' %}"></script>
+
+</html>

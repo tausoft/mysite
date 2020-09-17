@@ -1,0 +1,454 @@
+{% load static %}
+<html>
+<head>
+<title>RA&T box</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}"/>
+
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+</head>
+
+<body bgcolor="#8f153e" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<!-- Header -->
+<img id="header" src="{% static 'images/Header.png' %}" max width="100%" height="100px">
+<div style="background-color: #8f153e; padding:100px 80px;"></div>
+
+<img id="Viplogo" src="{% static 'images/vip.png' %}" width="75px" height="66px">
+<a href="{% url 'index' %}">
+<img id="RATlogo" src="{% static 'images/RAT_logo.png' %}" width="auto" height="auto">
+</a>
+<!-- Header -->
+
+<!-- Navigator -->
+<div class="bgimg-1">
+	<div class="navigatorimg">
+		<h2 style="text-align:center;">Statistika!</h2>
+  </div>
+</div>
+
+<!-- Aplications -->
+
+
+
+<div style="background-color: #ffffff; text-align:center;  padding:50px 80px;">
+	<div>Uspešno {{ counter_sum_1 }} <b><span class="count">{{ counter_sum }}</span></b> {{ counter_sum_2 }} i {{ entry_sum_1 }} <b><span class="count">{{ entry_sum }}</span></b> {{ entry_sum_2 }}!</div><br/>
+	<br/>
+	<div style="background-color: #f1f1f1; text-align:center;  padding:50px 80px;">
+		Izveštaj za {{month_list.1}} - FCR unapređen za {{FCRthismonth}} %
+	</div>
+	<div class="row">
+		<div class="column">
+			<button class="input-btn" disabled>
+				Statusi pretrage
+				<div id="statusChart_div" style="width: 350px; height: 350px;"></div>
+			</button>
+			<button class="input-btn" disabled>
+				Pretraga po timovima
+				<div id="groupChart_div" style="width: 350px; height: 350px;"></div>
+			</button>
+			<button class="input-btn" disabled>
+				Statusi zahteva
+				<div id="requestStatusChart_div" style="width: 350px; height: 350px;"></div>
+			</button>
+			<button class="input-btn" disabled>
+				Zahtevi po timovima
+				<div id="requestGroupChart_div" style="width: 350px; height: 350px;"></div>
+			</button>
+		</div>
+	</div>
+
+	<div style="background-color: #f1f1f1; text-align:center;  padding:50px 80px;">
+		Izveštaj za {{month_list.2}} - FCR unapređen za {{FCRlastmonth}} %
+	</div>
+	<div class="row">
+		<div class="column">
+			<button class="input-btn" disabled>
+				Statusi pretrage
+				<div id="statusChart_lm_div" style="width: 350px; height: 350px;"></div>
+			</button>
+			<button class="input-btn" disabled>
+				Pretraga po timovima
+				<div id="groupChart_lm_div" style="width: 350px; height: 350px;"></div>
+			</button>
+			<button class="input-btn" disabled>
+				Statusi zahteva
+				<div id="requestStatusChart_lm_div" style="width: 350px; height: 350px;"></div>
+			</button>
+			<button class="input-btn" disabled>
+				Zahtevi po timovima
+				<div id="requestGroupChart_lm_div" style="width: 350px; height: 350px;"></div>
+			</button>
+		</div>
+	</div>
+	<div style="background-color: #f1f1f1; text-align:center;  padding:50px 80px;">
+		Poslednjih 6 meseci
+	</div>
+	<br/>
+	<div class="row">
+		<div class="column">
+			<button class="chart-btn" disabled>
+				Izvršene pretrage
+				<div id="columnchart_values"></div>
+			</button>
+		</div>
+	</div>
+	<br/>
+	<div class="row">
+		<div class="column">
+			<button class="chart-btn" disabled>
+				Podneti zahtevi
+				<div id="reqMonthChart_values"></div>
+			</button>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- Aplications -->
+
+
+
+<div style="background-color: #ffffff; text-align:center;  padding:100px 80px; text-align: justify;">
+
+
+
+</div>
+
+<!-- Navigator -->
+
+<!-- Stephen -->
+<div class="bgimg-2">
+</div>
+
+<div style="background-color: #ffffff; text-align:center;  padding:25px 80px; text-align: justify;">
+	<h3 style="text-align:center";>Quote</h3>
+	<p style="text-align:center";><i>"Intelligence is the ability to adapt to change."</i>
+	</p>
+	<p style="text-align:right";><b>Stephen Hawking</b>
+	</p>
+</div>
+<!-- Stephen -->
+
+<div style="background-color: #ffffff; text-align:center; padding:50px 80px; text-align: justify;">
+
+	<div id="shiva"><span class="count">1000</span></div>
+
+</div>
+  
+<!-- Footer -->
+<div style="background-color: #8f153e; text-align:center; padding:50px 80px;">
+<a href="{% url 'about' %}"><font color="ffffff">o nama</font></a><br />
+{% if user.is_authenticated %}
+	<p id="loggedUser" style="text-align: right; columns: #000000;"><b>{{request.user.username}} </b><a href="{% url 'logout' %}"><font 	color="ffffff">izloguj se</font></a></p>
+{% else %}
+	<p id="loggedUser" style="text-align: right; columns: #ffffff;"><a href="{% url 'login' %}"><font color="ffffff">uloguj se</font></a></p>
+{% endif %}
+</div>
+<!-- Footer -->
+
+<script>
+
+
+	// Load google charts
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(statusChart);
+	google.charts.setOnLoadCallback(groupChart);
+	google.charts.setOnLoadCallback(requestStatusChart);
+	google.charts.setOnLoadCallback(requestGroupChart);
+	google.charts.setOnLoadCallback(statusChart_lm);
+	google.charts.setOnLoadCallback(groupChart_lm);
+	google.charts.setOnLoadCallback(requestStatusChart_lm);
+	google.charts.setOnLoadCallback(requestGroupChart_lm);
+	
+	// Draw the chart and set the chart values
+	function statusChart() {
+	  var data = google.visualization.arrayToDataTable([
+	  ['Status', 'Ukupno'],
+	  ['Nije zaključan', parseInt({{ lockstatusthismonth.0 }})],
+	  ['Dostupan kod', parseInt({{ lockstatusthismonth.1 }})],
+	  ['Nije dostupan kod', parseInt({{ lockstatusthismonth.2 }})],
+	  ['Zahtev u obradi', parseInt({{ lockstatusthismonth.3 }})],
+	]);
+	
+	  // Optional; add a title and set the width and height of the chart
+	  var options = { pieHole: 0.4, "legend": {"position": "none"}};
+	
+	  // Display the chart inside the <div> element with id="piechart"
+	  var chart = new google.visualization.PieChart(document.getElementById('statusChart_div'));
+	  chart.draw(data, options);
+	}
+
+	function groupChart() {
+	  var data = google.visualization.arrayToDataTable([
+	  ['Grupa', 'Ukupno'],
+	  ['CS Business Complaint and Support Team', parseInt({{ groupthismonth.0 }})],
+	  ['CS Business Contact Center', parseInt({{ groupthismonth.1 }})],
+	  ['CS Complaint and Retention Center', parseInt({{ groupthismonth.2 }})],
+	  ['CS Online team', parseInt({{ groupthismonth.3 }})],
+	  ['CS Residental Contact Center', parseInt({{ groupthismonth.4 }})],
+	  ['CS Technical', parseInt({{ groupthismonth.5 }})],
+	  ['RCC TNPS team', parseInt({{ groupthismonth.6 }})],
+	  ['Sales', parseInt({{ groupthismonth.7 }})],
+	  ['Sales and CS content Team', parseInt({{ groupthismonth.8 }})],
+	  ['Telesales Team', parseInt({{ groupthismonth.9 }})],
+	  ['Training Team', parseInt({{ groupthismonth.10 }})],
+	]);
+	
+	  // Optional; add a title and set the width and height of the chart
+	  var options = {pieHole: 0.4, "legend": {"position": "none"}};
+	
+	  // Display the chart inside the <div> element with id="piechart"
+	  var chart = new google.visualization.PieChart(document.getElementById('groupChart_div'));
+	  chart.draw(data, options);
+	}
+
+	function requestStatusChart() {
+	  var data = google.visualization.arrayToDataTable([
+	  ['Status zahteva', 'Ukupno'],
+	  ['Novi zahtevi', parseInt({{ requeststatusthismonth.0 }})],
+	  ['Prosleđeno vendoru', parseInt({{ requeststatusthismonth.1 }})],
+	  ['Na čekanju za slanje', parseInt({{ requeststatusthismonth.2 }})],
+	  ['Kod dostavljen korisniku', parseInt({{ requeststatusthismonth.3 }})],
+	]);
+	
+	  // Optional; add a title and set the width and height of the chart
+	  var options = {pieHole: 0.4, "legend": {"position": "none"}};
+	
+	  // Display the chart inside the <div> element with id="piechart"
+	  var chart = new google.visualization.PieChart(document.getElementById('requestStatusChart_div'));
+	  chart.draw(data, options);
+	}
+
+	function requestGroupChart() {
+	  var data = google.visualization.arrayToDataTable([
+	  ['Grupa', 'Ukupno'],
+	  ['CS Business Complaint and Support Team', parseInt({{ reqgroupthismonth.0 }})],
+	  ['CS Business Contact Center', parseInt({{ reqgroupthismonth.1 }})],
+	  ['CS Complaint and Retention Center', parseInt({{ reqgroupthismonth.2 }})],
+	  ['CS Online team', parseInt({{ reqgroupthismonth.3 }})],
+	  ['CS Residental Contact Center', parseInt({{ reqgroupthismonth.4 }})],
+	  ['CS Technical', parseInt({{ reqgroupthismonth.5 }})],
+	  ['RCC TNPS team', parseInt({{ reqgroupthismonth.6 }})],
+	  ['Sales', parseInt({{ reqgroupthismonth.7 }})],
+	  ['Sales and CS content Team', parseInt({{ reqgroupthismonth.8 }})],
+	  ['Telesales Team', parseInt({{ reqgroupthismonth.9 }})],
+	  ['Training Team', parseInt({{ reqgroupthismonth.10 }})],
+	]);
+	
+	  // Optional; add a title and set the width and height of the chart
+	  var options = {pieHole: 0.4, "legend": {"position": "none"}};
+	
+	  // Display the chart inside the <div> element with id="piechart"
+	  var chart = new google.visualization.PieChart(document.getElementById('requestGroupChart_div'));
+	  chart.draw(data, options);
+	}
+
+	// Draw the chart and set the chart values
+	function statusChart_lm() {
+	  var data = google.visualization.arrayToDataTable([
+	  ['Status', 'Ukupno'],
+	  ['Nije zaključan', parseInt({{ lockstatuslastmonth.0 }})],
+	  ['Dostupan kod', parseInt({{ lockstatuslastmonth.1 }})],
+	  ['Nije dostupan kod', parseInt({{ lockstatuslastmonth.2 }})],
+	  ['Zahtev u obradi', parseInt({{ lockstatuslastmonth.3 }})],
+	]);
+	
+	  // Optional; add a title and set the width and height of the chart
+	  var options = { pieHole: 0.4, "legend": {"position": "none"}};
+	
+	  // Display the chart inside the <div> element with id="piechart"
+	  var chart = new google.visualization.PieChart(document.getElementById('statusChart_lm_div'));
+	  chart.draw(data, options);
+	}
+
+	function groupChart_lm() {
+	  var data = google.visualization.arrayToDataTable([
+	  ['Grupa', 'Ukupno'],
+	  ['CS Business Complaint and Support Team', parseInt({{ grouplastmonth.0 }})],
+	  ['CS Business Contact Center', parseInt({{ grouplastmonth.1 }})],
+	  ['CS Complaint and Retention Center', parseInt({{ grouplastmonth.2 }})],
+	  ['CS Online team', parseInt({{ grouplastmonth.3 }})],
+	  ['CS Residental Contact Center', parseInt({{ grouplastmonth.4 }})],
+	  ['CS Technical', parseInt({{ grouplastmonth.5 }})],
+	  ['RCC TNPS team', parseInt({{ grouplastmonth.6 }})],
+	  ['Sales', parseInt({{ reqgroupthismonth.7 }})],
+	  ['Sales and CS content Team', parseInt({{ grouplastmonth.8 }})],
+	  ['Telesales Team', parseInt({{ grouplastmonth.9 }})],
+	  ['Training Team', parseInt({{ grouplastmonth.10 }})],
+	]);
+	
+	  // Optional; add a title and set the width and height of the chart
+	  var options = {pieHole: 0.4, "legend": {"position": "none"}};
+	
+	  // Display the chart inside the <div> element with id="piechart"
+	  var chart = new google.visualization.PieChart(document.getElementById('groupChart_lm_div'));
+	  chart.draw(data, options);
+	}
+
+	function requestStatusChart_lm() {
+	  var data = google.visualization.arrayToDataTable([
+	  ['Status zahteva', 'Ukupno'],
+	  ['Novi zahtevi', parseInt({{ requeststatuslastmonth.0 }})],
+	  ['Prosleđeno vendoru', parseInt({{ requeststatuslastmonth.1 }})],
+	  ['Na čekanju za slanje', parseInt({{ requeststatuslastmonth.2 }})],
+	  ['Kod dostavljen korisniku', parseInt({{ requeststatuslastmonth.3 }})],
+	]);
+	
+	  // Optional; add a title and set the width and height of the chart
+	  var options = {pieHole: 0.4, "legend": {"position": "none"}};
+	
+	  // Display the chart inside the <div> element with id="piechart"
+	  var chart = new google.visualization.PieChart(document.getElementById('requestStatusChart_lm_div'));
+	  chart.draw(data, options);
+	}
+
+	function requestGroupChart_lm() {
+	  var data = google.visualization.arrayToDataTable([
+	  ['Grupa', 'Ukupno'],
+	  ['CS Business Complaint and Support Team', parseInt({{ reqgrouplastmonth.0 }})],
+	  ['CS Business Contact Center', parseInt({{ reqgrouplastmonth.1 }})],
+	  ['CS Complaint and Retention Center', parseInt({{ reqgrouplastmonth.2 }})],
+	  ['CS Online team', parseInt({{ reqgrouplastmonth.3 }})],
+	  ['CS Residental Contact Center', parseInt({{ reqgrouplastmonth.4 }})],
+	  ['CS Technical', parseInt({{ reqgrouplastmonth.5 }})],
+	  ['RCC TNPS team', parseInt({{ reqgrouplastmonth.6 }})],
+	  ['Sales', parseInt({{ reqgrouplastmonth.7 }})],
+	  ['Sales and CS content Team', parseInt({{ reqgrouplastmonth.8 }})],
+	  ['Telesales Team', parseInt({{ reqgrouplastmonth.9 }})],
+	  ['Training Team', parseInt({{ reqgrouplastmonth.10 }})],
+	]);
+	
+	  // Optional; add a title and set the width and height of the chart
+	  var options = {pieHole: 0.4, "legend": {"position": "none"}};
+	
+	  // Display the chart inside the <div> element with id="piechart"
+	  var chart = new google.visualization.PieChart(document.getElementById('requestGroupChart_lm_div'));
+	  chart.draw(data, options);
+	}
+
+
+
+	google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(monthChart);
+
+    function monthChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Mesec", "Ukpuno pretraga", { role: "style" } ],
+		['{{ month_list.6 }}', parseInt({{ month_count.6 }}), "silver"],
+		['{{ month_list.5 }}', parseInt({{ month_count.5 }}), "silver"],
+		['{{ month_list.4 }}', parseInt({{ month_count.4 }}), "silver"],
+        ['{{ month_list.3 }}', parseInt({{ month_count.3 }}), "silver"],
+        ['{{ month_list.2 }}', parseInt({{ month_count.2 }}), "silver"],
+        ['{{ month_list.1 }}', parseInt({{ month_count.1 }}), "default"]
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation"},
+                       2]);
+
+      var options = {
+        bar: {groupWidth: "85%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      chart.draw(view, options);
+  }
+
+$(document).ready(function(){
+  	$(window).resize(function(){
+  		monthChart();
+	});
+});
+
+	google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(monthChart);
+
+    function monthChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Mesec", "Ukpuno pretraga", { role: "style" } ],
+		['{{ month_list.6 }}', parseInt({{ month_count.6 }}), "silver"],
+		['{{ month_list.5 }}', parseInt({{ month_count.5 }}), "silver"],
+		['{{ month_list.4 }}', parseInt({{ month_count.4 }}), "silver"],
+        ['{{ month_list.3 }}', parseInt({{ month_count.3 }}), "silver"],
+        ['{{ month_list.2 }}', parseInt({{ month_count.2 }}), "silver"],
+        ['{{ month_list.1 }}', parseInt({{ month_count.1 }}), "default"]
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation"},
+                       2]);
+
+      var options = {
+        bar: {groupWidth: "85%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      chart.draw(view, options);
+  }
+
+  	google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(reqMonthChart);
+
+    function reqMonthChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Mesec", "Ukupuno zahteva", { role: "style" } ],
+		['{{ month_list.6 }}', parseInt({{ req_month_count.6 }}), "silver"],
+		['{{ month_list.5 }}', parseInt({{ req_month_count.5 }}), "silver"],
+		['{{ month_list.4 }}', parseInt({{ req_month_count.4 }}), "silver"],
+        ['{{ month_list.3 }}', parseInt({{ req_month_count.3 }}), "silver"],
+        ['{{ month_list.2 }}', parseInt({{ req_month_count.2 }}), "silver"],
+        ['{{ month_list.1 }}', parseInt({{ req_month_count.1 }}), "default"]
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation"},
+                       2]);
+
+      var options = {
+        bar: {groupWidth: "85%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("reqMonthChart_values"));
+      chart.draw(view, options);
+  }
+
+$(document).ready(function(){
+  	$(window).resize(function(){
+  		monthChart();
+	});
+});
+
+$('.count').each(function () {
+    $(this).prop('Counter',0).animate({
+        Counter: $(this).text()
+    }, {
+        duration: 3000,
+        easing: 'swing',
+        step: function (now) {
+            $(this).text(Math.ceil(now));
+        }
+    });
+});
+
+</script>
+
+</body>
+</html>

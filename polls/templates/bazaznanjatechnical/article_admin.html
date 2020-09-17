@@ -1,0 +1,84 @@
+{% load static %}
+{% load wysiwyg %}
+{% wysiwyg_setup %}
+<html>
+<head>
+<title>Baza znanja</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}"/>
+
+<link rel="stylesheet" href="{% static 'bazaznanja/style.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src={% static 'bazaznanja/main.js' %}></script>
+<style>body {background-image: url("{% static 'bazaznanja/images/Header.jpg' %}");}</style>
+
+{{ form.media }}
+
+</script>
+
+</head>
+
+<body bgcolor="#e0e0e0" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<!-- Header -->
+
+<div style="text-align: center;">
+	<br/><br/><br/><br/>
+		<form class="article" action="/action_page.php" style="margin:auto;">
+			{% csrf_token %}
+			<label for="username">ulogovani ste kao: {{request.user.username}}</label><br /><br />
+			<input type="text" placeholder="Naslov" name="title" autocomplete="off"><br /><br />
+			{{ form }}
+		</form>
+		<br/>
+</div>
+
+
+
+<div class="fixedheader">
+	<div class="topnav" id="myTopnav">
+		<a href="{% url 'bazaznanja_cst' %}">početna</a>
+		<a href="#news">šabloni</a>
+		<a href="#contact">uputstva</a>
+		<div class="dropdown">
+		  <button class="dropbtn">troubleshooting 
+			<i class="fa fa-caret-down"></i>
+		  </button>
+		  <div class="dropdown-content">
+			<a href="#">voice</a>
+			<a href="#">sms</a>
+			<a href="#">data</a>
+		  </div>
+		</div> 
+		<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+	</div>
+</div>
+
+<!-- Header -->
+
+
+
+<!-- Page -->
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<!-- Page -->
+
+
+  
+<!-- Footer -->
+<div style="background-color: #e0e0e0; text-align:center; padding:50px 40px;">
+	<a href="http://localhost:8000/polls"><font color="000000" size="4">ratbox</font></a>
+	<font color="000000" size="4"> | </font>
+	<a href="{% url 'about' %}"><font color="000000" size="4">o nama</font></a>
+	<font color="000000" size="4"> | </font>
+	<a href="{% url 'about' %}"><font color="000000" size="4">admin</font></a><br />
+{% if user.is_authenticated %}
+	<p id="loggedUser" style="text-align: right; columns: #000000;"><font color="000000" size="3"><b>{{request.user.username}} </font></b><a href="{% url 'logout' %}"><font color="dfb83b" size="3">izloguj se</font></a></p>
+{% else %}
+	<p id="loggedUser" style="text-align: right; columns: #dfb83b;"><a href="{% url 'login' %}"><font color="ffffff" size="3">uloguj se</font></a></p class="loggedUser">
+{% endif %}
+</div>
+<!-- Footer -->
+
+</body>
+</html>

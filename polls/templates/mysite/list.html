@@ -1,0 +1,94 @@
+{% load static %}
+<html>
+<head>
+	<title>RA&T box</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}"/>
+	
+	<link rel="stylesheet" href="{% static 'style.css' %}">
+	<script type="text/javascript" src={% static 'main.js' %} defer></script>
+	<script class="jsbin" src=https://ajax.gogleapis.com/ajax/libs/jquery/1/jquery.min.js></script>
+</head>
+
+<body bgcolor="#8f153e" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<!-- Header -->
+<img id="header" src="{% static 'images/Header.png' %}" max width="100%" height="120px">
+<div style="background-color: #8f153e; padding:100px 80px;"></div>
+
+<img id="Viplogo" src="{% static 'images/vip.png' %}" width="75px" height="66px">
+<a href="{% url 'index' %}">
+<img id="RATlogo" src="{% static 'images/RAT_logo.png' %}" width="auto" height="auto">
+</a>
+<!-- Header -->
+
+<!-- Navigator -->
+<div class="bgimg-1">
+	<div class="navigatorimg">
+		<h2 style="text-align:center;">Ulogujte se</h2>
+  </div>
+</div>
+<!-- Navigator -->
+
+<!-- Aplication -->
+<div style="background-color: #ffffff; overflow-x:auto; text-align:center;  padding:50px 80px; text-align: center;">
+	<h3 style="text-align:center";>Za korišćenje aplikacije potrebno je ulogovati se</h3>
+	<br />
+	<form method="POST" action="/polls/mylogin/">
+		{% csrf_token %}
+		<button class="input-btn" disabled>
+			<label for="username">Korisničko ime: </label><br />
+			<input id="username" type="text" name="username" value="{{ username }}">
+		</button>
+		<button class="input-btn" disabled>
+			<label for="password">Lozinka: </label><br />
+			<input id="password" type="password" name="password" value="{{ password }}">
+		</button>
+	</br></br>
+		<div style="text-align:center; background-color: #ffffff;">
+			<input type="image" id="ace" src="{% static 'images/ulogujse.png' %}"
+							onmouseover="this.src='{% static 'images/ulogujse_hover.png' %}';"
+							onmouseout="this.src='{% static 'images/ulogujse.png' %}';">
+		</div>
+	</form>
+	{% if '0' in trigger %}
+		<div style="background-color: #f15959; text-align: center;">
+			<p style="color:#ffffff;" class="not-numeric-input" hidden>Nevalidan unos! IMEI broj se sastoji od 15 numeričkih karaktera.</p>
+		</div>
+	{% endif %}
+
+<!-- Aplication -->
+
+
+<!-- Stephen -->
+<div class="bgimg-2">
+</div>
+
+<div style="background-color: #ffffff; text-align:center;  padding:25px 80px; text-align: justify;">
+	<h3 style="text-align:center";>Quote</h3>
+	<p style="text-align:center";><i>"Intelligence is the ability to adapt to change."</i>
+	</p>
+	<p style="text-align:right";><b>Stephen Hawking</b>
+	</p>
+</div>
+<!-- Stephen -->
+
+<div style="background-color: #ffffff; text-align:center; padding:50px 80px; text-align: justify;"></div>
+  
+<!-- Footer -->
+<div style="background-color: #8f153e; text-align:center; padding:50px 80px;">
+	<a href="{% url 'about' %}"><font color="ffffff">o nama</font></a><br />
+	{% if user.is_authenticated %}
+		<p id="loggedUser" style="text-align: right; columns: #000000;"><b>{{request.user.username}} </b><a href="{% url 'logout' %}"><font 	color="ffffff">izloguj se</font></a></p>
+	{% else %}
+		<p id="loggedUser" style="text-align: right; columns: #ffffff;"><a href="{% url 'login' %}"><font color="ffffff">uloguj se</font></a></p>
+	{% endif %}
+</div>
+<!-- Footer -->
+
+</body>
+
+<script src="{% static 'main.js' %}"></script>
+
+</html>

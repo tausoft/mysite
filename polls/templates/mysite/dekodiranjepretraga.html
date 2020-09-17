@@ -1,0 +1,183 @@
+{% load static %}
+<html>
+<head>
+<title>RA&T box</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}"/>
+
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<script type="text/javascript" src={% static 'main.js' %} defer></script>
+<script class="jsbin" src=https://ajax.gogleapis.com/ajax/libs/jquery/1/jquery.min.js></script>
+	
+</head>
+
+<body bgcolor="#8f153e" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<!-- Header -->
+<img id="header" src="{% static 'images/Header.png' %}" max width="100%" height="100px">
+<div style="background-color: #8f153e; padding:100px 80px;"></div>
+
+<img id="Viplogo" src="{% static 'images/vip.png' %}" width="75px" height="66px">
+<a href="{% url 'index' %}">
+<img id="RATlogo" src="{% static 'images/RAT_logo.png' %}" width="auto" height="auto">
+</a>
+<!-- Header -->
+
+<!-- Navigator -->
+<div class="bgimg-1">
+	<div class="navigatorimg">
+		<h2 style="text-align:center;">Pretraži preko IMEI broja</h2>
+  </div>
+</div>
+
+<div style="background-color: #ffffff; overflow-x:auto; text-align:center; padding:50px 80px;">
+
+	<form name="search-unc-code" class="contact-form" method="POST" action="/search_unc/">
+	{% csrf_token %}
+		<div class="row">
+			<div class="column">
+				<label for="imei">IMEI: </label>
+				</br>
+				<input style="text-align:center" id="imei" type="text" name="imei" value="{{ imei }}">
+				<br />
+				<br />
+				<input type="image" onclick="searchValidate()" id="ace" src="{% static 'images/buttonlowercut_pretrazi.png' %}"
+							onmouseover="this.src='{% static 'images/buttonlowercut_pretrazi_hover.png' %}';"
+							onmouseout="this.src='{% static 'images/buttonlowercut_pretrazi.png' %}';">
+			</div>
+		</div>
+	</form>
+	<div style="background-color: #f15959; text-align: center;">
+		<p style="color:#ffffff;" class="not-luhn-input" hidden>Nevalidan unos! IMEI broj nije ispravan.</p>
+	</div>
+	<div style="background-color: #f15959; text-align: center;">
+		<p style="color:#ffffff;" class="not-numeric-input" hidden>Nevalidan unos! IMEI broj se sastoji od 15 numeričkih karaktera.</p>
+	</div>
+	<table align="center" class="search-result">
+			<div class="row">
+				<div class="column">
+					<p style="background-color: #f15959; color:#ffffff;">{{ unlock_not_found }} </p>
+				</div>
+			</div>
+			<br/>
+			<div class="row">
+				<div class="column">
+					<label for="unlock">{{ imei_query }} </label>
+				</div>
+			</div>
+			<br \>
+			{% for item in unlock_list %}
+			<div class="row">
+				<div class="column">
+					<p>{{ item }}</p>
+				</div>
+			</div>
+			{% endfor %}
+	</table>
+	{% if request.user.groups.all.0.name == 'level_1' %}
+	{% if proizvodjac_temp == 'Nokia' %}
+	<br/><br/>
+	{{ winlockpreview }}
+	<br/><br/>
+	{% endif %}
+	{% endif %}
+	{% if request.user.groups.all.0.name != 'level_3' %}
+	{% if '0' in validate %}
+	<div style="text-align:center;" class="new-request">
+		<form class="contact-form" method="POST" action="/dekodiranjeinput_search/">
+			{% csrf_token %}
+			<input id="imeihidden" type="text" name="imeihidden" value="{{ imei_temp }}" style="text-align:center;" hidden>
+			<input id="proizvodjachidden" type="text" name="proizvodjachidden" value="{{ proizvodjac_temp }}" style="text-align:center;" hidden>
+			<input id="modelhidden" type="text" name="modelhidden" value="{{ model_temp }}" style="text-align:center;" hidden>
+			<div class="row">
+				<div class="column">
+					<a href="{% url 'dekodiranjeinput' %}">
+						<input type="image" id="ace" src="{% static 'images/podnesizahtev.png' %}"
+							onmouseover="this.src='{% static 'images/podnesizahtev_hover.png' %}';"
+							onmouseout="this.src='{% static 'images/podnesizahtev.png' %}';">
+					</a>
+				</div>
+			</div>
+		</form>
+	</div>
+	{% endif %}
+	{% if '1' in validate %}
+	<div style="text-align:center;" class="new-request">
+		<form class="contact-form" method="POST" action="/dekodiranjeinput_search/">
+			{% csrf_token %}
+			<input id="imeihidden" type="text" name="imeihidden" value="{{ imei_temp }}" style="text-align:center;" hidden>
+			<input id="proizvodjachidden" type="text" name="proizvodjachidden" value="{{ proizvodjac_temp }}" style="text-align:center;" hidden>
+			<input id="modelhidden" type="text" name="modelhidden" value="{{ model_temp }}" style="text-align:center;" hidden>
+			<div class="row">
+				<div class="column">
+					</br>
+					<p>U slučaju neispravnosti koda za dekodiranje, možete podneti novi zahtev</p>
+					<a href="{% url 'dekodiranjeinput' %}">
+						<input type="image" id="ace" src="{% static 'images/podnesizahtev.png' %}"
+							onmouseover="this.src='{% static 'images/podnesizahtev_hover.png' %}';"
+							onmouseout="this.src='{% static 'images/podnesizahtev.png' %}';">
+					</a>
+				</div>
+			</div>
+		</form>
+	</div>
+	{% endif %}
+	{% if '3' in validate %}
+	<div style="text-align:center;" class="new-request">
+		<form class="contact-form" method="POST" action="/dekodiranjeinput_search/">
+			{% csrf_token %}
+			<input id="imeihidden" type="text" name="imeihidden" value="{{ imei_temp }}" style="text-align:center;" hidden>
+			<input id="proizvodjachidden" type="text" name="proizvodjachidden" value="{{ proizvodjac_temp }}" style="text-align:center;" hidden>
+			<input id="modelhidden" type="text" name="modelhidden" value="{{ model_temp }}" style="text-align:center;" hidden>
+			<div class="row">
+				<div class="column">
+					</br>
+					<p>Ukoliko su izvršene navedene provere, a korisnikov uređaj traži da se unese kod za dekodiranje, možete podneti zahtev</p>
+					<a href="{% url 'dekodiranjeinput' %}">
+						<input type="image" id="ace" src="{% static 'images/podnesizahtev.png' %}"
+							onmouseover="this.src='{% static 'images/podnesizahtev_hover.png' %}';"
+							onmouseout="this.src='{% static 'images/podnesizahtev.png' %}';">
+					</a>
+				</div>
+			</div>
+		</form>
+	</div>
+	{% endif %}
+	{% endif %}
+</div>
+
+<div style="background-color: #ffffff; overflow-x:auto; text-align:center;  padding:20px 20px; text-align: justify;">
+	
+	<br/>
+</div>
+<!-- Navigator -->
+
+<!-- Stephen -->
+<div class="bgimg-2">
+</div>
+
+<div style="background-color: #ffffff; text-align:center;  padding:25px 80px; text-align: justify;">
+	<h3 style="text-align:center";>Quote</h3>
+	<p style="text-align:center";><i>"Intelligence is the ability to adapt to change."</i>
+	</p>
+	<p style="text-align:right";><b>Stephen Hawking</b>
+	</p>
+</div>
+<!-- Stephen -->
+
+<div style="background-color: #ffffff; text-align:center; padding:50px 80px; text-align: justify;"></div>
+  
+<!-- Footer -->
+<div style="background-color: #8f153e; text-align:center; padding:50px 80px;">
+	<a href="{% url 'about' %}"><font color="ffffff">o nama</font></a><br />
+	{% if user.is_authenticated %}
+		<p id="loggedUser" style="text-align: right; columns: #000000;"><b>{{request.user.username}} </b><a href="{% url 'logout' %}"><font 	color="ffffff">izloguj se</font></a></p>
+	{% else %}
+		<p id="loggedUser" style="text-align: right; columns: #ffffff;"><a href="{% url 'login' %}"><font color="ffffff">uloguj se</font></a></p>
+	{% endif %}
+</div>
+<!-- Footer -->
+
+</body>
+</html>
