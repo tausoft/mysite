@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'multi_email_field',
     'bootstrap_pagination',
     'register.apps.RegisterConfig',
 ]
