@@ -1,0 +1,100 @@
+{% load static %}
+<html>
+<head>
+<title>RA&T box</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src={% static 'bazaznanja/main.js' %}></script>
+<style>body {background-image: url("{% static 'images/Header.jpg' %}");}</style>
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+</head>
+
+<body onload="hyperlink()" bgcolor="#ffffff" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+	
+<!-- Header -->
+
+{% include "mysite/header.html" %}
+
+</div>
+
+<!-- Header -->
+
+
+<!-- Content -->
+
+<div style="text-align:center;  padding:50px 80px; text-align: justify;">
+	<br /><br />
+	<h3 style="color: #000000; text-align:center";>Uuuups!</h3>
+  	<p style="text-align:center">U ovom trenutku naša aplikacija ne podržava Internet Explorer. Vidimo se na nekom od podržanih pretraživača :)
+	<br /><br />
+	</p>
+	<div class="row">
+		<div class="columns">
+			<img onclick="openChrome()" src="{% static 'images/chrome.png' %}" width="auto" height="66px" style="margin-left: 10px; margin-right: 10px; cursor: pointer;">
+			<img onclick="openMozilla()" src="{% static 'images/mozilla.png' %}" width="auto" height="66px" style="margin-left: 10px; margin-right: 10px; cursor: pointer;">
+			<img onclick="openEdge()" src="{% static 'images/edge.png' %}" width="auto" height="66px" style="margin-left: 10px; margin-right: 10px; cursor: pointer;">
+		</div>
+	</div>
+	<br /><br />
+	<p style="text-align:center">Ili link možeš ručno kopirati i otvoriti u željenom pretraživaču</p>
+
+	<p style="text-align:center" id="hyperlink"></p>
+</div>
+
+<!-- Content -->
+
+
+<!-- Footer -->
+
+{% include "mysite/footer.html" %}
+
+<!-- Footer -->
+
+<script type="text/javascript">
+
+function openChrome() {
+	var shell = new ActiveXObject("WScript.Shell");
+	var x = "Chrome " + window.location.origin;
+	try {
+		shell.run(x);
+	}
+	catch(err) {
+	alert('Ne mogu da pronađem Chrome pretraživač na tvom računaru! Ukoliko je Chrome instaliran, potrebno je pokrenuti ga ručno i prekopirati link iz nastavka.')
+	}
+}
+
+function openMozilla() {
+	var shell = new ActiveXObject("WScript.Shell");
+	var x = "Firefox " + window.location.origin;
+	try {
+		shell.run(x);
+	}
+	catch(err) {
+	alert('Ne mogu da pronađem Mozilla Firefox pretraživač na tvom računaru! Ukoliko je Mozilla Firefox instaliran, potrebno je pokrenuti ga ručno i prekopirati link iz nastavka.')
+	}
+}
+
+function openEdge() {
+	var shell = new ActiveXObject("WScript.Shell");
+	var x = "microsoft-edge:" + window.location.origin;
+	try {
+		shell.run(x);
+	}
+	catch(err) {
+		alert('Ne mogu da pronađem Edge pretraživač na tvom računaru! Ukoliko je Edge instaliran, potrebno je pokrenuti ga ručno i prekopirati link iz nastavka.')
+	}
+}
+
+function hyperlink() {
+	document.getElementById("hyperlink").innerHTML = window.location.origin;
+}
+
+
+</script>
+
+</body>
+</html>

@@ -5,117 +5,231 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}"/>
+<style>body {background-image: url("{% static 'images/Header.jpg' %}");}</style>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src={% static 'bazaznanja/main.js' %} defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="{% static 'style.css' %}">
 
 </head>
 
-<body bgcolor="#8f153e" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 
 <!-- Header -->
-<img id="header" src="{% static 'images/Header.png' %}" max width="100%" height="100px">
-<div style="background-color: #8f153e; padding:100px 80px;"></div>
 
-<img id="Viplogo" src="{% static 'images/vip.png' %}" width="75px" height="66px">
-<a href="">
-<img id="RATlogo" src="{% static 'images/RAT_logo.png' %}" width="auto" height="auto">
-</a>
-<!-- Header -->
+{% include "mysite/header.html" %}
 
-<!-- Navigator -->
-<div class="bgimg-1">
-	<div class="navigatorimg">
-		<h2 style="text-align:center;">Dobro došli!</h2>
-  </div>
+<div class="headersearch" style="text-align: center; background-color: rgb(92, 92, 92);">
+	<h3 class="headertext">Da li ti je potreban kod za dekodiranje?</h3>
+	<form class="search" style="margin:auto;" method="POST">	
+		{% csrf_token %}
+		<input type="text" id="user" value="{{request.user.username}}" hidden>
+		<input type="text" id="group" value="{{request.user.groups.all.1}}" hidden>
+		<input type="text" id="level" value="{{request.user.groups.all.0}}" hidden>
+		<input type="text" id="imei" name="imei" value="{{ imei }}" placeholder="Unesi IMEI broj.." autocomplete="off">
+		<button class="newmessagebtn" type="submit"><i class="fa fa-search"></i></button>
+	</form>
+	<div style="background-color: #f15959; text-align: center; position:absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;">
+		<p style="color:#ffffff; padding: 10px 0px 10px 0px;" class="not-luhn-input" hidden>Nevalidan unos! IMEI broj nije ispravan.</p>
+	</div>
+	<div style="background-color: #f15959; text-align: center; position:absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;">
+		<p style="color:#ffffff; padding: 10px 0px 10px 0px;" class="not-numeric-input" hidden>Nevalidan unos! IMEI broj se sastoji od 15 numeričkih karaktera.</p>
+	</div>
+	<br />
+	<br />
 </div>
 
-<!-- Aplications -->
-<div style="background-color: #ffffff; text-align:center;  padding:50px 80px; text-align: center;">
-	<h3 style="text-align:center";>Dostupni alati:</h3>
-	
+</div>
+
+<!-- Header -->
+
+
+<!-- Body -->
+
+<div style="text-align:center;  padding:100px 80px; text-align: center;">
+
+<br/><br/><br/>
+
+<div class="headertext"><br/><br/><br/></div>
+
+
+<p><b>Dostupni alati:</b></p>
+
 	{% if request.user.groups.all.0.name == 'level_1' %}
 	<div class="row">
-		<div class="column">
-			<a href="{% url 'dekodiranjepretraga' %}">
-				<img src="{% static 'images/proveridostupnost.png' %}"
-					onmouseover="this.src='{% static 'images/proveridostupnost_hover.png' %}';"
-					onmouseout="this.src='{% static 'images/proveridostupnost.png' %}';">
-			</a>
-			<a href="{% url 'dekodiranjeinput' %}">
-				<img src="{% static 'images/dekodiranje.png' %}"
-        			onmouseover="this.src='{% static 'images/dekodiranje_hover.png' %}';"
-					onmouseout="this.src='{% static 'images/dekodiranje.png' %}';">
-			</a>
-			<a href="{% url 'dekodiranjeadmin' %}">
-				<img src="{% static 'images/dekodiranjeadmin.png' %}"
-					onmouseover="this.src='{% static 'images/dekodiranjeadmin_hover.png' %}';"
-					onmouseout="this.src='{% static 'images/dekodiranjeadmin.png' %}';">
-			</a>
+		<div class="columns">
+			<button style="border: none; min-width: 312px; max-width: 312px;">
+				<a href="{% url 'dekodiranjepretraga' %}">
+					<div style="background-color: rgb(92, 92, 92); display: table; border: none; padding-top: 50px; font: 22px 'FuturaLight'; text-align:center;"> <p style="color:#ffffff;">Dekodiranje</p>
+						<div style="background-color: #f1f1f1; min-width: 300px; max-width: 300px; text-align:center; padding: 1px 0px 1px 0px;">
+							<p style="color:#000000;"><b>pretraga</b></p>
+						</div>
+					</div>
+				</a>
+			</button>
+			<button style="border:none; min-width: 312px; max-width: 312px;">
+				<a href="{% url 'dekodiranjeinput' %}">
+					<div style="background-color: rgb(92, 92, 92); display: table; border: none; padding-top: 50px; font: 22px 'FuturaLight'; text-align:center;"> <p style="color:#ffffff;">Dekodiranje</p>
+						<div style="background-color: #f1f1f1; min-width: 300px; max-width: 300px; text-align:center; padding: 1px 0px 1px 0px;">
+							<p style="color:#000000;"><b>podnesi zahtev</b></p>
+						</div>
+					</div>
+				</a>
+			</button>
+			<button style="border:none; min-width: 312px; max-width: 312px;">
+				<a href="{% url 'dekodiranjeadmin' %}">
+					<div style="background-color: rgb(92, 92, 92); display: table; border: none; padding-top: 50px; font: 22px 'FuturaLight'; text-align:center;"> <p style="color:#ffffff;">Dekodiranje</p>
+						<div style="background-color: #f1f1f1; min-width: 300px; max-width: 300px; text-align:center; padding: 1px 0px 1px 0px;">
+							<p style="color:#000000;"><b>administracija</b></p>
+						</div>
+					</div>
+				</a>
+			</button>
+			<button style="border:none; min-width: 312px; max-width: 312px;">
+				<a href="{% url 'dashboard' %}">
+					<div style="background-color: rgb(92, 92, 92); display: table; border: none; padding-top: 50px; font: 22px 'FuturaLight'; text-align:center;"> <p style="color:#ffffff;">Dekodiranje</p>
+						<div style="background-color: #f1f1f1; min-width: 300px; max-width: 300px; text-align:center; padding: 1px 0px 1px 0px;">
+							<p style="color:#000000;"><b>dashboard</b></p>
+						</div>
+					</div>
+				</a>
+			</button>
 		</div>
 	</div>
 	{% endif %}
 	{% if request.user.groups.all.0.name == 'level_2' %}
 	<div class="row">
-		<div class="column">
-			<a href="{% url 'dekodiranjepretraga' %}">
-				<img src="{% static 'images/proveridostupnost.png' %}"
-					onmouseover="this.src='{% static 'images/proveridostupnost_hover.png' %}';"
-					onmouseout="this.src='{% static 'images/proveridostupnost.png' %}';">
-			</a>
-			<a href="{% url 'dekodiranjeinput' %}">
-				<img src="{% static 'images/dekodiranje.png' %}"
-        			onmouseover="this.src='{% static 'images/dekodiranje_hover.png' %}';"
-					onmouseout="this.src='{% static 'images/dekodiranje.png' %}';">
-			</a>
+		<div class="columns">
+			<button style="border:none; min-width: 312px; max-width: 312px;">
+				<a href="{% url 'dekodiranjepretraga' %}">
+					<div style="background-color: rgb(92, 92, 92); display: table; border: none; padding-top: 50px; font: 22px 'FuturaLight'; text-align:center;"> <p style="color:#ffffff;">Dekodiranje</p>
+						<div style="background-color: #f1f1f1; min-width: 300px; max-width: 300px; text-align:center; padding: 1px 0px 1px 0px;">
+							<p style="color:#000000;">pretraga</p>
+						</div>
+					</div>
+				</a>
+			</button>
+			<button style="border:none; min-width: 312px; max-width: 312px;">
+				<a href="{% url 'dekodiranjeinput' %}">
+					<div style="background-color:rgb(92, 92, 92); display: table; border: none; padding-top: 50px; font: 22px 'FuturaLight'; text-align:center;"> <p style="color:#ffffff;">Dekodiranje</p>
+						<div style="background-color: #f1f1f1; min-width: 300px; max-width: 300px; text-align:center; padding: 1px 0px 1px 0px;">
+							<p style="color:#000000;">podnesi zahtev</p>
+						</div>
+					</div>
+				</a>
+			</button>
 		</div>
 	</div>
 	{% endif %}
 	{% if request.user.groups.all.0.name == 'level_3' %}
 	<div class="row">
-		<div class="column">
-			<a href="{% url 'dekodiranjepretraga' %}">
-				<img src="{% static 'images/proveridostupnost.png' %}"
-					onmouseover="this.src='{% static 'images/proveridostupnost_hover.png' %}';"
-					onmouseout="this.src='{% static 'images/proveridostupnost.png' %}';">
-			</a>
+		<div class="columns">
+			<button style="border:none; min-width: 312px; max-width: 312px;">
+				<a href="{% url 'dekodiranjepretraga' %}">
+					<div style="background-color: rgb(92, 92, 92); display: table; border: none; padding-top: 50px; font: 22px 'FuturaLight'; text-align:center;"> <p style="color:#ffffff;">Dekodiranje</p>
+						<div style="background-color: #f1f1f1; min-width: 300px; max-width: 300px; text-align:center; padding: 1px 0px 1px 0px;">
+							<p style="color:#000000;">pretraga</p>
+						</div>
+					</div>
+				</a>
+			</button>
 		</div>
 	</div>
 	{% endif %}
+
+</div>
+
+<button onclick="myModal()" id="myBtn" hidden>Open Modal</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  	<div class="modal-content">
+    	<span class="close">&times;</span>
+		<br/><br/>
+
+		<div id="div_pending" style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 10%; right: 10%; margin-top: 2px;" hidden>
+			<p style="color:#ffffff; padding: 10px 0px 10px 0px;" id="i"></p>
+		</div>
+
+		<br/><br/><br/>
+
+		<div style="background-color: #ffffff; overflow-x:auto; text-align:center; padding:50px 80px;">
+			<p id='p'></p>
+			<br/>
+			<p id='o'></p>
+		</div>
+
+		
+
+
+		{% if request.user.groups.all.0.name == 'level_1' %}
+		<div id ="div_winlock" hidden>
+			<div id="div_winlock" style="background-color: #62eb62; text-align: center; margin-left: auto; margin-right: auto; left: 10%; right: 10%; margin-top: 2px;" >
+				<p style="color:#ffffff; padding: 10px 0px 10px 0px;" id="r"></p>
+			</div>
+			<br/><br/>
+		</div>
+		{% endif %}
+		
+		<br/><br/><br/>
 	
+
+		{% if request.user.groups.all.0.name != 'level_3' %}
+			<div id="validate_0" style="text-align: center;"  hidden>
+				<form class="contact-form" method="POST" action="/dekodiranjeinput_search/">
+					{% csrf_token %}
+					<input id="imeihidden_0" type="text" name="imeihidden" value="" style="text-align:center;" hidden>
+					<input id="proizvodjachidden_0" type="text" name="proizvodjachidden" value="" style="text-align:center;" hidden>
+					<input id="modelhidden_0" type="text" name="modelhidden" value="" style="text-align:center;" hidden>
+						<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+							<p style="color:#ffffff;">podnesi zahtev</p>
+						</button>
+				</form>
+			</div>
+
+			<div id="validate_1" style="text-align: center;" hidden>
+				<form class="contact-form" method="POST" action="/dekodiranjeinput_search/">
+					{% csrf_token %}
+					<input id="imeihidden_1" type="text" name="imeihidden" value="" style="text-align:center;" hidden>
+					<input id="proizvodjachidden_1" type="text" name="proizvodjachidden" value="" style="text-align:center;" hidden>
+					<input id="modelhidden_1" type="text" name="modelhidden" value="" style="text-align:center;" hidden>
+					<p style="color:#000000;">U slučaju neispravnosti koda za dekodiranje, možete podneti novi zahtev</p><br/>
+					<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+						<p style="color:#ffffff;">podnesi zahtev</p>
+					</button>
+				</form>
+			</div>  
+			  
+			<div id="validate_3" style="text-align: center;" hidden>
+				<form class="contact-form" method="POST" action="/dekodiranjeinput_search/">
+					{% csrf_token %}
+					<input id="imeihidden_3" type="text" name="imeihidden" value="" style="text-align:center;" hidden>
+					<input id="proizvodjachidden_3" type="text" name="proizvodjachidden" value="" style="text-align:center;" hidden>
+					<input id="modelhidden_3" type="text" name="modelhidden" value="" style="text-align:center;" hidden>
+					<p style="color:#000000;">Ukoliko su izvršene navedene provere, a korisnikov uređaj traži da se unese kod za dekodiranje, možete podneti zahtev</p><br/>
+						<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+							<p style="color:#ffffff;">podnesi zahtev</p>
+						</button>
+				</form>
+			</div>
+
+		{% endif %}
+	</div>
 </div>
-<!-- Aplications -->
 
-<div style="background-color: #ffffff; text-align:center;  padding:100px 80px; text-align: justify;">
 
-</div>
+<!-- Body -->
 
-<!-- Navigator -->
-
-<!-- Stephen -->
-<div class="bgimg-2">
-</div>
-
-<div style="background-color: #ffffff; text-align:center;  padding:25px 80px; text-align: justify;">
-	<h3 style="text-align:center";>Quote</h3>
-	<p style="text-align:center";><i>"Intelligence is the ability to adapt to change."</i>
-	</p>
-	<p style="text-align:right";><b>Stephen Hawking</b>
-	</p>
-</div>
-<!-- Stephen -->
-
-<div style="background-color: #ffffff; text-align:center; padding:50px 80px; text-align: justify;"></div>
   
 <!-- Footer -->
-<div style="background-color: #8f153e; text-align:center; padding:50px 80px;">
-<a href="{% url 'about' %}"><font color="ffffff">o nama</font></a><br />
-{% if user.is_authenticated %}
-	<p id="loggedUser" style="text-align: right; columns: #000000;"><b>{{request.user.username}} </b><a href="{% url 'logout' %}"><font 	color="ffffff">izloguj se</font></a></p>
-{% else %}
-	<p id="loggedUser" style="text-align: right; columns: #ffffff;"><a href="{% url 'login' %}"><font color="ffffff">uloguj se</font></a></p>
-{% endif %}
-</div>
+
+{% include "mysite/footer.html" %}
+
 <!-- Footer -->
+
 
 </body>
 </html>

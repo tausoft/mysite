@@ -1,88 +1,83 @@
 {% load static %}
 <html>
 <head>
-<title>RA&T box</title>
+<title>Tausoft</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}"/>
 
+<link rel="stylesheet" href="{% static 'bazaznanja/style.css' %}">
 <link rel="stylesheet" href="{% static 'style.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src={% static 'bazaznanja/main.js' %} defer></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<style></style>
 
 </head>
 
-<body bgcolor="#8f153e" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-
-<p id="loggedUser">{{request.user.username}}</p>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 
 <!-- Header -->
-<img id="header" src="{% static 'images/Header.png' %}" max width="100%" height="120px">
-<div style="background-color: #8f153e; padding:100px 80px;"></div>
 
-<img id="Viplogo" src="{% static 'images/vip.png' %}" width="75px" height="66px">
-<a href="">
-<img id="RATlogo" src="{% static 'images/RAT_logo.png' %}" width="auto" height="auto">
-</a>
-<!-- Header -->
+{% include "mysite/header.html" %}
 
-<!-- Navigator -->
-<div class="bgimg-1">
-	<div class="navigatorimg">
-		<h2 style="text-align:center;">Ulogujte se!</h2>
-  </div>
 </div>
+
+<!-- Header -->
+
+
+
+<!-- Page -->
+
+<div id="main" style="background-color: #fff; text-align:center;">
+
+    <br/><br/><br/><br/><br/><br/>
 
 <!-- Aplications -->
-<div class="from-group" style="background-color: #ffffff; text-align:center;  padding:50px 80px; text-align: center;">
-	<h3 style="text-align:center";></h3><br /><br />
-
-
-
-
-<form method="POST" class="from-group">
-    {% csrf_token %}
-    <table align="center">
-        <tr>
-            <td>
-                <label for="{{ form.username.id_for_label }}" id="username"><font size="5">Korisničko ime:</font></label>
-            </td>
-            <td>
-                <label for="{{ form.password.id_for_label }}"><font size="5">Lozinka:</font></label>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {{ form.username }}
-            </td>
-            <td>
-                {{ form.password }}
-            </td>
-        </tr>
-    </table>
-    <br/>
-        <input type="image" id="ace" src="{% static 'images/ulogujse.png' %}"
-                                onmouseover="this.src='{% static 'images/ulogujse_hover.png' %}';"
-                                onmouseout="this.src='{% static 'images/ulogujse.png' %}';">
-</form>
-
-
-<br/>
-
-<div style="background-color: #f15959; text-align: center;">
-    <p style="color:#ffffff;" class="username-alert" hidden>Obavezan unos! Potrebno je uneti korisničko ime.</p>
-</div>
+    <div style="background-color: #f1f1f1; display: table; margin: 0 auto; border: none; padding: 50px 70px;">
+        <p style="text-align: center; color: gray; font-size: 20px;">Unesi kredencijale</h4>
+        <form method="POST" class="from-group">
+            {% csrf_token %}
+            {{ form.username }} <br/>
+            {{ form.password }} <br/>
+            <button class="loginbutton2" type="submit">uloguj se</button>
+        </form>
+        <div style="background-color: #f15959; text-align: center;">
+            <p style="color:#ffffff;" class="username-alert" hidden>Obavezan unos! Potrebno je uneti korisničko ime.</p>
+        </div>
+    </div>
+<br/><br/>
+<!-- Aplications -->
 
 </div>
+
+<!-- Page -->
 
 <!-- Footer -->
-<div style="background-color: #8f153e; text-align:center; padding:50px 80px;">
-    <a href="{% url 'about' %}"><font color="ffffff">o nama</font></a><br />
-        {% if user.is_authenticated %}
-            <p id="loggedUser" style="text-align: right; columns: #000000;">{{request.user.username}} <a href="{% url 'logout' %}"><font 	color="ffffff">izloguj se</font></a></p>
-        {% else %}
-            <p id="loggedUser" style="text-align: right; columns: #ffffff;"><a href="{% url 'login' %}"><font color="ffffff">uloguj se</font></a></p>
-        {% endif %}
-</div>
+
+{% include "mysite/footer.html" %}
+
 <!-- Footer -->
-        
+
+<script type="text/javascript" >
+
+$(document).ready(function() {
+	var ua = window.navigator.userAgent;
+  	var isIE = /MSIE|Trident/.test(ua);
+
+  	if ( isIE ) {
+        window.location.href = '../isie/';
+  	}
+});
+
+    $(document).ready(function(){
+        $("#id_username").attr('placeholder', 'korisničko ime');
+        $("#id_username").attr('autocomplete', 'off');
+        $("#id_username").attr('style', 'text-align:center; font: 14px "FuturaLight"; margin-bottom: 10px; width: 200px; height:30px;');
+        $("#id_password").attr('placeholder', 'lozinka');
+        $("#id_password").attr('style', 'text-align:center; font: 14px "FuturaLight"; margin-bottom: 10px; width: 200px; height:30px;');
+    });
+</script>
+
 </body>
 </html>

@@ -5,51 +5,36 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}"/>
+<style>body {background-image: url("{% static 'images/Header.jpg' %}");}</style>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-
-<!-- jQuery library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src={% static 'bazaznanja/main.js' %} defer></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
 <link rel="stylesheet" href="{% static 'style.css' %}">
-<script type="text/javascript" src={% static 'main.js' %} defer></script>
-<script class="jsbin" src=https://ajax.gogleapis.com/ajax/libs/jquery/1/jquery.min.js></script>
+
 <script>
     var ace_alert = "{{ trigger }}";
 </script>
 
 </head>
 
-<body bgcolor="#8f153e" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 
 <!-- Header -->
-<img id="header" src="{% static 'images/Header.png' %}" max width="100%" height="120px">
-<div style="background-color: #8f153e; padding:100px 80px;"></div>
 
-<img id="Viplogo" src="{% static 'images/vip.png' %}" width="75px" height="66px">
-<a href="{% url 'index' %}">
-<img id="RATlogo" src="{% static 'images/RAT_logo.png' %}" width="auto" height="auto">
-</a>
-<!-- Header -->
+{% include "mysite/header.html" %}
 
-<!-- Navigator -->
-<div class="bgimg-1">
-	<div class="navigatorimg">
-		<h2 style="text-align:center;">Dekodiranje - Admin</h2>
-  </div>
 </div>
-<!-- Navigator -->
+
+<!-- Header -->
 
 <!-- APPS -->
 
 <!-- DOWNLOAD VENDORS LIST -->
-<div style="background-color: #ffffff; overflow-x:auto; padding:50px 80px; text-align: center;">
-	<h3 style="text-align:center";>IMEI liste</h3>
+<div style="overflow-x:auto; padding:50px 80px; text-align: center;">
+	<h3 class="headertext" style="color: #000000;">IMEI liste</h3>
 	<div class="row">
-		<div class="column">
+		<div class="columns">
 			<form class="contact-form" method="POST" action="/download_list/"> 
 				{% csrf_token %}
 				<input type="checkbox" onClick="toggleAll(this)" /> Obeleži sve<br/><br/>
@@ -62,45 +47,49 @@
 				<input type="checkbox" class="select_all" name="name6" value="sony"/> Sony
 				<input type="checkbox" class="select_all" name="name7" value="zte"/> ZTE
 				<br><br>
-				<input type="image" onclick="checkboxChecker()" src="{% static 'images/button_lowercut.png' %}"
-								onmouseover="this.src='{% static 'images/button_lowercut_hover.png' %}';"
-								onmouseout="this.src='{% static 'images/button_lowercut.png' %}';">
+				<button onclick="checkboxChecker();" style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+					<p style="color:#ffffff;">preuzmi</p>
+				</button>
 			</form>
 		</div>
 	</div>
-	<div class="ace-alert" style="background-color: #f15959">
-		<p style="color:#ffffff;" class="checkbox-alert" hidden>Neophodno je odabrati makar jednog proizvođača!</p>
+	<div class="ace-alert" style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;">
+		<p style="color:#ffffff; padding: 10px 0px 10px 0px;" class="checkbox-alert" hidden>Neophodno je odabrati makar jednog proizvođača!</p>
 	</div>
+	{% if list_trigger != None %}
 	<div class="row">
-		<div class="column">
-			<div class="ace-alert" style="background-color: #62eb62">
-				<p style="color:#ffffff;">{{ list_trigger }} </p>
+		<div class="columns">
+			<div class="ace-alert" style="background-color: #62eb62; text-align: center; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;">
+				<p style="color:#ffffff; padding: 10px 0px 10px 0px;">{{ list_trigger }} </p>
 			</div>
 		</div>
 	</div>
+	{% endif %}
 	<br><br>
 
 	<!-- NOKIA LIST -->
-	<h3 style="text-align:center";>Nokia liste</h3>
+	<h3 class="headertext" style="color: #000000;">Nokia liste</h3>
 	<p style="text-align:center";>Liste IMEI brojeva sortiranih prema tipu winlock-a:</p>
 	<div class="row">
-		<div class="column">
+		<div class="columns">
 			<form class="contact-form" method="POST" action="/nokia_list/"> 
 				{% csrf_token %}
 				<br>
-				<input type="image" src="{% static 'images/button_lowercut.png' %}"
-								onmouseover="this.src='{% static 'images/button_lowercut_hover.png' %}';"
-								onmouseout="this.src='{% static 'images/button_lowercut.png' %}';">
+				<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+					<p style="color:#ffffff;">preuzmi</p>
+				</button>
 			</form>
 		</div>
 	</div>
+	{% if nokia_trigger != None %}
 	<div class="row">
-		<div class="column">
-			<div class="ace-alert" style="background-color: #62eb62">
-				<p style="color:#ffffff;">{{ nokia_trigger }} </p>
+		<div class="columns">
+			<div class="ace-alert" style="background-color: #62eb62; text-align: center; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;">
+				<p style="color:#ffffff; padding: 10px 0px 10px 0px;">{{ nokia_trigger }} </p>
 			</div>
 		</div>
 	</div>
+	{% endif %}
 	<!-- NOKIA LIST -->
 
 </div>
@@ -109,8 +98,8 @@
 <div style="background-color: #e4e4e4; overflow-x:auto; padding:50px 80px; text-align: center;"></div>
 
 <!-- UPLOAD CSV -->
-<div style="background-color: #ffffff; padding:50px 80px;">
-	<h3 style="text-align:center";>Unos kodova za dekodiranje</h3>
+<div style="padding:50px 80px;">
+	<h3 class="headertext" style="color: #000000; text-align: center;">Unos kodova za dekodiranje</h3>
 		<form name="myWebForm" method="POST" action="/upload_csv/" enctype="multipart/form-data">
 			{% csrf_token %}
 			<div class="form-group">
@@ -128,13 +117,13 @@
 						<div class="image-title-wrap">
 							<p>Uspešno je učitana datoteka <span class="image-title">Uploaded Image</span></p> <br />
 							<div class="row">
-								<div class="column">
-									<input src='{% static "images/ocitaj.png" %}' type="image" class="file-submit-content"onchange="readURL(this);" hidden
-										onmouseover="this.src='{% static 'images/ocitaj_hover.png' %}';"
-										onmouseout="this.src='{% static 'images/ocitaj.png' %}';">
-									<input src='{% static "images/uklonidatoteku.png" %}' type="image" onclick="removeUpload()"
-										onmouseover="this.src='{% static 'images/uklonidatoteku_hover.png' %}';"
-										onmouseout="this.src='{% static 'images/uklonidatoteku.png' %}';">
+								<div class="columns">
+									<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+										<p style="color:#ffffff;">učitaj datoteku</p>
+									</button>
+									<button onclick="removeUpload()" style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+										<p style="color:#ffffff;">ukloni datoteku</p>
+									</button>
 								</div>
 							</div>
 						</div>
@@ -142,6 +131,7 @@
 				</div>
 			</div>
 		</form>
+		<p id="test"></p>
 </div>
 
 </br>
@@ -150,18 +140,18 @@
 <div style="background-color: #e4e4e4; overflow-x:auto; padding:50px 80px; text-align: center;"></div>
 
 <!-- ACE LIST AND TABLE-->
-<div style="background-color: #ffffff; padding:50px 80px; text-align: center;">
-	<h3 style="text-align:center";>Liste za ACE</h3>
+<div style="padding:50px 80px; text-align: center;">
+	<h3 class="headertext" style="color: #000000;">Liste za ACE</h3>
 	<div class="row">
-		<div class="column">
+		<div class="columns">
 			<form class="contact-form" method="POST" action="/ace_list/"> 
 				{% csrf_token %}
-				<input type="image" onclick="fnValidate()" id = "demo" name = "{{ trigger }}" src="{% static 'images/button_lowercut.png' %}"
-								onmouseover="this.src='{% static 'images/button_lowercut_hover.png' %}';"
-								onmouseout="this.src='{% static 'images/button_lowercut.png' %}';">
+				<button onclick="fnValidate()" style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+					<p style="color:#ffffff;">preuzmi</p>
+				</button>
 			</form>
-			<div class="ace-alert" style="background-color: #62eb62">
-				<p style="color:#ffffff;" class="ace-alert" hidden>Nema novih zahteva za preuzimanje!</p>
+			<div id="div_winlock" style="background-color: #62eb62; text-align: center; margin-left: auto; margin-right: auto; left: 10%; right: 10%; margin-top: 2px;" >
+				<p style="color:#ffffff; padding: 10px 0px 10px 0px;" class="ace-alert"  hidden>Nema novih zahteva za preuzimanje!</p>
 			</div>
 			<!--  not in use - if there is need for pop-up alert message
 			{% if messages %}
@@ -177,53 +167,39 @@
 	</br>
 	<p>Kreirane ACE liste - preuzmi ponovo</p>
 	<div class="row">
-		<div class="column">
 			{% for item in ace_data reversed %}
 				{% if forloop.counter < 11 %}
-					<button type="submit" class="ace-download-btn">
+				
+					<div class="columns">
+						<button class="input-btn" disabled></button>
 						<form class="contact-form" method="POST" action="/ace_table/">
 							{% csrf_token %}
-							<input style="background-color:#ffffff; color:#000000;" type="submit" id="ace_name" value='{{ item.datecreated|date:"d.m.Y - H:i" }}'>
-							</br>
-							<input id="ace_name" type="text" name="ace_name" value="{{ item.name }}"hidden>
-							<input type="image" id="ace" src="{% static 'images/button_lowercut.png' %}"
-								onmouseover="this.src='{% static 'images/button_lowercut_hover.png' %}';"
-								onmouseout="this.src='{% static 'images/button_lowercut.png' %}';">
+							<button style="border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+								<input id="ace_name" type="text" name="ace_name" value="{{ item.name }}"hidden>
+								<div style="background-color: rgb(92, 92, 92); display: table; border: none; padding-top: 50px; font: 22px 'FuturaLight'; text-align:center; cursor: pointer;"> <p style="color:#ffffff;">{{ item.datecreated|date:"d.m.Y - H:i" }}</p>
+									<div style="background-color: #f1f1f1; min-width: 300px; max-width: 300px; text-align:center; padding: 1px 0px 1px 0px; cursor: pointer;">
+										<p style="color:#000000;">preuzmi</p>
+									</div>
+								</div>
+							</button>
 						</form>
 					</button>
+					
+				</div>
 				{% endif %}
 			{% endfor %}
 		</div>
-	</div>
 </div>
+<br/><br/><br/><br/><br/>
 <!-- ACE LIST AND TABLE-->
 
 <!-- APPS -->
 
-<!-- Stephen -->
-<div class="bgimg-2">
-</div>
-
-<div style="background-color: #ffffff; text-align:center;  padding:25px 80px; text-align: justify;">
-	<h3 style="text-align:center";>Quote</h3>
-	<p style="text-align:center";><i>"Intelligence is the ability to adapt to change."</i>
-	</p>
-	<p style="text-align:right";><b>Stephen Hawking</b>
-	</p>
-</div>
-<!-- Stephen -->
-
-<div style="background-color: #ffffff; text-align:center; padding:50px 80px; text-align: justify;"></div>
   
 <!-- Footer -->
-<div style="background-color: #8f153e; text-align:center; padding:50px 80px;">
-	<a href="{% url 'about' %}"><font color="ffffff">o nama</font></a><br />
-	{% if user.is_authenticated %}
-		<p id="loggedUser" style="text-align: right; columns: #000000;"><b>{{request.user.username}} </b><a href="{% url 'logout' %}"><font 	color="ffffff">izloguj se</font></a></p>
-	{% else %}
-		<p id="loggedUser" style="text-align: right; columns: #ffffff;"><a href="{% url 'login' %}"><font color="ffffff">uloguj se</font></a></p>
-	{% endif %}
-</div>
+
+{% include "mysite/footer.html" %}
+
 <!-- Footer -->
 
 </body>

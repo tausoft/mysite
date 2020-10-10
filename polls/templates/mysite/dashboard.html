@@ -5,44 +5,37 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}"/>
-
-<link rel="stylesheet" href="{% static 'style.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src={% static 'bazaznanja/main.js' %} defer></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<style>body {background-image: url("{% static 'images/Header.jpg' %}");}</style>
+<link rel="stylesheet" href="{% static 'style.css' %}">
 
 </head>
 
-<body bgcolor="#8f153e" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 
 <!-- Header -->
-<img id="header" src="{% static 'images/Header.png' %}" max width="100%" height="100px">
-<div style="background-color: #8f153e; padding:100px 80px;"></div>
 
-<img id="Viplogo" src="{% static 'images/vip.png' %}" width="75px" height="66px">
-<a href="{% url 'index' %}">
-<img id="RATlogo" src="{% static 'images/RAT_logo.png' %}" width="auto" height="auto">
-</a>
-<!-- Header -->
+{% include "mysite/header.html" %}
 
-<!-- Navigator -->
-<div class="bgimg-1">
-	<div class="navigatorimg">
-		<h2 style="text-align:center;">Statistika!</h2>
-  </div>
 </div>
+
+<!-- Header -->
 
 <!-- Aplications -->
 
-
+<br/><br/>
 
 <div style="background-color: #ffffff; text-align:center;  padding:50px 80px;">
 	<div>Uspešno {{ counter_sum_1 }} <b><span class="count">{{ counter_sum }}</span></b> {{ counter_sum_2 }} i {{ entry_sum_1 }} <b><span class="count">{{ entry_sum }}</span></b> {{ entry_sum_2 }}!</div><br/>
 	<br/>
 	<div style="background-color: #f1f1f1; text-align:center;  padding:50px 80px;">
-		Izveštaj za {{month_list.1}} - FCR unapređen za {{FCRthismonth}} %
+		Izveštaj za {{month_list.1}} - proces unapređen za {{FCRthismonth}} %
 	</div>
 	<div class="row">
-		<div class="column">
+		<div class="columns">
 			<button class="input-btn" disabled>
 				Statusi pretrage
 				<div id="statusChart_div" style="width: 350px; height: 350px;"></div>
@@ -63,10 +56,10 @@
 	</div>
 
 	<div style="background-color: #f1f1f1; text-align:center;  padding:50px 80px;">
-		Izveštaj za {{month_list.2}} - FCR unapređen za {{FCRlastmonth}} %
+		Izveštaj za {{month_list.2}} - proces unapređen za {{FCRlastmonth}} %
 	</div>
 	<div class="row">
-		<div class="column">
+		<div class="columns">
 			<button class="input-btn" disabled>
 				Statusi pretrage
 				<div id="statusChart_lm_div" style="width: 350px; height: 350px;"></div>
@@ -90,7 +83,7 @@
 	</div>
 	<br/>
 	<div class="row">
-		<div class="column">
+		<div class="columns">
 			<button class="chart-btn" disabled>
 				Izvršene pretrage
 				<div id="columnchart_values"></div>
@@ -99,7 +92,7 @@
 	</div>
 	<br/>
 	<div class="row">
-		<div class="column">
+		<div class="columns">
 			<button class="chart-btn" disabled>
 				Podneti zahtevi
 				<div id="reqMonthChart_values"></div>
@@ -120,36 +113,12 @@
 
 </div>
 
-<!-- Navigator -->
 
-<!-- Stephen -->
-<div class="bgimg-2">
-</div>
-
-<div style="background-color: #ffffff; text-align:center;  padding:25px 80px; text-align: justify;">
-	<h3 style="text-align:center";>Quote</h3>
-	<p style="text-align:center";><i>"Intelligence is the ability to adapt to change."</i>
-	</p>
-	<p style="text-align:right";><b>Stephen Hawking</b>
-	</p>
-</div>
-<!-- Stephen -->
-
-<div style="background-color: #ffffff; text-align:center; padding:50px 80px; text-align: justify;">
-
-	<div id="shiva"><span class="count">1000</span></div>
-
-</div>
   
 <!-- Footer -->
-<div style="background-color: #8f153e; text-align:center; padding:50px 80px;">
-<a href="{% url 'about' %}"><font color="ffffff">o nama</font></a><br />
-{% if user.is_authenticated %}
-	<p id="loggedUser" style="text-align: right; columns: #000000;"><b>{{request.user.username}} </b><a href="{% url 'logout' %}"><font 	color="ffffff">izloguj se</font></a></p>
-{% else %}
-	<p id="loggedUser" style="text-align: right; columns: #ffffff;"><a href="{% url 'login' %}"><font color="ffffff">uloguj se</font></a></p>
-{% endif %}
-</div>
+
+{% include "mysite/footer.html" %}
+
 <!-- Footer -->
 
 <script>
@@ -433,6 +402,7 @@ $(document).ready(function(){
 $(document).ready(function(){
   	$(window).resize(function(){
   		monthChart();
+		reqMonthChart();
 	});
 });
 

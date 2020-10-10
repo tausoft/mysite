@@ -1,56 +1,333 @@
 <style>
-
-<!-- Vip logo -->
-body { 
-	margin: 0;
-}
-
-#Viplogo {
-	z-index: 99;
-	position: fixed;
-	top: 20;
-	right: 4;
-	}
-<!-- Vip logo -->
-
-<!-- RAT Logo -->
+{% load static %}
+/* MAIN */
 
 body { 
 	margin: 0;
 }
 
-#RATlogo {
-	z-index: 98;
-	position: fixed;
-	top: 10;
-  left: 10;
-	}
-<!-- RAT Logo -->
+/* CUSTOM SCROLL */
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
 
 
-<!-- RAT Logo -->
+/* CUSTOM SCROLL */
+
+
+@font-face {
+  font-family: "FuturaBold";
+  src: url('fonts/FuturaCom-Bold.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "FuturaLight";
+  src: url('fonts/FuturaCom-Light.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+a {
+  color: #000000;
+  background-color: transparent;
+  text-decoration: none;
+font: 25px;
+}
+a:link {
+  color: #000000;
+  background-color: transparent;
+  text-decoration: none;
+font: 25px;
+}
+a:visited {
+  color: #000000;
+  background-color: transparent;
+  text-decoration: none;
+font: 25px;
+}
+a:hover {
+  color: #000000;
+  background-color: transparent;
+font: 25px;
+}
+a:active {
+  color: #000000;
+  background-color: transparent;
+  text-decoration: underline;
+font: 25px;
+}
+
+/* INPUT BTN */
+
+
+
+.input-btn {;
+  border: none;
+  color: #000000;
+  text-align: center;
+  font: 20px "FuturaLight";
+	padding: 5px 15px;
+}
+
+.input-btn-hidden {
+  border: none;
+  color: #000000;
+  text-align: center;
+  font: 20px "FuturaLight";
+	padding: 5px 15px;
+}
+
+.chart-btn {;
+  border: none;
+  color: #000000;
+  text-align: center;
+  font: 20px "FuturaLight";
+  padding: 5px 15px;
+  width: 90%;
+}
+
+/* INPUT BTN */
+
+
+/* MAIN */
+
+
+/* HEAD */
+
+.fixedheader {
+  top: 0;
+  width: 100%;
+  position: fixed;
+  background-color: rgb(92, 92, 92);
+  opacity: 1;
+  z-index: 9999;
+  /* background-image:  url('/static/bazaznanja/images/Header.jpg'); */
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: rgb(92, 92, 92);
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.active {
+  background-color: #dfb83b;
+  color: white;
+}
+
+.topnav .icon {
+  display: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 17px;    
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font: 14px "FuturaLight";
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.topnav a:hover, .dropdown:hover .dropbtn {
+  background-color: #555;
+  color: white;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child), .dropdown .dropbtn {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .topnav.responsive .dropdown {float: none;}
+  .topnav.responsive .dropdown-content {position: relative;}
+  .topnav.responsive .dropdown .dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+form.search input[type=text] {
+  padding: 10px;
+  border: 1px solid grey;
+  float: center;
+  width: 50%;
+  background: #f1f1f1;
+  text-align: center;
+  font: 18px "FuturaLight";
+}
+
+form.search button {
+  float: center;
+  width: 80px;
+  height: 45px;
+  padding: 10px;
+  background: #dfb83b;
+  color: white;
+  font-size: 18px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+form.search button:hover {
+  background: grey;
+}
+
+form.search::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+input[type=text], select {
+	font: 18px "FuturaLight";
+    padding:5px; 
+    border:2px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+  width: 200px;
+  height: 45px;
+}
+
+input[type=submit] {
+	font: 18px "FuturaLight";
+    padding: 5px 15px; 
+    background: #8f153e; 
+	color: #ffffff;
+    border: 0 none;
+    cursor: pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+}
+
+input[type=password] {
+	font: 18px "FuturaLight";
+    padding:5px; 
+    border:2px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+input[type=username] {
+	font: 18px "FuturaLight";
+    padding:5px; 
+    border:2px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+/* HEAD */
+
+/* FOOTER */
+
+.footer {
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  bottom: 0;
+  height: 70px;
+  padding-top: 10px;
+}
 
 #loggedUser {
 	z-index: 100;
 	position: fixed;
-	top: 50;
-	right: 4;
+	bottom: 0;
+  right: 10;
 	}
 
-/*main*/
+/* FOOTER */
 
-@font-face {
-    font-family: "FuturaBold";
-    src: url('fonts/FuturaCom-Bold.ttf');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "FuturaLight";
-    src: url('fonts/FuturaCom-Light.ttf');
-    font-weight: normal;
-    font-style: normal;
+form.article input[type=text] {
+  padding: 10px;
+  border: 1px solid grey;
+  float: center;
+  width: 40%;
+  background: #f1f1f1;
+  text-align: center;
+  font: 22px "FuturaLight";
 }
 
 
@@ -63,8 +340,126 @@ table th , table td{
   cursor: pointer;
 }
 
+/*responsive*/
+
+.row_chart {
+  background-color: #ffffff;
+  margin:0 !important;
+  }
+  
+.column_chart {
+  width: 100%; 
+  min-height: 450px;
+  }
+  
+ .row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+  }
+  
+/* Create four equal columns that sits next to each other */
+.column {
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+  }
+  
+.columns {
+    flex: 25%;
+    padding: 0 4px;
+    text-align: center;
+    }
+  
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+  }
+
+.headertext {
+  display: block;
+}
+
+.headersearch{
+  margin-top: -50px;
+}
+
+  
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+
+  .headertext {
+    display: none;
+  }
+
+  .headersearch{
+    margin-top: 0px;
+  }
+}
+  
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
+    }
+
+  .headertext {
+    display: none;
+  }
+
+  .headersearch{
+    margin-top: 0px;
+  }
+}
+
+/*responsive*/
+
 
 /*table*/
+
+
+table{
+  width: 100%;
+}
+td, th{
+  border: none;
+}
+
+@media only screen and (max-width: 1500px) {
+  .one{
+      display: none;
+  }
+}
+
+@media only screen and (max-width: 1150px) {
+  .two{
+      display: none;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .three{
+      display: none;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .four{
+      display: none;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .five{
+      display: none;
+  }
+}
 
 table#t1 {
   border-collapse: collapse;
@@ -87,8 +482,8 @@ h2 {
 }
 
 h3 {
-  font: 45px "FuturaLight";
-  color: #000000;
+  font: 38px "FuturaLight";
+  color: #ffffff;
 }
 
 h5 {
@@ -96,10 +491,15 @@ h5 {
   color: #000000;
 }
 
+p {
+
+  font: 18px "FuturaLight";
+}
+
 body, html {
   height: 100%;
   margin: 0;
-  font: 25px "FuturaLight";
+  font: 18px "FuturaLight";
   color: #000000;
 }
 
@@ -111,51 +511,58 @@ body, html {
 	
 /*main*/
 
-.ace-download-btn {
-  background-color: #ffffff;
-  border: none;
-  color: #000000;
-  text-align: center;
-  font: 20px "FuturaLight";
-	padding: 5px 15px;
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 99999; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
 }
 
-.input-btn {
-  background-color: #ffffff;
-  border: none;
-  color: #000000;
-  text-align: center;
-  font: 20px "FuturaLight";
-	padding: 5px 15px;
-}
-
-.chart-btn {
-  background-color: #ffffff;
-  border: none;
-  color: #000000;
-  text-align: center;
-  font: 20px "FuturaLight";
-  padding: 5px 15px;
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
   width: 90%;
+  height: 100%;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+  z-index: 99999; /* Sit on top */
+  overscroll-behavior: contain;
 }
 
-.input-btn-hidden {
-  background-color: #ffffff;
-  border: none;
-  color: #000000;
-  text-align: center;
-  font: 20px "FuturaLight";
-	padding: 5px 15px;
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
-textarea:focus, input:focus{
-  outline: none;
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
+
+/* The Modal (background) */
 
 /*file uploader*/
 
 .file-upload {
-  background-color: #ffffff;
   width: 90%;
   margin: 0 auto;
   padding: 20px;
@@ -202,7 +609,7 @@ textarea:focus, input:focus{
 }
 
 .image-upload-wrap {
-  border: 4px dashed #ebebeb;
+  border: 4px dashed #000000;
   position: relative;
 }
 
@@ -262,201 +669,5 @@ textarea:focus, input:focus{
 }
 
 /*file uploader*/
-
-/*parallax*/
-
-.bgimg-1, .bgimg-2 {
-  position: relative;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.bgimg-1 {
-  background-image: url("images/navigator.jpg");
-  background-color: 8f153e;
-  min-height: 20%;
-}
-
-.bgimg-2 {
-  background-image: url("images/stephen.jpg");
-  background-color: ffffff;
-  min-height: 45%;
-}
-
- .navigatorimg {
-  position: absolute;
-  left: 0;
-  top: 15%;
-  width: 100%;
-  text-align: center;
-  color: #000;
-}
-  
- .stephenimg {
-  position: absolute;
-  left: 0;
-  top: 55%;
-  width: 100%;
-  text-align: center;
-  color: #000;
-}
-  
-}
-
-/*parallax*/
-
-/*forms*/
-
-::placeholder {
-  color: black;
-  opacity: 1; /* Firefox */
-}
-
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
- color: black;
-}
-
-::-ms-input-placeholder { /* Microsoft Edge */
- color: black;
-}
-
-input[type=text], select {
-	font: 20px "FuturaLight";
-    padding:5px; 
-    border:2px solid #ccc; 
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-	font-family: "FuturaLight";
-	font-size: 13px;
-}
-
-input[type=submit] {
-	font: 20px "FuturaLight";
-    padding: 5px 15px; 
-    background: #8f153e; 
-	color: #ffffff;
-    border: 0 none;
-    cursor: pointer;
-    -webkit-border-radius: 5px;
-    border-radius: 5px; 
-}
-
-input[type=password] {
-	font: 20px "FuturaLight";
-    padding:5px; 
-    border:2px solid #ccc; 
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-	font-family: "FuturaLight";
-	font-size: 13px;
-}
-
-input[type=username] {
-	font: 20px "FuturaLight";
-    padding:5px; 
-    border:2px solid #ccc; 
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-	font-family: "FuturaLight";
-	font-size: 13px;
-}
-
-select {
-	width: 150px;
-	font: 20px "FuturaLight";
-    padding:5px; 
-    border:2px solid #ccc; 
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-	font-family: "FuturaLight";
-	font-size: 13px;
-}
-
-/*forms*/
-
-/*link*/
-
-a {
-    color: #000000;
-    background-color: transparent;
-    text-decoration: none;
-	font: 25px;
-
-a:link {
-    color: #000000;
-    background-color: transparent;
-    text-decoration: none;
-	font: 25px;
-}
-a:visited {
-    color: #000000;
-    background-color: transparent;
-    text-decoration: none;
-	font: 25px;
-}
-a:hover {
-    color: #000000;
-    background-color: transparent;
-	font: 25px;
-}
-a:active {
-    color: #000000;
-    background-color: transparent;
-    text-decoration: underline;
-	font: 25px;
-}
-
-/*link*/
-
-/*responsive*/
-
-.row_chart {
-  background-color: #ffffff;
-  margin:0 !important;
-}
-
-.column_chart {
-  width: 100%; 
-  min-height: 450px;
-}
-
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 4px;
-}
-
-/* Create four equal columns that sits next to each other */
-.column {
-  flex: 25%;
-  max-width: 25%;
-  padding: 0 4px;
-}
-
-.column img {
-  margin-top: 8px;
-  vertical-align: middle;
-  width: 100%;
-}
-
-/* Responsive layout - makes a two column-layout instead of four columns */
-@media screen and (max-width: 800px) {
-  .column {
-    flex: 50%;
-    max-width: 50%;
-  }
-}
-
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .column {
-    flex: 100%;
-    max-width: 100%;
-  }
-}
-
-/*responsive*/
-
 
 </style>

@@ -4,9 +4,7 @@ from .models import *
 from django.core.validators import *
 from multi_email_field.forms import MultiEmailField
 from django.db import models
-from tinymce import models as tinymce_models
 from .views import *
-from ckeditor.widgets import CKEditorWidget
 
 
 class Dekodiranjelist(forms.ModelForm):
@@ -29,7 +27,3 @@ class Vendorlist(forms.ModelForm):
     subject = forms.CharField(label='subject', max_length=50)
     mailbody = forms.CharField(label='mailbody', max_length=1000)
 
-class PostForm(forms.ModelForm):
-    class Meta:
-        model = Post
-        fields = ('body',)

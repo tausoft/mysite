@@ -1,0 +1,50 @@
+{% load static %}
+<!-- Header -->
+<div class="fixedheader">
+	<div class="topnav" id="myTopnav">
+		<a href="{% url 'index' %}" class="active">RA&T box</a>
+		{% if request.user.groups.all.0.name == 'level_1' %}
+		<div class="dropdown">
+		  <button class="dropbtn">dekodiranje 
+			<i class="fa fa-caret-down"></i>
+		  </button>
+		  <div class="dropdown-content">
+			<a href="{% url 'dekodiranjepretraga' %}">pretraži</a>
+			<a href="{% url 'dekodiranjeinput' %}">podnesi zahtev</a>
+			<a href="{% url 'dekodiranjeadmin' %}">admistracija</a>
+			<a href="{% url 'dashboard' %}">dashboard</a>
+		  </div>
+		</div> 
+		{% endif %}
+		{% if request.user.groups.all.0.name == 'level_2' %}
+		<div class="dropdown">
+		  <button class="dropbtn">troubleshooting 
+			<i class="fa fa-caret-down"></i>
+		  </button>
+		  <div class="dropdown-content">
+			<a href="{% url 'dekodiranjepretraga' %}">pretraži</a>
+			<a href="{% url 'dekodiranjeinput' %}">podnesi zahtev</a>
+		  </div>
+		</div> 
+		{% endif %}
+		{% if request.user.groups.all.0.name == 'level_3' %}
+		<a href="{% url 'dekodiranjepretraga' %}">pretraži</a>
+		{% endif %}
+		<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+	</div>
+
+<!--
+	<div style="text-align: center; background-color: rgb(92, 92, 92);">
+		<br/>
+		<h2>Da li ti je potreban kod za dekodiranje?</h2>
+		<form class="search" action="/action_page.php" style="margin:auto;">
+			<input type="text" placeholder="Unesi IMEI broj.." name="search" autocomplete="off">
+			<button type="submit"><i class="fa fa-search"></i></button>
+		</form>
+		<br />
+		<br />
+	</div>
+-->
+
+
+<!-- Header -->

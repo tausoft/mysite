@@ -1,8 +1,6 @@
 from django.db import models
 from django.views.generic import DeleteView
-from tinymce.widgets import TinyMCE
 from django import forms
-from ckeditor.fields import RichTextField
 
 class EntryTable(models.Model):
     kontakt = models.CharField(max_length=20)
@@ -204,17 +202,3 @@ class Counters(models.Model):
     counter_10 = models.IntegerField(default=0)
 
 
-### KNOWLEDGE DATABASE ###
-
-class Article(models.Model):
-    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
-    #user = models.CharField(max_length=50)
-    #title = models.CharField(max_length=30)
-    #tags = models.TextField()
-    #attachments = models.TextField()
-    #datecreated = models.DateTimeField()
-    #datepublished = models.DateTimeField(auto_now_add=True)
-    #datemodified = models.DateTimeField(auto_now=True)
-
-class Post(models.Model):
-    body = RichTextField()

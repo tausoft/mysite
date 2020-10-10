@@ -1,61 +1,51 @@
 {% load static %}
 <html>
 <head>
-	<title>RA&T box</title>
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}"/>
-	
-	<link rel="stylesheet" href="{% static 'style.css' %}">
-	<script type="text/javascript" src={% static 'main.js' %} defer></script>
-	<script class="jsbin" src=https://ajax.gogleapis.com/ajax/libs/jquery/1/jquery.min.js></script>
+<title>RA&T box</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}"/>
+<style>body {background-image: url("{% static 'images/Header.jpg' %}");}</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src={% static 'bazaznanja/main.js' %} defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
 </head>
 
-<body bgcolor="#8f153e" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 
 <!-- Header -->
-<img id="header" src="{% static 'images/Header.png' %}" max width="100%" height="100px">
-<div style="background-color: #8f153e; padding:100px 80px;"></div>
 
-<img id="Viplogo" src="{% static 'images/vip.png' %}" width="75px" height="66px">
-<a href="{% url 'index' %}">
-<img id="RATlogo" src="{% static 'images/RAT_logo.png' %}" width="auto" height="auto">
-</a>
-<!-- Header -->
+{% include "mysite/header.html" %}
 
-<!-- Navigator -->
-<div class="bgimg-1">
-	<div class="navigatorimg">
-		<h2 style="text-align:center;">Unos kodova</h2>
-  	</div>
 </div>
-<!-- Navigator -->
 
-<div style="background-color: #ffffff; overflow-x:auto; text-align:center;  padding:20px 20px; text-align: justify;">
-		<table align="center" id= "table-id">
-			<thead>
-				<tr>
-					<td>
-						IMEI
-					</td>
-					<td>
-						Kod
-					</td>
-				</tr>
-			</thead>
-			<tbody>
-				{% for item in pages %}
-					<tr>
-						<td>
-							<input id = "list" type = "text" name = "list" value = "{{ item.0 }}" style="text-align:center;" readonly>
-						</td>
-						<td>
-							<input id = "list" type = "text" name = "list" value = "{{ item.1 }}" style="text-align:center;" readonly>
-						</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+<!-- Header -->
+
+<!-- Content -->
+
+<br/><br/><br/>
+
+<div style="overflow-x:auto; text-align:center;  padding:20px 20px; text-align: justify;">
+
+	<div class="row">
+		<div class="columns">
+			<input type = "text" value = "IMEI" style="text-align:center; width: 200px;" readonly>
+			<input type = "text" value = "Kod" style="text-align:center; width: 200px;" readonly>
+		</div>
+	</div>
+		
+	{% for item in pages %}
+		<div class="row">
+			<div class="columns">
+				<input id = "list" type = "text" name = "list" value = "{{ item.0 }}" style="text-align:center; width: 200px;" readonly>
+				<input id = "list" type = "text" name = "list" value = "{{ item.1 }}" style="text-align:center; width: 200px;" readonly>
+			</div>
+		</div>
+	{% endfor %}
+
 	<div class="pagination" style="text-align: center;">
 		<span class="step-links">
 
@@ -96,20 +86,20 @@
 
 	{% for i in input_text %}
 		{% if forloop.counter < 2 %}
-			<div style="background-color:#ffffff; text-align:center;">
+			<div style="text-align:center;">
 				<div class="row">
-					<div class="column">
+					<div class="columns">
 						<form name = "myWebForm" method = "POST" action = "/reset_csv/">
 							{% csrf_token %}
-							<input type="image" value="reset" src="{% static 'images/ponisti.png' %}"
-								onmouseover="this.src='{% static 'images/ponisti_hover.png' %}';"
-								onmouseout="this.src='{% static 'images/ponisti.png' %}';">
+							<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+								<p style="color:#ffffff;">poništi</p>
+							</button>
 						</form>
 						<form name = "myWebForm" method = "POST" action = "/validate_csv/">
 							{% csrf_token %}
-							<input type="image" value="validate" src="{% static 'images/preuzmisacuvaj.png' %}"
-								onmouseover="this.src='{% static 'images/preuzmisacuvaj_hover.png' %}';"
-								onmouseout="this.src='{% static 'images/preuzmisacuvaj.png' %}';">
+							<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+								<p style="color:#ffffff;">preuzmi i sačuvaj</p>
+							</button>
 						</form>
 					</div>
 				</div>
@@ -119,36 +109,14 @@
 
 	<br />
 
-<!-- Navigator -->
-
-<!-- Stephen -->
-<div class="bgimg-2">
-</div>
-
-<div style="background-color: #ffffff; text-align:center;  padding:25px 80px; text-align: justify;">
-	<h3 style="text-align:center";>Quote</h3>
-	<p style="text-align:center";><i>"Intelligence is the ability to adapt to change."</i>
-	</p>
-	<p style="text-align:right";><b>Stephen Hawking</b>
-	</p>
-</div>
-<!-- Stephen -->
-
-<div style="background-color: #ffffff; text-align:center; padding:50px 80px; text-align: justify;"></div>
+<!-- Content -->
   
 <!-- Footer -->
-<div style="background-color: #8f153e; text-align:center; padding:50px 80px;">
-	<a href="{% url 'about' %}"><font color="ffffff">o nama</font></a><br />
-	{% if user.is_authenticated %}
-		<p id="loggedUser" style="text-align: right; columns: #000000;"><b>{{request.user.username}} </b><a href="{% url 'logout' %}"><font 	color="ffffff">izloguj se</font></a></p>
-	{% else %}
-		<p id="loggedUser" style="text-align: right; columns: #ffffff;"><a href="{% url 'login' %}"><font color="ffffff">uloguj se</font></a></p>
-	{% endif %}
-</div>
+
+{% include "mysite/footer.html" %}
+
 <!-- Footer -->
 
 </body>
-
-<script src="{% static 'main.js' %}"></script>
 
 </html>

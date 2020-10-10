@@ -5,172 +5,242 @@
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}"/>
+	<style>body {background-image: url("{% static 'images/Header.jpg' %}");}</style>
 	
 	<link rel="stylesheet" href="{% static 'style.css' %}">
-	<script type="text/javascript" src={% static 'main.js' %} defer></script>
+	<script type="text/javascript" src={% static 'bazaznanja/main.js' %} defer></script>
 	<script class="jsbin" src=https://ajax.gogleapis.com/ajax/libs/jquery/1/jquery.min.js></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<script>
 		var proizvodjac_lwr = "{{ proizvodjac_lwr }}";
-		var model_temp = "{{ model_temp }}";
 	</script>
 
 </head>
-
-<body  onload="nokiaValidate()" bgcolor="#8f153e" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+{% if proizvodjac_lwr == None  %}
+<body  onload="nokiaValidate(); myModal();" bgcolor="#ffffff" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+{% endif %}
+{% if proizvodjac_lwr != None  %}
+<body  onload="nokiaValidate();" bgcolor="#ffffff" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+{% endif %}
 
 <!-- Header -->
-<img id="header" src="{% static 'images/Header.png' %}" max width="100%" height="100px">
-<div style="background-color: #8f153e; padding:100px 80px;"></div>
 
-<img id="Viplogo" src="{% static 'images/vip.png' %}" width="75px" height="66px">
-<a href="{% url 'index' %}">
-<img id="RATlogo" src="{% static 'images/RAT_logo.png' %}" width="auto" height="auto">
-</a>
-<!-- Header -->
+{% include "mysite/header.html" %}
 
-<!-- Navigator -->
-<div class="bgimg-1">
-	<div class="navigatorimg">
-		<h2 style="text-align:center;">Popunite formu</h2>
-  </div>
 </div>
 
-<div style="background-color: #ffffff; overflow-x:auto; text-align:center;  padding:50px 80px; text-align: center;">
-	<form class="contact-form" method="POST" action="/add_new/">
+<!-- Header -->
+
+
+<br/><br/><br/>
+
+<div class="headertext"><br/><br/></div>
+
+<div style="overflow-x:auto; text-align:center;  padding:50px 80px; text-align: center;">
+	{% if proizvodjac_lwr == None  %}
+	<form class="contact-form" method="POST" action="/confirm_new/">
+	{% endif %}
+	{% if proizvodjac_lwr != None  %}
+	<form class="contact-form" method="POST" action="/add_new_confirm/">
+	{% endif %}
 		{% csrf_token %}
 		<button class="input-btn" disabled>
-			<label for="kontakt">Kontakt: </label><br />
-			<input id="kontakt" type="text" name="kontakt" value="{{ kontakt }}">
+			<input id="kontakt" type="text" name="kontakt" value="{{ kontakt }}" placeholder="kontakt..">
 		</button>
 		<button class="input-btn" disabled>
-			<label for="proizvodjac">Proizvođač: </label><br />
-			<select onchange="nokiaValidate()" id="proizvodjac" name="proizvodjac">
-				<option style="display:none" value="{{ proizvodjac_lwr }}">{{ proizvodjac }}</option>
-				<option style="display:none" value=""></option>
-				<option value="alcatel">Alcatel</option>
-				<option value="htc">HTC</option>
-				<option value="huawei">Huawei</option>
-				<option value="lg">LG</option>
-				<option value="lumia">Lumia</option>
-				<option value="nokia">Nokia</option>
-				<option value="samsung">Samsung</option>
-				<option value="sony">Sony</option>
-				<option value="zte">ZTE</option>
+				{% if proizvodjac != None %}
+			<select onchange="nokiaValidate()" type="text" id="proizvodjac" name="proizvodjac" style="color: #000000;">
+				<option style="display:none" value="{{ proizvodjac }}">{{ proizvodjac }}</option>
+				{% endif %}
+				{% if proizvodjac == None %}
+			<select onchange="nokiaValidate()" type="text" id="proizvodjac" name="proizvodjac" style="color: gray;">
+				<option value="" hidden>proizvodjac..</option>
+				{% endif %}
+				<option value="Alcatel">Alcatel</option>
+				<option value="HTC">HTC</option>
+				<option value="Huawei">Huawei</option>
+				<option value="LG">LG</option>
+				<option value="Lumia">Lumia</option>
+				<option value="Nokia">Nokia</option>
+				<option value="Samsung">Samsung</option>
+				<option value="Sony">Sony</option>
+				<option value="ZTE">ZTE</option>
 			</select>
 		</button>
 		<button class="input-btn-hidden" disabled hidden>
-			<label for="model" class="show-nokia" hidden>Model: </label><br />
-			<select id="model" name="model">
-					<option style="display:none" value="{{ model_temp }}"">{{ model_temp }}</option>
+					{% if proizvodjac_lwr == 'nokia' %}
+					{% if model_temp != None %}
+			<select onchange="modelColor()" type="text" id="model" name="model" style="color: #000000;">
+					<option style="display:none" value="{{ model_temp }}">{{ model_temp }}</option>
+					{% endif %}
+					{% endif %}
+					{% if proizvodjac_lwr != 'nokia' %}
+					{% if model_temp != None %}
+			<select onchange="modelColor()" type="text" id="model" name="model" style="color: #000000;">
 					<option style="display:none" value=""></option>
+					{% endif %}
+					{% endif %}
+					{% if model_temp == None %}
+			<select onchange="modelColor()" type="text" id="model" name="model" style="color: gray;">
+					<option value="" hidden>model..</option>
+					{% endif %}
 				{% for item in nokia_model %}
 					<option value="{{ item.model }}">{{ item.model }} {{ item.modeltype }}</option>
 				{% endfor %}
 			</select>
 		</button>
 		<button class="input-btn" disabled>
-			<label for="imei">IMEI: </label><br />
-			<input id="imei" type="text" name="imei" value="{{ imei }}">
+			<input id="imei" type="text" name="imei" value="{{ imei }}" placeholder="imei..">
 		</button>
 	</br></br>
-		<div style="text-align:center; background-color: #ffffff;">
-			<input type="image" onclick="formValidate()" id="ace" src="{% static 'images/podnesizahtev.png' %}"
-							onmouseover="this.src='{% static 'images/podnesizahtev_hover.png' %}';"
-							onmouseout="this.src='{% static 'images/podnesizahtev.png' %}';">
+		<div style="text-align:center;">
+			<button onclick="formValidate();" style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+				<p style="color:#ffffff;">podnesi zahtev</p>
+			</button>
 		</div>
 	</form>
-	<div style="background-color: #f15959; text-align: center;">
-		<p style="color:#ffffff;" class="kontakt-alert" hidden>Nevalidan unos! Kontakt broj je potrebno uneti u formatu 06xxxxxxx(x).</p>
+	<p id="test"></p>
+	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;" class="empty-kontakt-alert" hidden>
+		<p style="color:#ffffff; padding: 10px 0px 10px 0px;">Obavezan unos! Potrebno je uneti kontakt.</p>
 	</div>
-	<div style="background-color: #f15959; text-align: center;">
-		<p style="color:#ffffff;" class="nokia-model-alert" hidden>Obavezan unos! Potrebno je uneti model.</p>
+	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;" class="kontakt-alert" hidden>
+		<p style="color:#ffffff; padding: 10px 0px 10px 0px;">Nevalidan unos! Kontakt broj je potrebno uneti u formatu 06xxxxxxx(x).</p>
 	</div>
-	<div style="background-color: #f15959; text-align: center;">
-		<p style="color:#ffffff;" class="proizvodjac-alert" hidden>Obavezan unos! Potrebno je odabrati proizvođača.</p>
+	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;" class="nokia-model-alert" hidden>
+		<p style="color:#ffffff; padding: 10px 0px 10px 0px;">Obavezan unos! Potrebno je uneti model.</p>
 	</div>
-	<div style="background-color: #f15959; text-align: center;">
-		<p style="color:#ffffff;" class="not-luhn-input" hidden>Nevalidan unos! IMEI broj nije ispravan.</p>
+	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;" class="proizvodjac-alert" hidden>
+		<p style="color:#ffffff; padding: 10px 0px 10px 0px;">Obavezan unos! Potrebno je odabrati proizvođača.</p>
 	</div>
-	<div style="background-color: #f15959; text-align: center;">
-		<p style="color:#ffffff;" class="not-numeric-input" hidden>Nevalidan unos! IMEI broj se sastoji od 15 numeričkih karaktera.</p>
+	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;" class="imei-alert" hidden>
+		<p style="color:#ffffff; padding: 10px 0px 10px 0px;">Obavezan unos! Potrebno je uneti IMEI broj.</p>
 	</div>
+	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;" class="not-luhn-input" hidden>
+		<p style="color:#ffffff; padding: 10px 0px 10px 0px;">Nevalidan unos! IMEI broj nije ispravan.</p>
+	</div>
+	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;" class="not-numeric-input" hidden>
+		<p style="color:#ffffff; padding: 10px 0px 10px 0px;">Nevalidan unos! IMEI broj se sastoji od 15 numeričkih karaktera.</p>
+	</div>
+	{% if unlock_not_found != None %}
+	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;">
+		<p style="color:#ffffff; padding: 10px 0px 10px 0px;">{{ unlock_not_found }}</p>
+	</div>
+	<br/><br/>
+	{% endif %}
+</div>
 
-	<div style="background-color: #ffffff; text-align: center;">
-		<div class="row">
-			<div class="column">
-				<p style="background-color: #f15959; color:#ffffff;">{{ unlock_not_found }} </p>
+{% if proizvodjac_lwr == None %}
+{% if imei_query != None %}
+{% if unlock_not_found == None %}
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  	<div class="modal-content">
+    	<span class="close">&times;</span>
+		<br/><br/>
+<div style="overflow-x:auto; text-align:center; background-color: #ffffff;">
+
+	<p>{{ imei_query }}</p>
+	{% for item in unlock_list %}
+		<p>{{ item }}</p>
+	{% endfor %}
+
+	{% if request.user.groups.all.0.name == 'level_1' %}
+		{% if proizvodjac_temp == 'Nokia' %}
+			<br/><br/>
+			<div id="div_winlock" style="background-color: #62eb62; text-align: center; margin-left: auto; margin-right: auto; left: 10%; right: 10%; margin-top: 2px;" >
+				<p style="color:#ffffff; padding: 10px 0px 10px 0px;">{{ winlockpreview }}</p>
 			</div>
-		</div>
-		<br/>
-		<div class="row">
-			<div class="column">
-				<label for="unlock">{{ imei_query }} </label>
-			</div>
-		</div>
-		{% for item in unlock_list %}
-		<div class="row">
-			<div class="column">
-				<p>{{ item }}</p>
-			</div>
-		</div>
-		{% endfor %}
-	</div>
+			<br/><br/>
+		{% endif %}
+	{% endif %}
+	{% if request.user.groups.all.0.name != 'level_3' %}
 	{% if '0' in validate %}
 	<div style="text-align:center;" class="new-request">
-		<form class="contact-form" method="POST" action="/dekodiranjeinput_search/">
+		<form class="contact-form" method="POST" action="/add_new/">
 			{% csrf_token %}
+			<input id="kontakthidden" type="text" name="kontakthidden" value="{{ kontakt }}" style="text-align:center;" hidden>
 			<input id="imeihidden" type="text" name="imeihidden" value="{{ imei_temp }}" style="text-align:center;" hidden>
-			<div class="row">
-				<div class="column">
-					<a href="{% url 'dekodiranjeinput' %}">
-						<input type="image" id="ace" src="{% static 'images/podnesizahtev.png' %}"
-							onmouseover="this.src='{% static 'images/podnesizahtev_hover.png' %}';"
-							onmouseout="this.src='{% static 'images/podnesizahtev.png' %}';">
-					</a>
-				</div>
-			</div>
+			<input id="proizvodjachidden" type="text" name="proizvodjachidden" value="{{ proizvodjac_temp }}" style="text-align:center;" hidden>
+			<input id="modelhidden" type="text" name="modelhidden" value="{{ model }}" style="text-align:center;" hidden>
+			<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+				<p style="color:#ffffff;">podnesi zahtev</p>
+			</button>
 		</form>
 	</div>
 	{% endif %}
 	{% if '1' in validate %}
 	<div style="text-align:center;" class="new-request">
-		<form class="contact-form" method="POST" action="/add_new_confirm/">
+		<form class="contact-form" method="POST" action="/add_new/">
 			{% csrf_token %}
-			<input id="imeihidden" type="text" name="kontakthidden" value="{{ kontakt_temp }}" style="text-align:center;" hidden>
-			<input id="imeihidden" type="text" name="prizvodjachidden" value="{{ proizvodjac_temp }}" style="text-align:center;" hidden>
-			<input id="imeihidden" type="text" name="modelhidden" value="{{ model_temp }}" style="text-align:center;" hidden>
+			<input id="kontakthidden" type="text" name="kontakthidden" value="{{ kontakt }}" style="text-align:center;" hidden>
 			<input id="imeihidden" type="text" name="imeihidden" value="{{ imei_temp }}" style="text-align:center;" hidden>
-			<div class="row">
-				<div class="column">
-					</br>
-					<p>U slučaju neispravnosti koda za dekodiranje, možete podneti novi zahtev</p>
-					<a href="{% url 'dekodiranjeinput' %}">
-						<input type="image" id="ace" src="{% static 'images/podnesizahtev.png' %}"
-							onmouseover="this.src='{% static 'images/podnesizahtev_hover.png' %}';"
-							onmouseout="this.src='{% static 'images/podnesizahtev.png' %}';">
-					</a>
-				</div>
-			</div>
+			<input id="proizvodjachidden" type="text" name="proizvodjachidden" value="{{ proizvodjac_temp }}" style="text-align:center;" hidden>
+			<input id="modelhidden" type="text" name="modelhidden" value="{{ model }}" style="text-align:center;" hidden>
+			</br>
+			<p>U slučaju neispravnosti koda za dekodiranje, možete podneti novi zahtev</p>
+			<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+				<p style="color:#ffffff;">podnesi zahtev</p>
+			</button>
 		</form>
 	</div>
 	{% endif %}
+	{% if '5' in validate %}
+	<div style="text-align:center;" class="new-request">
+		<form class="contact-form" method="POST" action="/add_new/">
+			{% csrf_token %}
+			<input id="kontakthidden" type="text" name="kontakthidden" value="{{ kontakt }}" style="text-align:center;" hidden>
+			<input id="imeihidden" type="text" name="imeihidden" value="{{ imei_temp }}" style="text-align:center;" hidden>
+			<input id="proizvodjachidden" type="text" name="proizvodjachidden" value="{{ proizvodjac_temp }}" style="text-align:center;" hidden>
+			<input id="modelhidden" type="text" name="modelhidden" value="{{ model }}" style="text-align:center;" hidden>
+			</br>
+			<p>U slučaju neispravnosti koda za dekodiranje, možete podneti novi zahtev</p>
+			<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+				<p style="color:#ffffff;">podnesi zahtev</p>
+			</button>
+		</form>
+	</div>
+	{% endif %}
+	{% if '3' in validate %}
+	<div style="text-align:center;" class="new-request">
+		<form class="contact-form" method="POST" action="/add_new/">
+			{% csrf_token %}
+			<input id="kontakthidden" type="text" name="kontakthidden" value="{{ kontakt }}" style="text-align:center;" hidden>
+			<input id="imeihidden" type="text" name="imeihidden" value="{{ imei_temp }}" style="text-align:center;" hidden>
+			<input id="proizvodjachidden" type="text" name="proizvodjachidden" value="{{ proizvodjac_temp }}" style="text-align:center;" hidden>
+			<input id="modelhidden" type="text" name="modelhidden" value="{{ model }}" style="text-align:center;" hidden>
+			</br>
+			<p>Ukoliko su izvršene navedene provere, a korisnikov uređaj traži da se unese kod za dekodiranje, možete podneti zahtev</p>
+			<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+				<p style="color:#ffffff;">podnesi zahtev</p>
+			</button>
+		</form>
+	</div>
+	{% endif %}
+	{% endif %}
 </div>
+</div>
+</div>
+{% endif %}
+{% endif %}
+{% endif %}
 
-<div style="background-color: #ffffff; overflow-x:auto; text-align:center;  padding:20px 20px; text-align: justify;">
+<div style="overflow-x:auto; text-align:center;  padding:20px 20px; text-align: justify;">
 	<table id="t1">
 		<tr>
-			<th>Kontakt:</th>
-			<th>Proizvođač:</th>
-			<th>Model telefona:</th>
+			<th class="four">Kontakt:</th>
+			<th class="five">Proizvođač:</th>
+			<th class="two">Model telefona:</th>
 			<th>IMEI:</th>
 			<th>Kod za dekodiranje:</th>
-			<th>Datum unosa:</th>
-			<th>Datum poslednje izmene:</th>
+			<th class="one">Datum unosa:</th>
+			<th class="one">Datum poslednje izmene:</th>
 			{% if request.user.groups.all.0.name == 'level_1' %}
-			<th>Sačuvaj:</th>
+			<th class="three">Sačuvaj:</th>
 			{% endif %}
-			<th>Obriši:</th>
+			<th class="three">Obriši:</th>
 		</tr>
 		{% for item in entry_data reversed %}
 			{% if forloop.counter < 11 %}
@@ -178,10 +248,10 @@
 			<form class="contact-form" method="POST" action="{% url 'edit_new' item_id=item.id %}">
 			{% endif %}
 			{% csrf_token %}
-				<td id="t1">
+				<td class="four" id="t1">
 					<input id="kontakt" type="text" name="kontakt" value="{{ item.kontakt }}" readonly>
 				</td>
-				<td id="t1">
+				<td class="five" id="t1">
 					<input id="proizvodjac" type="text" name="proizvodjac" value="{{ item.proizvodjac }}" readonly>
 
 					<!-- Currently not in use
@@ -200,29 +270,36 @@
 					-->
 
 				</td>
-				<td id="t1">
+				<td class="two" id="t1">
 					<input id="model" type="text" name="model" value="{{ item.model }}" readonly>
 				</td>
 				<td id="t1">
 					<input id="imei" type="text" name="imei" value="{{ item.imei }}" readonly>
 				</td>
+				{% if request.user.groups.all.0.name == 'level_1' %}
 				<td id="t1">
 					<input id="unlock" type="text" name="unlock" value="{{ item.unlock }}">
 				</td>
+				{% endif %}
+				{% if request.user.groups.all.0.name != 'level_1' %}
 				<td id="t1">
+					<input id="unlock" type="text" name="unlock" value="{{ item.unlock }}" readonly>
+				</td>
+				{% endif %}
+				<td class="one" id="t1">
 					{{ item.datecreated|date:"d.m.Y - H:i" }}
 				</td>
-				<td id="t1">
+				<td class="one" id="t1">
 					{{ item.datemodified|date:"d.m.Y - H:i" }}
 				</td>
 				{% if request.user.groups.all.0.name == 'level_1' %}
-				<td id="t1">
+				<td  class="three" id="t1">
 					<input type="image" style="text-align: center" src="{% static 'images/Tick_Mark_Dark-512.png' %}" alt="izmeni" width="20px", height="20px">
 				</td>
 			</form>
 			<form class="contact-form" method="POST" action="{% url 'delete_new' item_id=item.id %}">
 				{% csrf_token %}
-				<td id="t1">
+				<td  class="three" id="t1">
 					<input type="image" onclick="deleteValidate()" id="delete_button" src="{% static 'images/X_Mark_Dark.png' %}" alt="obrisi" width="20px", height="20px">
 				</td>
 			</form>
@@ -239,51 +316,35 @@
 		{% endfor %}
 	</table>
 	<br \>
-	<div style="background-color: #ffffff; text-align:center; padding:50px 80px;">
+	<div style="text-align:center; padding:50px 80px;">
 		{% if request.user.groups.all.0.name == 'level_1' %}
 		<div class="row">
-			<div class="column">
+			<div class="columns">
+				<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
 				<a href="{% url 'dekodiranjetabela' %}">
-					<img src="{% static 'images/neobradjenizahtevi.png' %}"
-						onmouseover="this.src='{% static 'images/neobradjenizahtevi_hover.png' %}';"
-						onmouseout="this.src='{% static 'images/neobradjenizahtevi.png' %}';">
+					
+						<p style="color:#ffffff;">zahtevi u obradi</p>
 				</a>
+			</button>
+				<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
 				<a href="{% url 'dekodiranjeobradjeni' %}">
-					<img src="{% static 'images/obradjenizahtevi.png' %}"
-						onmouseover="this.src='{% static 'images/obradjenizahtevi_hover.png' %}';"
-						onmouseout="this.src='{% static 'images/obradjenizahtevi.png' %}';">
+					
+						<p style="color:#ffffff;">obrađeni zahtevi</p>
+					
 				</a>
+			</button>
 			</div>
 		</div>
 		{% endif %}
 	</div>
 </div>
-<!-- Navigator -->
+<!-- Content -->
 
-<!-- Stephen -->
-<div class="bgimg-2">
-</div>
-
-<div style="background-color: #ffffff; text-align:center;  padding:25px 80px; text-align: justify;">
-	<h3 style="text-align:center";>Quote</h3>
-	<p style="text-align:center";><i>"Intelligence is the ability to adapt to change."</i>
-	</p>
-	<p style="text-align:right";><b>Stephen Hawking</b>
-	</p>
-</div>
-<!-- Stephen -->
-
-<div style="background-color: #ffffff; text-align:center; padding:50px 80px; text-align: justify;"></div>
   
 <!-- Footer -->
-<div style="background-color: #8f153e; text-align:center; padding:50px 80px;">
-	<a href="{% url 'about' %}"><font color="ffffff">o nama</font></a><br />
-	{% if user.is_authenticated %}
-		<p id="loggedUser" style="text-align: right; columns: #000000;"><b>{{request.user.username}} </b><a href="{% url 'logout' %}"><font 	color="ffffff">izloguj se</font></a></p>
-	{% else %}
-		<p id="loggedUser" style="text-align: right; columns: #ffffff;"><a href="{% url 'login' %}"><font color="ffffff">uloguj se</font></a></p>
-	{% endif %}
-</div>
+
+{% include "mysite/footer.html" %}
+
 <!-- Footer -->
 
 </body>

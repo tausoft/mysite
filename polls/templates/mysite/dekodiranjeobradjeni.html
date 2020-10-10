@@ -5,148 +5,64 @@
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}"/>
+	<style>body {background-image: url("{% static 'images/Header.jpg' %}");}</style>
 	
 	<link rel="stylesheet" href="{% static 'style.css' %}">
-	<script type="text/javascript" src={% static 'main.js' %} defer></script>
+	<script type="text/javascript" src={% static 'bazaznanja/main.js' %} defer></script>
 	<script class="jsbin" src=https://ajax.gogleapis.com/ajax/libs/jquery/1/jquery.min.js></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<script>
+		var proizvodjac_lwr = "{{ proizvodjac_lwr }}";
+	</script>
+
 </head>
-
-<body bgcolor="#8f153e" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+{% if proizvodjac_lwr == None  %}
+<body  onload="nokiaValidate(); myModal();" bgcolor="#ffffff" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+{% endif %}
+{% if proizvodjac_lwr != None  %}
+<body  onload="nokiaValidate();" bgcolor="#ffffff" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+{% endif %}
 
 <!-- Header -->
-<img id="header" src="{% static 'images/Header.png' %}" max width="100%" height="120px">
-<div style="background-color: #8f153e; padding:100px 80px;"></div>
 
-<img id="Viplogo" src="{% static 'images/vip.png' %}" width="75px" height="66px">
-<a href="{% url 'index' %}">
-<img id="RATlogo" src="{% static 'images/RAT_logo.png' %}" width="auto" height="auto">
-</a>
+{% include "mysite/header.html" %}
+
+</div>
+
 <!-- Header -->
 
-<!-- Navigator -->
-<div class="bgimg-1">
-	<div class="navigatorimg">
-		<h2 style="text-align:center;">Dekodiranje</h2>
-  </div>
-</div>
+<!-- Content -->
 
-<div style="background-color: #ffffff; overflow-x:auto; text-align:center;  padding:50px 80px; text-align: center;">
-	<h3 style="text-align:center";>Popunite formu</h3>
-	<br />
-	<form class="contact-form" method="POST" action="/add_new/">
-		{% csrf_token %}
-		<button class="input-btn" disabled>
-			<label for="kontakt">Kontakt: </label><br />
-			<input id="kontakt" type="text" name="kontakt" value="{{ kontakt }}">
-		</button>
-		<button class="input-btn" disabled>
-			<label for="proizvodjac">Proizvođač: </label><br />
-			<select onchange="nokiaValidate()" id="proizvodjac" name="proizvodjac">
-				<option style="display:none" value=""></option>
-				<option value="alcatel">Alcatel</option>
-				<option value="htc">HTC</option>
-				<option value="huawei">Huawei</option>
-				<option value="lg">LG</option>
-				<option value="lumia">Lumia</option>
-				<option value="nokia">Nokia</option>
-				<option value="samsung">Samsung</option>
-				<option value="sony">Sony</option>
-				<option value="zte">ZTE</option>
-			</select>
-		</button>
-		<button class="input-btn-hidden" disabled hidden>
-			<label for="model" class="show-nokia" hidden>Model: </label><br />
-			<input id="model" class="show-nokia" type="text" name="model" value="{{ model }}" hidden>
-		</button>
-		<button class="input-btn" disabled>
-			<label for="imei">IMEI: </label><br />
-			<input id="imei" type="text" name="imei" value="{{ imei }}">
-		</button>
-	</br></br>
-		<div style="text-align:center; background-color: #ffffff;">
-			<input type="image" onclick="formValidate()" id="ace" src="{% static 'images/podnesizahtev.png' %}"
-							onmouseover="this.src='{% static 'images/podnesizahtev_hover.png' %}';"
-							onmouseout="this.src='{% static 'images/podnesizahtev.png' %}';">
-		</div>
-	</form>
-	<div style="background-color: #f15959; text-align: center;">
-		<p style="color:#ffffff;" class="empty-kontakt-alert" hidden>Obavezan unos! Potrebno je uneti kontakt broj.</p>
-	</div>
-	<div style="background-color: #f15959; text-align: center;">
-		<p style="color:#ffffff;" class="kontakt-alert" hidden>Nevalidan unos! Kontakt broj je potrebno uneti u formatu 06xxxxxxx(x).</p>
-	</div>
-	<div style="background-color: #f15959; text-align: center;">
-		<p style="color:#ffffff;" class="nokia-model-alert" hidden>Obavezan unos! Potrebno je uneti model.</p>
-	</div>
-	<div style="background-color: #f15959; text-align: center;">
-		<p style="color:#ffffff;" class="proizvodjac-alert" hidden>Obavezan unos! Potrebno je odabrati proizvođača.</p>
-	</div>
-	<div style="background-color: #f15959; text-align: center;">
-		<p style="color:#ffffff;" class="not-luhn-input" hidden>Nevalidan unos! IMEI broj nije ispravan.</p>
-	</div>
-	<div style="background-color: #f15959; text-align: center;">
-		<p style="color:#ffffff;" class="not-numeric-input" hidden>Nevalidan unos! IMEI broj se sastoji od 15 numeričkih karaktera.</p>
-	</div>
+<br/><br/><br/>
 
-	<div style="background-color: #ffffff; text-align: center;">
-		<div class="row">
-			<div class="column">
-				<p style="background-color: #f15959; color:#ffffff;">{{ unlock_not_found }} </p>
-			</div>
-		</div>
-		<br/>
-		<div class="row">
-			<div class="column">
-				<label for="unlock">{{ imei_query }} </label>
-			</div>
-		</div>
-		{% for item in unlock_list %}
-		<div class="row">
-			<div class="column">
-				<p>{{ item }}</p>
-			</div>
-		</div>
-		{% endfor %}
-	</div>
-	{% if '1' in validate %}
-	<div style="text-align:center;" class="new-request">
-		<form class="contact-form" method="POST" action="/add_new_confirm/">
-			{% csrf_token %}
-			<input id="kontakt_temp" type="text" name="kontakt_temp" value="{{ kontakt_temp }}" style="text-align:center;" hidden>
-			<input id="proizvodjac_temp" type="text" name="proizvodjac_temp" value="{{ proizvodjac_temp }}" style="text-align:center;" hidden>
-			<input id="model_temp" type="text" name="model_temp" value="{{ model_temp }}" style="text-align:center;" hidden>
-			<input id="imei_temp" type="text" name="imei_temp" value="{{ imei_temp }}" style="text-align:center;" hidden>
-			<div class="row">
-				<div class="column">
-					<a href="{% url 'dekodiranjeinput' %}">
-						<input type="image" id="ace" src="{% static 'images/podnesizahtev.png' %}"
-							onmouseover="this.src='{% static 'images/podnesizahtev_hover.png' %}';"
-							onmouseout="this.src='{% static 'images/podnesizahtev.png' %}';">
-					</a>
-				</div>
-			</div>
-		</form>
-	</div>
-	{% endif %}
-</div>
+<div class="headertext"><br/><br/></div>
 
-<div style="background-color: #ffffff; overflow-x:auto; text-align:center;  padding:20px 20px; text-align: justify;">
+
+<div style="overflow-x:auto; text-align:center;  padding:20px 20px; text-align: justify;">
 	<table id="t1">
 		<tr>
-			<th>Kontakt:</th>
-			<th>Proizvođač:</th>
-			<th>Model telefona:</th>
+			<th class="four">Kontakt:</th>
+			<th class="five">Proizvođač:</th>
+			<th class="two">Model telefona:</th>
 			<th>IMEI:</th>
 			<th>Kod za dekodiranje:</th>
-			<th>Datum unosa:</th>
-			<th>Datum poslednje izmene:</th>
+			<th class="one">Datum unosa:</th>
+			<th class="one">Datum poslednje izmene:</th>
+			{% if request.user.groups.all.0.name == 'level_1' %}
+			<th class="three">Sačuvaj:</th>
+			{% endif %}
+			<th class="three">Obriši:</th>
 		</tr>
-		{% for item in pages %}
-
-				<td id="t1">
+		{% for item in pages reversed %}
+			{% if request.user.groups.all.0.name == 'level_1' %}
+			<form class="contact-form" method="POST" action="{% url 'edit_new' item_id=item.id %}">
+			{% endif %}
+			{% csrf_token %}
+				<td class="four" id="t1">
 					<input id="kontakt" type="text" name="kontakt" value="{{ item.kontakt }}" readonly>
 				</td>
-				<td id="t1">
+				<td class="five" id="t1">
 					<input id="proizvodjac" type="text" name="proizvodjac" value="{{ item.proizvodjac }}" readonly>
 
 					<!-- Currently not in use
@@ -165,99 +81,105 @@
 					-->
 
 				</td>
-				<td id="t1">
+				<td class="two" id="t1">
 					<input id="model" type="text" name="model" value="{{ item.model }}" readonly>
 				</td>
 				<td id="t1">
 					<input id="imei" type="text" name="imei" value="{{ item.imei }}" readonly>
 				</td>
+				{% if request.user.groups.all.0.name == 'level_1' %}
 				<td id="t1">
 					<input id="unlock" type="text" name="unlock" value="{{ item.unlock }}">
 				</td>
+				{% endif %}
+				{% if request.user.groups.all.0.name != 'level_1' %}
 				<td id="t1">
+					<input id="unlock" type="text" name="unlock" value="{{ item.unlock }}" readonly>
+				</td>
+				{% endif %}
+				<td class="one" id="t1">
 					{{ item.datecreated|date:"d.m.Y - H:i" }}
 				</td>
-				<td id="t1">
+				<td class="one" id="t1">
 					{{ item.datemodified|date:"d.m.Y - H:i" }}
 				</td>
-			</tr>
+				{% if request.user.groups.all.0.name == 'level_1' %}
+				<td  class="three" id="t1">
+					<input type="image" style="text-align: center" src="{% static 'images/Tick_Mark_Dark-512.png' %}" alt="izmeni" width="20px", height="20px">
+				</td>
+			</form>
+			<form class="contact-form" method="POST" action="{% url 'delete_new' item_id=item.id %}">
+				{% csrf_token %}
+				<td  class="three" id="t1">
+					<input type="image" onclick="deleteValidate()" id="delete_button" src="{% static 'images/X_Mark_Dark.png' %}" alt="obrisi" width="20px", height="20px">
+				</td>
+			</form>
+			{% elif request.user.username == item.createdby %}
+			<form class="contact-form" method="POST" action="{% url 'delete_new' item_id=item.id %}">
+				{% csrf_token %}
+				<td id="t1">
+					<input type="image" onclick="deleteValidate()" id="delete_button" src="{% static 'images/X_Mark_Dark.png' %}" alt="obrisi" width="20px", height="20px">
+				</td>
+			</form>
+			{% endif %}
+		</tr>
 		{% endfor %}
 	</table>
+</div>
 
-	<div class="pagination" style="text-align: center;">
-		<span class="step-links">
-
-			{% if pages.has_previous %}
-				<a href="?page=1">
-					<img src="{% static 'images/prva_strana.png' %}"
-						onmouseover="this.src='{% static 'images/prva_strana_hover.png' %}';"
-						onmouseout="this.src='{% static 'images/prva_strana.png' %}';">
-				</a>
-				<a href="?page={{ pages.previous_page_number }}">
-					<img src="{% static 'images/prethodni.png' %}"
-						onmouseover="this.src='{% static 'images/prethodni_hover.png' %}';"
-						onmouseout="this.src='{% static 'images/prethodni.png' %}';">
-				</a>
-			{% endif %}
-
-			{% if pages.has_next %}
-				<a href="?page={{ pages.next_page_number }}">
-					<img src="{% static 'images/sledeci.png' %}"
-						onmouseover="this.src='{% static 'images/sledeci_hover.png' %}';"
-						onmouseout="this.src='{% static 'images/sledeci.png' %}';">
-				</a>
-				<a href="?page={{ pages.paginator.num_pages }}">
-					<img src="{% static 'images/poslenja_strana.png' %}"
-						onmouseover="this.src='{% static 'images/poslenja_strana_hover.png' %}';"
-						onmouseout="this.src='{% static 'images/poslenja_strana.png' %}';">
-				</a>
-			{% endif %}
-			</br>
-			<span class="current">
-				Strana {{ pages.number }} od {{ pages.paginator.num_pages }}
-			</span>
+<div class="pagination" style="text-align: center;">
+	<span class="step-links">
+		{% if pages.has_previous %}
+			<a href="?page=1">
+				<img src="{% static 'images/prva_strana.png' %}"
+					onmouseover="this.src='{% static 'images/prva_strana_hover.png' %}';"
+					onmouseout="this.src='{% static 'images/prva_strana.png' %}';">
+			</a>
+			<a href="?page={{ pages.previous_page_number }}">
+				<img src="{% static 'images/prethodni.png' %}"
+					onmouseover="this.src='{% static 'images/prethodni_hover.png' %}';"
+					onmouseout="this.src='{% static 'images/prethodni.png' %}';">
+			</a>
+		{% endif %}
+		{% if pages.has_next %}
+			<a href="?page={{ pages.next_page_number }}">
+				<img src="{% static 'images/sledeci.png' %}"
+					onmouseover="this.src='{% static 'images/sledeci_hover.png' %}';"
+					onmouseout="this.src='{% static 'images/sledeci.png' %}';">
+			</a>
+			<a href="?page={{ pages.paginator.num_pages }}">
+				<img src="{% static 'images/poslenja_strana.png' %}"
+					onmouseover="this.src='{% static 'images/poslenja_strana_hover.png' %}';"
+					onmouseout="this.src='{% static 'images/poslenja_strana.png' %}';">
+			</a>
+		{% endif %}
+		</br>
+		<span class="current">
+			Strana {{ pages.number }} od {{ pages.paginator.num_pages }}
 		</span>
-	</div>	
-
-	<br \>
-	<div style="background-color: #ffffff; text-align:center; padding:50px 80px;">
-		<div class="row">
-			<div class="column">
+	</span>
+</div>	
+<br/>
+<div style="text-align:center; padding:50px 80px;">
+	{% if request.user.groups.all.0.name == 'level_1' %}
+	<div class="row">
+		<div class="columns">
+			<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
 				<a href="{% url 'dekodiranjetabela' %}">
-					<img src="{% static 'images/neobradjenizahtevi.png' %}"
-						onmouseover="this.src='{% static 'images/neobradjenizahtevi_hover.png' %}';"
-						onmouseout="this.src='{% static 'images/neobradjenizahtevi.png' %}';">
+					<p style="color:#ffffff;">zahtevi u obradi</p>
 				</a>
-			</div>
+			</button>
 		</div>
 	</div>
-</div>
-<!-- Navigator -->
-
-<!-- Stephen -->
-<div class="bgimg-2">
-</div>
-
-<div style="background-color: #ffffff; text-align:center;  padding:25px 80px; text-align: justify;">
-	<h3 style="text-align:center";>Quote</h3>
-	<p style="text-align:center";><i>"Intelligence is the ability to adapt to change."</i>
-	</p>
-	<p style="text-align:right";><b>Stephen Hawking</b>
-	</p>
-</div>
-<!-- Stephen -->
-
-<div style="background-color: #ffffff; text-align:center; padding:50px 80px; text-align: justify;"></div>
-  
-<!-- Footer -->
-<div style="background-color: #8f153e; text-align:center; padding:50px 80px;">
-	<a href="{% url 'about' %}"><font color="ffffff">o nama</font></a><br />
-	{% if user.is_authenticated %}
-		<p id="loggedUser" style="text-align: right; columns: #000000;"><b>{{request.user.username}} </b><a href="{% url 'logout' %}"><font 	color="ffffff">izloguj se</font></a></p>
-	{% else %}
-		<p id="loggedUser" style="text-align: right; columns: #ffffff;"><a href="{% url 'login' %}"><font color="ffffff">uloguj se</font></a></p>
 	{% endif %}
 </div>
+<!-- Content -->
+
+  
+<!-- Footer -->
+
+{% include "mysite/footer.html" %}
+
 <!-- Footer -->
 
 </body>
