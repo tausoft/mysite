@@ -2,7 +2,6 @@ from django import forms
 from django.views.generic import TemplateView, DeleteView
 from .models import *
 from django.core.validators import *
-from multi_email_field.forms import MultiEmailField
 from django.db import models
 from .views import *
 
