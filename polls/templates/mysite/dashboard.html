@@ -36,21 +36,21 @@
 	</div>
 	<div class="row">
 		<div class="columns">
-			<button class="input-btn" disabled>
+			<button style="background-color: #ffffff;" class="input-btn" disabled>
 				Statusi pretrage
-				<div id="statusChart_div" style="width: 350px; height: 350px;"></div>
+				<div class="statusChart_div" id="statusChart_div" style="width: 350px; height: 350px;"></div>
 			</button>
-			<button class="input-btn" disabled>
+			<button style="background-color: #ffffff;" class="input-btn" disabled>
 				Pretraga po timovima
-				<div id="groupChart_div" style="width: 350px; height: 350px;"></div>
+				<div class="statusChart_div" id="groupChart_div" style="width: 350px; height: 350px;"></div>
 			</button>
-			<button class="input-btn" disabled>
+			<button style="background-color: #ffffff;" class="input-btn" disabled>
 				Statusi zahteva
-				<div id="requestStatusChart_div" style="width: 350px; height: 350px;"></div>
+				<div class="statusChart_div" id="requestStatusChart_div" style="width: 350px; height: 350px;"></div>
 			</button>
-			<button class="input-btn" disabled>
+			<button style="background-color: #ffffff;" class="input-btn" disabled>
 				Zahtevi po timovima
-				<div id="requestGroupChart_div" style="width: 350px; height: 350px;"></div>
+				<div class="statusChart_div" id="requestGroupChart_div" style="width: 350px; height: 350px;"></div>
 			</button>
 		</div>
 	</div>
@@ -60,21 +60,21 @@
 	</div>
 	<div class="row">
 		<div class="columns">
-			<button class="input-btn" disabled>
+			<button style="background-color: #ffffff;" class="input-btn" disabled>
 				Statusi pretrage
-				<div id="statusChart_lm_div" style="width: 350px; height: 350px;"></div>
+				<div class="statusChart_div" id="statusChart_lm_div" style="width: 350px; height: 350px;"></div>
 			</button>
-			<button class="input-btn" disabled>
+			<button style="background-color: #ffffff;" class="input-btn" disabled>
 				Pretraga po timovima
-				<div id="groupChart_lm_div" style="width: 350px; height: 350px;"></div>
+				<div class="statusChart_div" id="groupChart_lm_div" style="width: 350px; height: 350px;"></div>
 			</button>
-			<button class="input-btn" disabled>
+			<button style="background-color: #ffffff;" class="input-btn" disabled>
 				Statusi zahteva
-				<div id="requestStatusChart_lm_div" style="width: 350px; height: 350px;"></div>
+				<div class="statusChart_div" id="requestStatusChart_lm_div" style="width: 350px; height: 350px;"></div>
 			</button>
-			<button class="input-btn" disabled>
+			<button style="background-color: #ffffff;" class="input-btn" disabled>
 				Zahtevi po timovima
-				<div id="requestGroupChart_lm_div" style="width: 350px; height: 350px;"></div>
+				<div class="statusChart_div" id="requestGroupChart_lm_div" style="width: 350px; height: 350px;"></div>
 			</button>
 		</div>
 	</div>
@@ -84,18 +84,18 @@
 	<br/>
 	<div class="row">
 		<div class="columns">
-			<button class="chart-btn" disabled>
+			<button style="background-color: #ffffff;" class="chart-btn" disabled>
 				Izvršene pretrage
-				<div id="columnchart_values"></div>
+				<div class="statusChart_div" id="columnchart_values"></div>
 			</button>
 		</div>
 	</div>
 	<br/>
 	<div class="row">
 		<div class="columns">
-			<button class="chart-btn" disabled>
+			<button style="background-color: #ffffff;" class="chart-btn" disabled>
 				Podneti zahtevi
-				<div id="reqMonthChart_values"></div>
+				<div class="statusChart_div" id="reqMonthChart_values"></div>
 			</button>
 		</div>
 	</div>
@@ -114,7 +114,7 @@
 </div>
 
 
-  
+
 <!-- Footer -->
 
 {% include "mysite/footer.html" %}
@@ -134,7 +134,7 @@
 	google.charts.setOnLoadCallback(groupChart_lm);
 	google.charts.setOnLoadCallback(requestStatusChart_lm);
 	google.charts.setOnLoadCallback(requestGroupChart_lm);
-	
+
 	// Draw the chart and set the chart values
 	function statusChart() {
 	  var data = google.visualization.arrayToDataTable([
@@ -144,10 +144,10 @@
 	  ['Nije dostupan kod', parseInt({{ lockstatusthismonth.2 }})],
 	  ['Zahtev u obradi', parseInt({{ lockstatusthismonth.3 }})],
 	]);
-	
+
 	  // Optional; add a title and set the width and height of the chart
 	  var options = { pieHole: 0.4, "legend": {"position": "none"}};
-	
+
 	  // Display the chart inside the <div> element with id="piechart"
 	  var chart = new google.visualization.PieChart(document.getElementById('statusChart_div'));
 	  chart.draw(data, options);
@@ -168,10 +168,10 @@
 	  ['Telesales Team', parseInt({{ groupthismonth.9 }})],
 	  ['Training Team', parseInt({{ groupthismonth.10 }})],
 	]);
-	
+
 	  // Optional; add a title and set the width and height of the chart
 	  var options = {pieHole: 0.4, "legend": {"position": "none"}};
-	
+
 	  // Display the chart inside the <div> element with id="piechart"
 	  var chart = new google.visualization.PieChart(document.getElementById('groupChart_div'));
 	  chart.draw(data, options);
@@ -185,10 +185,10 @@
 	  ['Na čekanju za slanje', parseInt({{ requeststatusthismonth.2 }})],
 	  ['Kod dostavljen korisniku', parseInt({{ requeststatusthismonth.3 }})],
 	]);
-	
+
 	  // Optional; add a title and set the width and height of the chart
 	  var options = {pieHole: 0.4, "legend": {"position": "none"}};
-	
+
 	  // Display the chart inside the <div> element with id="piechart"
 	  var chart = new google.visualization.PieChart(document.getElementById('requestStatusChart_div'));
 	  chart.draw(data, options);
@@ -209,10 +209,10 @@
 	  ['Telesales Team', parseInt({{ reqgroupthismonth.9 }})],
 	  ['Training Team', parseInt({{ reqgroupthismonth.10 }})],
 	]);
-	
+
 	  // Optional; add a title and set the width and height of the chart
 	  var options = {pieHole: 0.4, "legend": {"position": "none"}};
-	
+
 	  // Display the chart inside the <div> element with id="piechart"
 	  var chart = new google.visualization.PieChart(document.getElementById('requestGroupChart_div'));
 	  chart.draw(data, options);
@@ -227,10 +227,10 @@
 	  ['Nije dostupan kod', parseInt({{ lockstatuslastmonth.2 }})],
 	  ['Zahtev u obradi', parseInt({{ lockstatuslastmonth.3 }})],
 	]);
-	
+
 	  // Optional; add a title and set the width and height of the chart
 	  var options = { pieHole: 0.4, "legend": {"position": "none"}};
-	
+
 	  // Display the chart inside the <div> element with id="piechart"
 	  var chart = new google.visualization.PieChart(document.getElementById('statusChart_lm_div'));
 	  chart.draw(data, options);
@@ -251,10 +251,10 @@
 	  ['Telesales Team', parseInt({{ grouplastmonth.9 }})],
 	  ['Training Team', parseInt({{ grouplastmonth.10 }})],
 	]);
-	
+
 	  // Optional; add a title and set the width and height of the chart
 	  var options = {pieHole: 0.4, "legend": {"position": "none"}};
-	
+
 	  // Display the chart inside the <div> element with id="piechart"
 	  var chart = new google.visualization.PieChart(document.getElementById('groupChart_lm_div'));
 	  chart.draw(data, options);
@@ -268,10 +268,10 @@
 	  ['Na čekanju za slanje', parseInt({{ requeststatuslastmonth.2 }})],
 	  ['Kod dostavljen korisniku', parseInt({{ requeststatuslastmonth.3 }})],
 	]);
-	
+
 	  // Optional; add a title and set the width and height of the chart
 	  var options = {pieHole: 0.4, "legend": {"position": "none"}};
-	
+
 	  // Display the chart inside the <div> element with id="piechart"
 	  var chart = new google.visualization.PieChart(document.getElementById('requestStatusChart_lm_div'));
 	  chart.draw(data, options);
@@ -292,10 +292,10 @@
 	  ['Telesales Team', parseInt({{ reqgrouplastmonth.9 }})],
 	  ['Training Team', parseInt({{ reqgrouplastmonth.10 }})],
 	]);
-	
+
 	  // Optional; add a title and set the width and height of the chart
 	  var options = {pieHole: 0.4, "legend": {"position": "none"}};
-	
+
 	  // Display the chart inside the <div> element with id="piechart"
 	  var chart = new google.visualization.PieChart(document.getElementById('requestGroupChart_lm_div'));
 	  chart.draw(data, options);

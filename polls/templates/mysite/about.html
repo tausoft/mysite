@@ -7,14 +7,13 @@
 <link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript" src={% static 'bazaznanja/main.js' %}></script>
-<style>body {background-image: url("{% static 'images/Header.jpg' %}");}</style>
 <link rel="stylesheet" href="{% static 'style.css' %}">
 
 </head>
 
 <body bgcolor="#ffffff" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 
-	
+
 <!-- Header -->
 
 {% include "mysite/header.html" %}
@@ -26,41 +25,62 @@
 
 <!-- Content -->
 
-<div style="background-color: #FFFFFF; text-align:center;  padding:50px 80px; text-align: justify;">
-	<h3 style="color: #000000; text-align:center";>Dobro došli!</h3>
-  	<p style="text-align:center";>U skladu sa RPA trendovima došli smo na ideju da automatizujemo svakodnevne procese uz pomoć veština
-	kojima raspolažemo. Iz ove ideje nastaje <b>RA&Tbox - Automation tool</b>.<br /><br />Sigurni smo da ćemo na ovaj način olakšati
-	izvršavanje čak i onih kompleksnijih zadataka, koji svima nama oduzimaju veliki deo vremena.<br /><br />Cilj nam je da se 
-	fokusiramo na obavljanje daleko zahtevnijih zadataka, kao i da nastavimo da budemo najbolja podrška, kako našim korisnicima, tako i
-	svim našim kolegama.
-	<br /><br />
-	</p>
-	<p style="text-align:right";> Vaš <b>Residental Activations & Technical team</b>.
-	</p>
+<br/><br/><br/>
+
+<div style="text-align:justify; padding: 0px 40px">
+    <p>
+        <font style="text-align:left; font: 22px 'Pacifico'; color: gray;">
+            Zdravo {{request.user.first_name}}! Drago nam je što se interesuješ za nas,
+        </font>
+    </p>
+        <br/>
+    <p>
+        <font style="font: 22px 'Pacifico'; color: gray;">
+            Cela platforma SIM lock alata se radi prezentacije trenutno nalazi na besplatnom host okruženju koje radi sa ograničenim resursima - PythonAnywere.
+            Backend je napisan u Python-u, a kao framework korišćen je Django.
+            Prvobitno razvijano uz Sqlite bazu, a naknadno migrirano na MySQL.
+            Migracija na MySQL bazu donela je dosta bolji odziv, prvenstveno za pretragu.
+            Pretraga se bazira na Pandas-u ali je dodatno optimizovana Luhn algoritmom, kao i posebnim merama i validatorima.
+            Procesi su olakšani masovnim akcijama - download iz baze i upload u bazu, prema definisanim kriterijumima.
+            Takođe svaku akciju prati i adekvatno logovanje.
+            <br/><br/>
+            Sve ovo dovelo je do toga da se pred tobom nalazi stabilan alat koji u sebi sadrži paket za pretragu dostupnosti kodova za dekodiranje mobilnih uređaja, ticketing sistem, stranicu za admistraciju i stranicu za osnovnu statistiku.
+            <br/><br/>
+            Za više informacija možeš nam pisati na e-adresu:
+            <br/>
+            <a href="mailto: tausoft.business@gmail.com">tausoft.business@gmail.com</a>
+        </font>
+        <br/>
+    </p>
+    <p style="text-align:right;">
+        <font style="font: 22px 'Pacifico'; color: gray;">
+            Tausoft
+        </font>
+    </p>
+
+    <br/>
+
 </div>
 
-<div style="background-color: #e4e4e4; overflow-x:auto; padding:50px 80px; text-align: center;"></div>
+
+
 
 <div style="background-color: #FFFFFF; text-align:center;  padding:50px 80px; text-align: justify;">
 	<p style="text-align:center";>
-		Administrator - Aleksandar Miljković<br />
-		Vaše predloge i sugestije možete poslati klikom <a href="mailto: alx.miljkovic@gmail.com; a.miljkovic@vipmobile.rs"><font color="8f153e"><b>na link</b></font></a>!<br /><br />
-		RA&Tbox v1.0<br />
-		Dekodiranje v1.0<br />
-	</p>
-	<p style="text-align:center";>
-		<br/>Powered by:<br/>
+		Powered by:<br/>
 		<div class="row" style="text-align: center;">
 			<div class="columns">
 				<img src="{% static 'images/powered_by_python.png' %}" width="auto" height="66px" style="margin-left: 10px; margin-right: 10px;">
-				<img src="{% static 'images/powered_by_django.png' %}" width="auto" height="66px" style="margin-left: 10px; margin-right: 10px;">	
-				<img src="{% static 'images/powered_by_pandas.png' %}" width="auto" height="66px" style="margin-left: 10px; margin-right: 10px;">	
-				<img src="{% static 'images/powered_by_gitlab.png' %}" width="auto" height="66px" style="margin-left: 10px; margin-right: 10px;">
+				<img src="{% static 'images/powered_by_django.png' %}" width="auto" height="66px" style="margin-left: 10px; margin-right: 10px;">
+				<img src="{% static 'images/powered_by_pandas.png' %}" width="auto" height="66px" style="margin-left: 10px; margin-right: 10px;">
+				<img src="{% static 'images/powered_by_github.png' %}" width="auto" height="66px" style="margin-left: 10px; margin-right: 10px;">
 				<img src="{% static 'images/powered_by_mysql.png' %}" width="auto" height="66px" style="margin-left: 10px; margin-right: 10px;">
 			</div>
 		</div>
 	</p>
 </div>
+
+<br/><br/>
 
 <!-- Content -->
 

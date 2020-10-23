@@ -1,7 +1,7 @@
 {% load static %}
 <html>
 <head>
-<title>RA&T box</title>
+<title>SIM lock</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}"/>
@@ -22,7 +22,7 @@
 
 <div class="headersearch" style="text-align: center; background-color: rgb(92, 92, 92);">
 	<h3 class="headertext">Da li ti je potreban kod za dekodiranje?</h3>
-	<form class="search" style="margin:auto;" method="POST">	
+	<form class="search" style="margin:auto;" method="POST">
 		{% csrf_token %}
 		<input type="text" id="user" value="{{request.user.username}}" hidden>
 		<input type="text" id="group" value="{{request.user.groups.all.1}}" hidden>
@@ -36,6 +36,9 @@
 	<div style="background-color: #f15959; text-align: center; position:absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;">
 		<p style="color:#ffffff; padding: 10px 0px 10px 0px;" class="not-numeric-input" hidden>Nevalidan unos! IMEI broj se sastoji od 15 numeričkih karaktera.</p>
 	</div>
+	<div style="background-color: #f15959; text-align: center; position:absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;">
+		<p style="color:#ffffff; padding: 10px 0px 10px 0px;" class="imei-alert" hidden>Obavezan unos! Potrebno je uneti IMEI broj.</p>
+	</div>
 	<br />
 	<br />
 </div>
@@ -47,72 +50,103 @@
 
 <!-- Body -->
 
-<div style="text-align:center;  padding:100px 80px; text-align: center;">
+<div style="text-align:center;  padding:100px 0px 100px 0px; text-align: center;">
 
 <br/><br/><br/>
 
-<div class="headertext"><br/><br/><br/></div>
+<div class="headertext"><br/><br/><br/><br/><br/></div>
 
-
-<p><b>Dostupni alati:</b></p>
 
 	{% if request.user.groups.all.0.name == 'level_1' %}
 	<div class="row">
-		<div class="columns">
-			<button style="border: none; min-width: 312px; max-width: 312px;">
+	    <div class="columns">
+
+	        <!--
+			<button class='indexbutton' style="opacity: 0.7;">
 				<a href="{% url 'dekodiranjepretraga' %}">
-					<div style="background-color: rgb(92, 92, 92); display: table; border: none; padding-top: 50px; font: 22px 'FuturaLight'; text-align:center;"> <p style="color:#ffffff;">Dekodiranje</p>
-						<div style="background-color: #f1f1f1; min-width: 300px; max-width: 300px; text-align:center; padding: 1px 0px 1px 0px;">
-							<p style="color:#000000;"><b>pretraga</b></p>
-						</div>
+					<div style="border: none; font: 48px 'ManropeLight'; text-align:center;">
+					    <p style="color:#ffffff; font-size: 48px;"><i class="fa fa-search"></i></p>
+					</div>
+					<div class="test2" style="background-color: rgb(92, 92, 92); border: none; padding: 5px 0px 24px 0px; font: 14px 'ManropeLight'; text-align:center;">
+					    <p style="color:#ffffff; font-size: 14px;"></p>
+					</div>
+					<div class="test" style="background-color: rgb(92, 92, 92); border: none; font: 14px 'ManropeLight'; text-align:center;">
+					    <p style="color:#ffffff; font-size: 18px; padding-top: 3px;">pretraga</p>
 					</div>
 				</a>
 			</button>
-			<button style="border:none; min-width: 312px; max-width: 312px;">
+			<button class='indexbutton' style="opacity: 0.7;">
 				<a href="{% url 'dekodiranjeinput' %}">
-					<div style="background-color: rgb(92, 92, 92); display: table; border: none; padding-top: 50px; font: 22px 'FuturaLight'; text-align:center;"> <p style="color:#ffffff;">Dekodiranje</p>
-						<div style="background-color: #f1f1f1; min-width: 300px; max-width: 300px; text-align:center; padding: 1px 0px 1px 0px;">
-							<p style="color:#000000;"><b>podnesi zahtev</b></p>
-						</div>
+					<div style="border: none; font: 48px 'ManropeLight'; text-align:center;">
+					    <p style="color:#ffffff; font-size: 48px;"><i class="fa fa-tasks"></i></p>
+					</div>
+					<div class="test2" style="background-color: rgb(92, 92, 92); border: none; padding: 5px 0px 24px 0px; font: 14px 'ManropeLight'; text-align:center;">
+					    <p style="color:#ffffff; font-size: 14px;"></p>
+					</div>
+					<div class="test" style="background-color: #000000; border: none; font: 14px 'ManropeLight'; text-align:center;">
+					    <p style="color:#ffffff; font-size: 18px; padding-top: 3px;">zahtevi</p>
 					</div>
 				</a>
 			</button>
-			<button style="border:none; min-width: 312px; max-width: 312px;">
-				<a href="{% url 'dekodiranjeadmin' %}">
-					<div style="background-color: rgb(92, 92, 92); display: table; border: none; padding-top: 50px; font: 22px 'FuturaLight'; text-align:center;"> <p style="color:#ffffff;">Dekodiranje</p>
-						<div style="background-color: #f1f1f1; min-width: 300px; max-width: 300px; text-align:center; padding: 1px 0px 1px 0px;">
-							<p style="color:#000000;"><b>administracija</b></p>
-						</div>
+			-->
+			<a href="{% url 'dekodiranjepretraga' %}" style="text-decoration: none;">
+                <button class='indexbutton' style="opacity: 0.7;">
+    				<div class="test" style="border: none; padding: 5px 0px 5px 0px; font: 48px 'ManropeLight'; text-align:center;">
+    				    <h3 style="color:lightgray; padding-top: 4px">pretraga</h3>
+    				</div>
+    				<div class="test2" style="border: none; padding: 5px 0px 5px 0px; font: 48px 'ManropeLight'; text-align:center;">
+    				    <p style="color:#ffffff; font-size: 48px;"><i class="fa fa-search"></i></p>
+    				</div>
+    			</button>
+			</a>
+			<a href="{% url 'dekodiranjeinput' %}" style="text-decoration: none;">
+			    <button class='indexbutton' style="opacity: 0.7;">
+				    <div class="test" style="border: none; padding: 5px 0px 5px 0px; text-align:center;">
+					    <h3 style="color:lightgray; padding-top: 4px">zahtevi</h3>
 					</div>
-				</a>
-			</button>
-			<button style="border:none; min-width: 312px; max-width: 312px;">
-				<a href="{% url 'dashboard' %}">
-					<div style="background-color: rgb(92, 92, 92); display: table; border: none; padding-top: 50px; font: 22px 'FuturaLight'; text-align:center;"> <p style="color:#ffffff;">Dekodiranje</p>
-						<div style="background-color: #f1f1f1; min-width: 300px; max-width: 300px; text-align:center; padding: 1px 0px 1px 0px;">
-							<p style="color:#000000;"><b>dashboard</b></p>
-						</div>
+					<div class="test2" style="border: none; padding: 5px 0px 5px 0px; font: 48px 'ManropeLight'; text-align:center;">
+					    <p style="color:#ffffff; font-size: 48px;"><i class="fa fa-tasks"></i></p>
 					</div>
-				</a>
-			</button>
+			    </button>
+			</a>
+			<a href="{% url 'dekodiranjeadmin' %}" style="text-decoration: none;">
+    			<button class='indexbutton' style="opacity: 0.7;">
+				    <div class="test" style="border: none; padding: 5px 0px 5px 0px; font: 48px 'ManropeLight'; text-align:center;">
+					    <h3 style="color:lightgray; padding-top: 4px">administracija</h3>
+					</div>
+					<div class="test2" style="border: none; padding: 5px 0px 5px 0px; font: 48px 'ManropeLight'; text-align:center;">
+					    <p style="color:#ffffff; font-size: 48px;"><i class="fa fa-magic"></i></p>
+					</div>
+			    </button>
+			</a>
+			<a href="{% url 'dashboard' %}" style="text-decoration: none;">
+			    <button class='indexbutton' style="opacity: 0.7;">
+				    <div class="test" style="border: none; padding: 5px 0px 5px 0px; text-align:center;">
+					    <h3 style="color:lightgray; padding-top: 4px">statistika</h3>
+					</div>
+					<div class="test2" style="border: none; padding: 5px 0px 5px 0px; font: 48px 'ManropeLight'; text-align:center;">
+					    <p style="color:#ffffff; font-size: 48px;"><i class="fa fa-pie-chart"></i></p>
+					</div>
+			    </button>
+			</a>
 		</div>
 	</div>
 	{% endif %}
 	{% if request.user.groups.all.0.name == 'level_2' %}
 	<div class="row">
 		<div class="columns">
-			<button style="border:none; min-width: 312px; max-width: 312px;">
+			<button class='indexbutton'>
 				<a href="{% url 'dekodiranjepretraga' %}">
-					<div style="background-color: rgb(92, 92, 92); display: table; border: none; padding-top: 50px; font: 22px 'FuturaLight'; text-align:center;"> <p style="color:#ffffff;">Dekodiranje</p>
+					<div style="background-color: rgb(92, 92, 92); display: table; border: none; padding-top: 50px; font: 22px 'ManropeLight'; text-align:center;"> <p style="color:#ffffff;">Dekodiranje</p>
 						<div style="background-color: #f1f1f1; min-width: 300px; max-width: 300px; text-align:center; padding: 1px 0px 1px 0px;">
 							<p style="color:#000000;">pretraga</p>
 						</div>
 					</div>
 				</a>
 			</button>
-			<button style="border:none; min-width: 312px; max-width: 312px;">
+			<button class='indexbutton'>
 				<a href="{% url 'dekodiranjeinput' %}">
-					<div style="background-color:rgb(92, 92, 92); display: table; border: none; padding-top: 50px; font: 22px 'FuturaLight'; text-align:center;"> <p style="color:#ffffff;">Dekodiranje</p>
+					<div style="background-color:rgb(92, 92, 92); display: table; border: none; padding-top: 50px; font: 22px 'ManropeLight'; text-align:center;"> <p style="color:#ffffff;">Dekodiranje</p>
 						<div style="background-color: #f1f1f1; min-width: 300px; max-width: 300px; text-align:center; padding: 1px 0px 1px 0px;">
 							<p style="color:#000000;">podnesi zahtev</p>
 						</div>
@@ -125,9 +159,9 @@
 	{% if request.user.groups.all.0.name == 'level_3' %}
 	<div class="row">
 		<div class="columns">
-			<button style="border:none; min-width: 312px; max-width: 312px;">
+			<button class='indexbutton'>
 				<a href="{% url 'dekodiranjepretraga' %}">
-					<div style="background-color: rgb(92, 92, 92); display: table; border: none; padding-top: 50px; font: 22px 'FuturaLight'; text-align:center;"> <p style="color:#ffffff;">Dekodiranje</p>
+					<div style="background-color: rgb(92, 92, 92); display: table; border: none; padding-top: 50px; font: 22px 'ManropeLight'; text-align:center;"> <p style="color:#ffffff;">Dekodiranje</p>
 						<div style="background-color: #f1f1f1; min-width: 300px; max-width: 300px; text-align:center; padding: 1px 0px 1px 0px;">
 							<p style="color:#000000;">pretraga</p>
 						</div>
@@ -156,13 +190,13 @@
 
 		<br/><br/><br/>
 
-		<div style="background-color: #ffffff; overflow-x:auto; text-align:center; padding:50px 80px;">
+		<div style="background-color: #ffffff; overflow-x:auto; text-align:center; padding:50px">
 			<p id='p'></p>
 			<br/>
 			<p id='o'></p>
 		</div>
 
-		
+
 
 
 		{% if request.user.groups.all.0.name == 'level_1' %}
@@ -173,9 +207,9 @@
 			<br/><br/>
 		</div>
 		{% endif %}
-		
+
 		<br/><br/><br/>
-	
+
 
 		{% if request.user.groups.all.0.name != 'level_3' %}
 			<div id="validate_0" style="text-align: center;"  hidden>
@@ -184,7 +218,7 @@
 					<input id="imeihidden_0" type="text" name="imeihidden" value="" style="text-align:center;" hidden>
 					<input id="proizvodjachidden_0" type="text" name="proizvodjachidden" value="" style="text-align:center;" hidden>
 					<input id="modelhidden_0" type="text" name="modelhidden" value="" style="text-align:center;" hidden>
-						<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+						<button style="background-color: rgb(92, 92, 92); border:none; width: 200px; cursor: pointer;">
 							<p style="color:#ffffff;">podnesi zahtev</p>
 						</button>
 				</form>
@@ -197,12 +231,12 @@
 					<input id="proizvodjachidden_1" type="text" name="proizvodjachidden" value="" style="text-align:center;" hidden>
 					<input id="modelhidden_1" type="text" name="modelhidden" value="" style="text-align:center;" hidden>
 					<p style="color:#000000;">U slučaju neispravnosti koda za dekodiranje, možete podneti novi zahtev</p><br/>
-					<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+					<button style="background-color: rgb(92, 92, 92); border:none; width: 200px; cursor: pointer;">
 						<p style="color:#ffffff;">podnesi zahtev</p>
 					</button>
 				</form>
-			</div>  
-			  
+			</div>
+
 			<div id="validate_3" style="text-align: center;" hidden>
 				<form class="contact-form" method="POST" action="/dekodiranjeinput_search/">
 					{% csrf_token %}
@@ -210,7 +244,7 @@
 					<input id="proizvodjachidden_3" type="text" name="proizvodjachidden" value="" style="text-align:center;" hidden>
 					<input id="modelhidden_3" type="text" name="modelhidden" value="" style="text-align:center;" hidden>
 					<p style="color:#000000;">Ukoliko su izvršene navedene provere, a korisnikov uređaj traži da se unese kod za dekodiranje, možete podneti zahtev</p><br/>
-						<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+						<button style="background-color: rgb(92, 92, 92); border:none; width: 200px; cursor: pointer;">
 							<p style="color:#ffffff;">podnesi zahtev</p>
 						</button>
 				</form>
@@ -223,7 +257,7 @@
 
 <!-- Body -->
 
-  
+
 <!-- Footer -->
 
 {% include "mysite/footer.html" %}

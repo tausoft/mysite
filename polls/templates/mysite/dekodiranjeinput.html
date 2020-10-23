@@ -2,11 +2,11 @@
 <html>
 <head>
 	<title>RA&T box</title>
-	
+
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}"/>
 	<style>body {background-image: url("{% static 'images/Header.jpg' %}");}</style>
-	
+
 	<link rel="stylesheet" href="{% static 'style.css' %}">
 	<script type="text/javascript" src={% static 'bazaznanja/main.js' %} defer></script>
 	<script class="jsbin" src=https://ajax.gogleapis.com/ajax/libs/jquery/1/jquery.min.js></script>
@@ -37,12 +37,12 @@
 
 <div class="headertext"><br/><br/></div>
 
-<div style="overflow-x:auto; text-align:center;  padding:50px 80px; text-align: center;">
+<div style="text-align:center; padding:50pxs;">
 	{% if proizvodjac_lwr == None  %}
-	<form class="contact-form" method="POST" action="/confirm_new/">
+	<form method="POST" action="/confirm_new/">
 	{% endif %}
 	{% if proizvodjac_lwr != None  %}
-	<form class="contact-form" method="POST" action="/add_new_confirm/">
+	<form method="POST" action="/add_new_confirm/">
 	{% endif %}
 		{% csrf_token %}
 		<button class="input-btn" disabled>
@@ -50,11 +50,11 @@
 		</button>
 		<button class="input-btn" disabled>
 				{% if proizvodjac != None %}
-			<select onchange="nokiaValidate()" type="text" id="proizvodjac" name="proizvodjac" style="color: #000000;">
+			<select onchange="nokiaValidate()"f id="proizvodjac" name="proizvodjac" style="color: #000000;">
 				<option style="display:none" value="{{ proizvodjac }}">{{ proizvodjac }}</option>
 				{% endif %}
 				{% if proizvodjac == None %}
-			<select onchange="nokiaValidate()" type="text" id="proizvodjac" name="proizvodjac" style="color: gray;">
+			<select onchange="nokiaValidate()" id="proizvodjac" name="proizvodjac" style="color: gray;">
 				<option value="" hidden>proizvodjac..</option>
 				{% endif %}
 				<option value="Alcatel">Alcatel</option>
@@ -95,35 +95,35 @@
 		</button>
 	</br></br>
 		<div style="text-align:center;">
-			<button onclick="formValidate();" style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+			<button onclick="formValidate();" style="background-color: rgb(92, 92, 92); border:none; width: 200px; cursor: pointer;">
 				<p style="color:#ffffff;">podnesi zahtev</p>
 			</button>
 		</div>
 	</form>
 	<p id="test"></p>
-	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;" class="empty-kontakt-alert" hidden>
+	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 10%; right: 10%; margin-top: 2px;" class="empty-kontakt-alert" hidden>
 		<p style="color:#ffffff; padding: 10px 0px 10px 0px;">Obavezan unos! Potrebno je uneti kontakt.</p>
 	</div>
-	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;" class="kontakt-alert" hidden>
+	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 10%; right: 10%; margin-top: 2px;" class="kontakt-alert" hidden>
 		<p style="color:#ffffff; padding: 10px 0px 10px 0px;">Nevalidan unos! Kontakt broj je potrebno uneti u formatu 06xxxxxxx(x).</p>
 	</div>
-	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;" class="nokia-model-alert" hidden>
+	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 10%; right: 10%; margin-top: 2px;" class="nokia-model-alert" hidden>
 		<p style="color:#ffffff; padding: 10px 0px 10px 0px;">Obavezan unos! Potrebno je uneti model.</p>
 	</div>
-	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;" class="proizvodjac-alert" hidden>
+	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 10%; right: 10%; margin-top: 2px;" class="proizvodjac-alert" hidden>
 		<p style="color:#ffffff; padding: 10px 0px 10px 0px;">Obavezan unos! Potrebno je odabrati proizvođača.</p>
 	</div>
-	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;" class="imei-alert" hidden>
+	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 10%; right: 10%; margin-top: 2px;" class="imei-alert" hidden>
 		<p style="color:#ffffff; padding: 10px 0px 10px 0px;">Obavezan unos! Potrebno je uneti IMEI broj.</p>
 	</div>
-	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;" class="not-luhn-input" hidden>
+	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 10%; right: 10%; margin-top: 2px;" class="not-luhn-input" hidden>
 		<p style="color:#ffffff; padding: 10px 0px 10px 0px;">Nevalidan unos! IMEI broj nije ispravan.</p>
 	</div>
-	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;" class="not-numeric-input" hidden>
+	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 10%; right: 10%; margin-top: 2px;" class="not-numeric-input" hidden>
 		<p style="color:#ffffff; padding: 10px 0px 10px 0px;">Nevalidan unos! IMEI broj se sastoji od 15 numeričkih karaktera.</p>
 	</div>
 	{% if unlock_not_found != None %}
-	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;">
+	<div style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 10%; right: 10%; margin-top: 2px;">
 		<p style="color:#ffffff; padding: 10px 0px 10px 0px;">{{ unlock_not_found }}</p>
 	</div>
 	<br/><br/>
@@ -165,7 +165,7 @@
 			<input id="imeihidden" type="text" name="imeihidden" value="{{ imei_temp }}" style="text-align:center;" hidden>
 			<input id="proizvodjachidden" type="text" name="proizvodjachidden" value="{{ proizvodjac_temp }}" style="text-align:center;" hidden>
 			<input id="modelhidden" type="text" name="modelhidden" value="{{ model }}" style="text-align:center;" hidden>
-			<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+			<button style="background-color: rgb(92, 92, 92); border:none; width: 200px; margin-top: 5px; cursor: pointer;">
 				<p style="color:#ffffff;">podnesi zahtev</p>
 			</button>
 		</form>
@@ -181,7 +181,7 @@
 			<input id="modelhidden" type="text" name="modelhidden" value="{{ model }}" style="text-align:center;" hidden>
 			</br>
 			<p>U slučaju neispravnosti koda za dekodiranje, možete podneti novi zahtev</p>
-			<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+			<button style="background-color: rgb(92, 92, 92); border:none; width: 200px; margin-top: 5px; cursor: pointer;">
 				<p style="color:#ffffff;">podnesi zahtev</p>
 			</button>
 		</form>
@@ -197,7 +197,7 @@
 			<input id="modelhidden" type="text" name="modelhidden" value="{{ model }}" style="text-align:center;" hidden>
 			</br>
 			<p>U slučaju neispravnosti koda za dekodiranje, možete podneti novi zahtev</p>
-			<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+			<button style="background-color: rgb(92, 92, 92); border:none; width: 200px; margin-top: 5px; cursor: pointer;">
 				<p style="color:#ffffff;">podnesi zahtev</p>
 			</button>
 		</form>
@@ -213,7 +213,7 @@
 			<input id="modelhidden" type="text" name="modelhidden" value="{{ model }}" style="text-align:center;" hidden>
 			</br>
 			<p>Ukoliko su izvršene navedene provere, a korisnikov uređaj traži da se unese kod za dekodiranje, možete podneti zahtev</p>
-			<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+			<button style="background-color: rgb(92, 92, 92); border:none; width: 200px; margin-top: 5px; cursor: pointer;">
 				<p style="color:#ffffff;">podnesi zahtev</p>
 			</button>
 		</form>
@@ -274,11 +274,11 @@
 					<input id="model" type="text" name="model" value="{{ item.model }}" readonly>
 				</td>
 				<td id="t1">
-					<input id="imei" type="text" name="imei" value="{{ item.imei }}" readonly>
+					<input class="zero" id="imei" name="imei" value="{{ item.imei }}" readonly>
 				</td>
 				{% if request.user.groups.all.0.name == 'level_1' %}
 				<td id="t1">
-					<input id="unlock" type="text" name="unlock" value="{{ item.unlock }}">
+					<input class="zero" id="unlock" name="unlock" value="{{ item.unlock }}">
 				</td>
 				{% endif %}
 				{% if request.user.groups.all.0.name != 'level_1' %}
@@ -316,21 +316,23 @@
 		{% endfor %}
 	</table>
 	<br \>
-	<div style="text-align:center; padding:50px 80px;">
+	<div style="text-align:center; padding:50px;">
 		{% if request.user.groups.all.0.name == 'level_1' %}
 		<div class="row">
 			<div class="columns">
-				<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
-				<a href="{% url 'dekodiranjetabela' %}">
-					
+			    <a href="{% url 'dekodiranjetabela' %}">
+				<button style="background-color: rgb(92, 92, 92); border:none; width: 200px; margin-top: 5px; cursor: pointer;">
+
+
 						<p style="color:#ffffff;">zahtevi u obradi</p>
-				</a>
+
 			</button>
-				<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+			</a>
+				<button style="background-color: rgb(92, 92, 92); border:none; width: 200px; margin-top: 5px; cursor: pointer;">
 				<a href="{% url 'dekodiranjeobradjeni' %}">
-					
+
 						<p style="color:#ffffff;">obrađeni zahtevi</p>
-					
+
 				</a>
 			</button>
 			</div>
@@ -338,9 +340,12 @@
 		{% endif %}
 	</div>
 </div>
+
+<br/>
+
 <!-- Content -->
 
-  
+
 <!-- Footer -->
 
 {% include "mysite/footer.html" %}
@@ -349,6 +354,6 @@
 
 </body>
 
-<script src="{% static 'main.js' %}"></script>
+
 
 </html>

@@ -2,30 +2,30 @@
 <!-- Header -->
 <div class="fixedheader">
 	<div class="topnav" id="myTopnav">
-		<a href="{% url 'index' %}" class="active">RA&T box</a>
+		<a href="{% url 'index' %}" class="active">SIM lock</a>
 		{% if request.user.groups.all.0.name == 'level_1' %}
 		<div class="dropdown">
-		  <button class="dropbtn">dekodiranje 
+		  <button class="dropbtn">dostupni alati
 			<i class="fa fa-caret-down"></i>
 		  </button>
 		  <div class="dropdown-content">
-			<a href="{% url 'dekodiranjepretraga' %}">pretraži</a>
-			<a href="{% url 'dekodiranjeinput' %}">podnesi zahtev</a>
+			<a href="{% url 'dekodiranjepretraga' %}">pretraga</a>
+			<a href="{% url 'dekodiranjeinput' %}">zahtevi</a>
 			<a href="{% url 'dekodiranjeadmin' %}">admistracija</a>
-			<a href="{% url 'dashboard' %}">dashboard</a>
+			<a href="{% url 'dashboard' %}">statistika</a>
 		  </div>
-		</div> 
+		</div>
 		{% endif %}
 		{% if request.user.groups.all.0.name == 'level_2' %}
 		<div class="dropdown">
-		  <button class="dropbtn">troubleshooting 
+		  <button class="dropbtn">troubleshooting
 			<i class="fa fa-caret-down"></i>
 		  </button>
 		  <div class="dropdown-content">
 			<a href="{% url 'dekodiranjepretraga' %}">pretraži</a>
 			<a href="{% url 'dekodiranjeinput' %}">podnesi zahtev</a>
 		  </div>
-		</div> 
+		</div>
 		{% endif %}
 		{% if request.user.groups.all.0.name == 'level_3' %}
 		<a href="{% url 'dekodiranjepretraga' %}">pretraži</a>

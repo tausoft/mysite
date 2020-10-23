@@ -1,3 +1,7 @@
+var ids = [];
+
+
+
 function readURL(input) {
   var fileType = input.files[0].name.slice(input.files[0].name.length - 4);
 
@@ -10,7 +14,7 @@ function readURL(input) {
           $('.file-upload-image').attr('src', e.target.result);
           $('.file-upload-content').show();
           $('.file-submit-content').show();
-          
+
           $('.image-title').html(input.files[0].name);
       };
         reader.readAsDataURL(input.files[0]);
@@ -70,7 +74,7 @@ var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal 
+// When the user clicks the button, open the modal
 btn.onclick = function() {
   modal.style.display = "block";
 }
@@ -112,7 +116,7 @@ function myModal() {
 $(document).ready(function() {
   $('.newmessagebtn').on('click', function (e) {
       event.preventDefault();
-      
+
         var user = $('#user').val();
         var imei = $('#imei').val();
         var group = $('#group').val();
@@ -131,22 +135,34 @@ $(document).ready(function() {
 
 
             var x = document.getElementById("imei").value;
-            if(isIMEI(x) == '0'){
+            if(x == ''){
+        event.preventDefault();
+        $('.not-luhn-input').hide();
+        $('.not-numeric-input').hide();
+        $('.imei-alert').hide();
+        $('.imei-alert').fadeIn("slow");
+      }
+      else {
+          if(isIMEI(x) == '0'){
               event.preventDefault();
               $('.not-luhn-input').hide();
-              $('.not-numeric-input').hide();;
+              $('.not-numeric-input').hide();
+              $('.imei-alert').hide();
               $('.not-numeric-input').fadeIn("slow");
-            }
-            if(isIMEI(x) == '1'){
+          }
+          if(isIMEI(x) == '1'){
               event.preventDefault();
               $('.not-numeric-input').hide();
               $('.not-luhn-input').hide();
+              $('.imei-alert').hide();
               $('.not-luhn-input').fadeIn("slow");
-            }
-            if(isIMEI(x) == '2'){
+          }
+          if(isIMEI(x) == '2'){
               $('.not-luhn-input').hide();
               $('.not-numeric-input').hide();
-  
+              $('.imei-alert').hide();
+
+
               var modal = document.getElementById("myModal");
               var span = document.getElementsByClassName("close")[0];
               modal.style.display = "block";
@@ -260,11 +276,11 @@ $(document).ready(function() {
                   }
               })
             }
+      }
           }
         });
       });
 });
-
 
 
 function fnValidate(){
@@ -299,26 +315,38 @@ function isIMEI(s) {
   if (chk != parseInt(s.substring(14,15),10))
       return '1';
   return '2';
-  }   
+  }
 
 function searchValidate(){
   var x = document.getElementById("imei").value;
-  if(isIMEI(x) == '0'){
-      event.preventDefault();
-      $('.not-luhn-input').hide();
-      $('.not-numeric-input').hide();;
-      $('.not-numeric-input').fadeIn("slow");
-  }
-  if(isIMEI(x) == '1'){
-      event.preventDefault();
-      $('.not-numeric-input').hide();
-      $('.not-luhn-input').hide();
-      $('.not-luhn-input').fadeIn("slow");
-  }
-  if(isIMEI(x) == '2'){
-      $('.not-luhn-input').hide();
-      $('.not-numeric-input').hide();
-  }
+  if(x == ''){
+        event.preventDefault();
+        $('.not-luhn-input').hide();
+        $('.not-numeric-input').hide();
+        $('.imei-alert').hide();
+        $('.imei-alert').fadeIn("slow");
+      }
+      else {
+          if(isIMEI(x) == '0'){
+              event.preventDefault();
+              $('.not-luhn-input').hide();
+              $('.not-numeric-input').hide();
+              $('.imei-alert').hide();
+              $('.not-numeric-input').fadeIn("slow");
+          }
+          if(isIMEI(x) == '1'){
+              event.preventDefault();
+              $('.not-numeric-input').hide();
+              $('.not-luhn-input').hide();
+              $('.imei-alert').hide();
+              $('.not-luhn-input').fadeIn("slow");
+          }
+          if(isIMEI(x) == '2'){
+              $('.not-luhn-input').hide();
+              $('.not-numeric-input').hide();
+              $('.imei-alert').hide();
+          }
+      }
 }
 
 function nokiaValidate(){
@@ -421,21 +449,33 @@ function formValidate(){
       }
   }
   var z = document.getElementById("imei").value;{
-      if(isIMEI(z) == '0'){
-          event.preventDefault();
-          $('.not-luhn-input').hide();
-          $('.not-numeric-input').hide();
-          $('.not-numeric-input').fadeIn("slow");
+      if(z == ''){
+        event.preventDefault();
+        $('.not-luhn-input').hide();
+        $('.not-numeric-input').hide();
+        $('.imei-alert').hide();
+        $('.imei-alert').fadeIn("slow");
       }
-      if(isIMEI(z) == '1'){
-          event.preventDefault();
-          $('.not-numeric-input').hide();
-          $('.not-luhn-input').hide();
-          $('.not-luhn-input').fadeIn("slow");
-      }
-      if(isIMEI(z) == '2'){
-          $('.not-luhn-input').hide();
-          $('.not-numeric-input').hide();
+      else {
+          if(isIMEI(z) == '0'){
+              event.preventDefault();
+              $('.not-luhn-input').hide();
+              $('.not-numeric-input').hide();
+              $('.imei-alert').hide();
+              $('.not-numeric-input').fadeIn("slow");
+          }
+          if(isIMEI(z) == '1'){
+              event.preventDefault();
+              $('.not-numeric-input').hide();
+              $('.not-luhn-input').hide();
+              $('.imei-alert').hide();
+              $('.not-luhn-input').fadeIn("slow");
+          }
+          if(isIMEI(z) == '2'){
+              $('.not-luhn-input').hide();
+              $('.not-numeric-input').hide();
+              $('.imei-alert').hide();
+          }
       }
   }
 }
@@ -449,22 +489,80 @@ function toggleAll(source) {
 
 
 function checkboxChecker() {
-  var result = false;
-  checkboxes = document.getElementsByClassName('select_all');
-  for(var i=0, n=checkboxes.length;i<n;i++) {
-      if(checkboxes[i].checked == true){
-          result = true;
-          break;
-      }
-      else{
-          result = false
-      }
-  }
-  if(result == true){
-      $('.checkbox-alert').fadeOut("slow");
-  }
-  else{
-      event.preventDefault();
-      $('.checkbox-alert').fadeIn("slow");
-  }
+  checkboxes = document.getElementById('selected').value;
+    if(checkboxes != ''){
+        $('.checkbox-alert').fadeOut("slow");
+    }
+    else{
+        event.preventDefault();
+        $('.checkbox-alert').fadeIn("slow");
+    }
 }
+
+
+
+function selectMeMain(clicked_id){
+    var selected = document.getElementById(clicked_id);
+    var selectall = document.getElementById('selectall');
+    var selectedall = document.getElementsByName('vendors');
+
+    if(selected.classList.contains('select_notselected')){
+        selected.classList.add('select_selected');
+        selected.classList.remove('select_notselected');
+        ids.push(clicked_id);
+        document.getElementById("selected").value = ids;
+    } else if(selected.classList.contains('select_selected')) {
+        selected.classList.add('select_notselected');
+        selected.classList.remove('select_selected');
+        ids = ids.filter(e => e !== clicked_id);
+        document.getElementById("selected").value = ids;
+    }
+
+
+    // document.getElementById('xlen').innerHTML = x.length
+    // document.getElementById('selectalllen').innerHTML = selectedall.length
+
+    if(selectedall.length != ids.length){
+        selectall.classList.add('selectall_notselected');
+        selectall.classList.remove('selectall_selected');
+    } else {
+        selectall.classList.add('selectall_selected');
+        selectall.classList.remove('selectall_notselected');
+    }
+}
+
+function selectAll() {
+    var selectall = document.getElementById('selectall');
+    var selectedall = document.getElementsByName('vendors');
+    var x = [];
+
+    if(selectedall.length != ids.length){
+        var i;
+        for (i = 0; i < selectedall.length; i++){
+            selectedall[i].classList.add('select_selected');
+            selectedall[i].classList.remove('select_notselected');
+            selectall.classList.add('selectall_selected');
+            selectall.classList.remove('selectall_notselected');
+            x.push(selectedall[i].id)
+            ids = x;
+            document.getElementById("selected").value = x;
+        }
+    } else if(selectedall.length == ids.length) {
+        var i;
+        for (i = 0; i < selectedall.length; i++){
+            selectedall[i].classList.add('select_notselected');
+            selectedall[i].classList.remove('select_selected');
+            selectall.classList.add('selectall_notselected');
+            selectall.classList.remove('selectall_selected');
+            x = [];
+            ids = [];
+            document.getElementById("selected").value = x;
+        }
+    }
+}
+
+
+
+
+
+

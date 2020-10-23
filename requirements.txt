@@ -1,9 +1,9 @@
+Django==3.1.1
 django-ajax-selects==1.7.1
 django-appconf==1.0.3
 django-bootstrap-pagination==1.7.1
 django-excel==0.0.10
-django-multi-email-field==0.5.1
 django-pandas==0.6.1
-django-tables2==2.1.0
 django-user-accounts==2.1.0
 django-zipfile==0.4.0
+mysqlclient==2.0.1

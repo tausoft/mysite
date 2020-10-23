@@ -1,15 +1,16 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Footer -->
 <div class="footer" style="background-color: #e0e0e0; text-align:center;">
-	<a href="{% url 'index' %}"><font color="000000" size="2">ratbox</font></a>
+    <a href="https://tausofttest.pythonanywhere.com/"><font color="000000" size="2">tausoft</font></a>
 	<font color="000000" size="2"> | </font>
-	<a href="{% url 'about' %}"><font color="000000" size="2">o nama</font></a>
+	<a href="{% url 'about' %}"><font color="000000" size="2">o alatu</font></a>
 	<font color="000000" size="2"> | </font>
 	<a href="{% url 'admin:index' %}"><font color="000000" size="2">admin</font></a><br />
+	<p class="tausoftfooter"><font color="000000" size="2">Tausoft © {% now "Y" %}</font></p>
 	{% if user.is_authenticated %}
-		<p id="loggedUser" style="text-align: right; columns: #000000;"><font color="000000" size="2"><b>{{request.user.username}} </font></b><a href="{% url 'logout' %}"><font color="dfb83b" size="2">izloguj se <i class="fa fa-sign-out" aria-hidden="true"></i></font></a></p>
+		<p id="loggedUser" style="text-align: right; columns: #000000; padding-top: 15px;"><font color="000000" size="2"><b>{{request.user.username}} </font></b><a href="{% url 'logout' %}"><font color="000000" size="2">izloguj se <i class="fa fa-sign-out" aria-hidden="true"></i></font></a></p>
 	{% else %}
-		<p id="loggedUser" style="text-align: right; columns: #dfb83b;"><a href="{% url 'login' %}"><font color="dfb83b" size="2">uloguj se <i class="fa fa-sign-in" aria-hidden="true"></i></font></a></p class="loggedUser">
+		<p id="loggedUser" style="text-align: right; columns: #000000; padding-top: 15px;"><a href="{% url 'login' %}"><font color="000000" size="2">uloguj se <i class="fa fa-sign-in" aria-hidden="true"></i></font></a></p class="loggedUser">
 	{% endif %}
 </div>
 <!-- Footer -->

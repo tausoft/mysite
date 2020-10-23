@@ -25,7 +25,7 @@ SECRET_KEY = 'w_u*#^uq)s**t7rrhpoi)=s5c-zd7^-by@a$1(eow_lk0qv=@='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['simlock.pythonanywhere.com']
 
 
 # Application definition
@@ -65,8 +65,6 @@ LOGIN_REDIRECT_URL = "/"
 
 LOGOUT_REDIRECT_URL = "/login/"
 
-CKEDITOR_UPLOAD_PATH = "/uploads/"
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -93,11 +91,10 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ratbox_database',
-        'USER': 'root',
-        'PASSWORD': 'Ratbox2020',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': 'simlock$database',
+        'USER': 'simlock',
+        'PASSWORD': 'Star333wars',
+        'HOST': 'simlock.mysql.pythonanywhere-services.com',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         }
@@ -137,21 +134,13 @@ USE_L10N = True
 USE_TZ = False
 
 
-
-DJANGO_WYSIWYG_FLAVOR = "ckeditor"
-
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'full',
-        'height': 300,
-        'width': '90%',
-    },
-}
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = '/home/simlock/mysite/polls/static'
+
 
 from django.contrib.messages import constants as messages
 

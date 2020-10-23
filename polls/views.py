@@ -144,20 +144,20 @@ def dekodiranjepretraga(request):
         arg = {"entry_data": entry_data}
         return render(request, "mysite/dekodiranjepretraga.html", arg)
 
-def sumDig(n): 
+def sumDig(n):
         a = 0
         while n > 0:
                 a = a + n % 10
                 n = int(n / 10)
-        return a 
-        # Returns True if n is valid EMEI 
+        return a
+        # Returns True if n is valid EMEI
 
 def isValidIMEI(n):
-        # Converting the number into 
-        # Sting for finding length 
+        # Converting the number into
+        # Sting for finding length
         s = str(n)
         l = len(s)
-        # If length is not 15 then IMEI is Invalid 
+        # If length is not 15 then IMEI is Invalid
         d = 0
         sum = 0
         for i in range(15, 0, -1):
@@ -165,7 +165,7 @@ def isValidIMEI(n):
                 if i % 2 == 0:
                         # Doubling every alternate digit
                         d = 2 * d
-                # Finding sum of the digits 
+                # Finding sum of the digits
                 sum = sum + sumDig(d)
                 n = n / 10
         return (sum % 10 == 0)
@@ -210,10 +210,9 @@ def search_unc(request):
                         imei_tac = str(imei[:8])
                         tac_data = MyTAC.objects.all()
                         tac = ''
-                        cxn = mysql.connector.connect(user='root', password='Ratbox2020',
-                              host='localhost',
-                              port='3306',
-                              database='ratbox_database')
+                        cxn = mysql.connector.connect(user='simlock', password='Star333wars',
+                              host='simlock.mysql.pythonanywhere-services.com',
+                              database='simlock$database')
                         cur = cxn.cursor()
                         for t in tac_data:
                                 if t.tac == imei_tac:
@@ -406,7 +405,7 @@ def search_unc(request):
                                                 imei_text = uri_to_iri('Kod za ure%C4%91aj ') + tac + ' sa IMEI brojem ' + imei + ' je:'
                                                 lockstatus = '1'
                                                 break
-                else: 
+                else:
                         imei_text = uri_to_iri('IMEI broj nije validan!')
                         validate = '9'
         # if IMEI is not integer
@@ -418,12 +417,12 @@ def search_unc(request):
                 imei_text = uri_to_iri('Nije dostupan kod za ure%C4%91aj ' + tac + ' sa IMEI brojem ' + imei + '.')
                 lockstatus = '2'
         if validate == '3':
-                imei_text = uri_to_iri('Uređaj sa IMEI brojem ' + imei + ' nije zaključan ili nije deo Vip mobile ponude. Ukoliko je uređaj deo Vip mobile ponude, potrebno je testirati SIM karticu drugog operatera u korisnikovom uređaju!')
+                imei_text = uri_to_iri('Uređaj sa IMEI brojem ' + imei + ' nije zaključan ili nije deo naše ponude. Ukoliko je uređaj deo naše ponude, potrebno je testirati SIM karticu drugog operatera u korisnikovom uređaju!')
                 lockstatus = '0'
         if validate == '4':
-                imei_text = uri_to_iri('Uređaj ' + tac + ' sa IMEI brojem ' + imei + ' nije zaključan ili nije deo Vip mobile ponude. Ukoliko je uređaj deo Vip mobile ponude, potrebno je testirati SIM karticu drugog operatera u korisnikovom uređaju!')
+                imei_text = uri_to_iri('Uređaj ' + tac + ' sa IMEI brojem ' + imei + ' nije zaključan ili nije deo naše ponude. Ukoliko je uređaj deo naše ponude, potrebno je testirati SIM karticu drugog operatera u korisnikovom uređaju!')
                 lockstatus = '0'
-        
+
         # search log
         username = str(request.user.username)
         usergroup = str(request.user.groups.all()[1])
@@ -448,7 +447,7 @@ def search_unc_ajax(request):
         user = request.GET.get('user', None)
         group = request.GET.get('group', None)
         level = request.GET.get('level', None)
-       
+
         unlock_list = []
         entry_data = EntryTable.objects.all()
         validate = '0'
@@ -483,10 +482,9 @@ def search_unc_ajax(request):
                         imei_tac = str(imei[:8])
                         tac_data = MyTAC.objects.all()
                         tac = ''
-                        cxn = mysql.connector.connect(user='root', password='Ratbox2020',
-                              host='localhost',
-                              port='3306',
-                              database='ratbox_database')
+                        cxn = mysql.connector.connect(user='simlock', password='Star333wars',
+                              host='simlock.mysql.pythonanywhere-services.com',
+                              database='simlock$database')
                         cur = cxn.cursor()
                         for t in tac_data:
                                 if t.tac == imei_tac:
@@ -679,7 +677,7 @@ def search_unc_ajax(request):
                                                 imei_text = uri_to_iri('Kod za ure%C4%91aj ') + tac + ' sa IMEI brojem ' + imei + ' je:'
                                                 lockstatus = '1'
                                                 break
-                else: 
+                else:
                         imei_text = uri_to_iri('IMEI broj nije validan!')
                         validate = '9'
         # if IMEI is not integer
@@ -691,13 +689,13 @@ def search_unc_ajax(request):
                 imei_text = uri_to_iri('Nije dostupan kod za ure%C4%91aj ' + tac + ' sa IMEI brojem ' + imei + '.')
                 lockstatus = '2'
         if validate == '3':
-                imei_text = uri_to_iri('Uređaj sa IMEI brojem ' + imei + ' nije zaključan ili nije deo Vip mobile ponude. Ukoliko je uređaj deo Vip mobile ponude, potrebno je testirati SIM karticu drugog operatera u korisnikovom uređaju!')
+                imei_text = uri_to_iri('Uređaj sa IMEI brojem ' + imei + ' nije zaključan ili nije deo naše ponude. Ukoliko je uređaj deo naše ponude, potrebno je testirati SIM karticu drugog operatera u korisnikovom uređaju!')
                 lockstatus = '0'
         if validate == '4':
-                imei_text = uri_to_iri('Uređaj ' + tac + ' sa IMEI brojem ' + imei + ' nije zaključan ili nije deo Vip mobile ponude. Ukoliko je uređaj deo Vip mobile ponude, potrebno je testirati SIM karticu drugog operatera u korisnikovom uređaju!')
+                imei_text = uri_to_iri('Uređaj ' + tac + ' sa IMEI brojem ' + imei + ' nije zaključan ili nije deo naše ponude. Ukoliko je uređaj deo naše ponude, potrebno je testirati SIM karticu drugog operatera u korisnikovom uređaju!')
                 lockstatus = '0'
- 
-        
+
+
         # search log
         username = str(user)
         usergroup = str(group)
@@ -807,7 +805,7 @@ def add_new(request):
                                                 unlock = str(i.unlock)
                                                 unlock_list.append(unlock)
                                                 imei_text = uri_to_iri('Kod za ure%C4%91aj sa IMEI brojem ' + imei + ' je:')
-                else: 
+                else:
                         imei_text = uri_to_iri('IMEI broj nije validan!')
                         validate = '9'
         # if IMEI is not integer
@@ -889,10 +887,9 @@ def confirm_new(request):
                         imei_tac = str(imei[:8])
                         tac_data = MyTAC.objects.all()
                         tac = ''
-                        cxn = mysql.connector.connect(user='root', password='Ratbox2020',
-                              host='localhost',
-                              port='3306',
-                              database='ratbox_database')
+                        cxn = mysql.connector.connect(user='simlock', password='Star333wars',
+                              host='simlock.mysql.pythonanywhere-services.com',
+                              database='simlock$database')
                         cur = cxn.cursor()
                         for t in tac_data:
                                 if t.tac == imei_tac:
@@ -1086,7 +1083,7 @@ def confirm_new(request):
                                                 imei_text = uri_to_iri('Kod za ure%C4%91aj ') + tac + ' sa IMEI brojem ' + imei + ' je:'
                                                 lockstatus = '1'
                                                 break
-                else: 
+                else:
                         imei_text = uri_to_iri('IMEI broj nije validan!')
                         validate = '9'
         # if IMEI is not integer
@@ -1098,10 +1095,10 @@ def confirm_new(request):
                 imei_text = uri_to_iri('Nije dostupan kod za ure%C4%91aj ' + tac + ' sa IMEI brojem ' + imei + '.')
                 lockstatus = '2'
         if validate == '3':
-                imei_text = uri_to_iri('Uređaj sa IMEI brojem ' + imei + ' nije zaključan ili nije deo Vip mobile ponude. Ukoliko je uređaj deo Vip mobile ponude, potrebno je testirati SIM karticu drugog operatera u korisnikovom uređaju!')
+                imei_text = uri_to_iri('Uređaj sa IMEI brojem ' + imei + ' nije zaključan ili nije deo naše ponude. Ukoliko je uređaj deo naše ponude, potrebno je testirati SIM karticu drugog operatera u korisnikovom uređaju!')
                 lockstatus = '0'
         if validate == '4':
-                imei_text = uri_to_iri('Uređaj ' + tac + ' sa IMEI brojem ' + imei + ' nije zaključan ili nije deo Vip mobile ponude. Ukoliko je uređaj deo Vip mobile ponude, potrebno je testirati SIM karticu drugog operatera u korisnikovom uređaju!')
+                imei_text = uri_to_iri('Uređaj ' + tac + ' sa IMEI brojem ' + imei + ' nije zaključan ili nije deo naše ponude. Ukoliko je uređaj deo naše ponude, potrebno je testirati SIM karticu drugog operatera u korisnikovom uređaju!')
                 lockstatus = '0'
 
 
@@ -1201,14 +1198,16 @@ def download_list(request):
 
         now = datetime.now()
         date_now = now.strftime("%m-%d-%Y_%H-%M-%S")
+        nokia_trigger = 0
 
         ### CHECKBOX CHECKER ###
 
+        """
         checkbox_list = ["checkbox0", "checkbox1", "checkbox2", "checkbox3", "checkbox4", "checkbox5", "checkbox6", "checkbox7"]
         name_list = []
         counter = 0
-        nokia_trigger = 0
-        
+
+
         for checked in checkbox_list:
                 try:
                         checked = str(request.POST["name" + str(counter)])
@@ -1216,6 +1215,10 @@ def download_list(request):
                         name_list.append(checked)
                 except KeyError:
                         counter += 1
+        """
+
+        name_list = request.POST["selected"]
+        name_list = name_list.split(',') # making the list out of name_list string
 
         ### CSV LIST ###
 
@@ -1227,13 +1230,13 @@ def download_list(request):
                 entry_data = EntryTable.objects.all()
                 for i in entry_data:
                         if i.unlock == '' and i.proizvodjac == checked:
-                                # append NAME in new list if there is find according to conditions 
+                                # append NAME in new list if there is find according to conditions
                                 csv_list.append(checked)
                                 # break (no need to look furder)
                                 break
 
         list_trigger = 'Nema novih zahteva za slanje!'
-        
+
         # check if list in not empty - in case it is, than skip and print message
         if len(csv_list) != 0:
 
@@ -1245,7 +1248,7 @@ def download_list(request):
 
                 for checked in csv_list:
                         index = []
-                        with open('polls/static/tmp/' + str(checked) + '.txt', 'w', newline='') as csvfile:
+                        with open('/home/simlock/mysite/polls/static/tmp/' + str(checked) + '.txt', 'w', newline='') as csvfile:
                                 filewriter = csv.writer(csvfile, delimiter=',')
                                 filewriter.writerow(['IMEI:'])
                                 for i in entry_data:
@@ -1264,7 +1267,7 @@ def download_list(request):
 
                 for checked in csv_list:
                         # Files (local path) to put in the .zip
-                        filename = ("polls/static/tmp/" + str(checked) + ".txt")
+                        filename = ("/home/simlock/mysite/polls/static/tmp/" + str(checked) + ".txt")
                         filenames.append(filename)
                 # Folder name in ZIP archive which contains the above files
                 zip_subdir = "liste za vendore"
@@ -1359,9 +1362,9 @@ def nokia_list(request):
                 if i.proizvodjac == 'nokia' and i.unlock == '':
                         fullwinlock.append(i.winlock + '-' + i.winlockversion)
         for i in fullwinlock:
-                if not str(i) in fullwinlock_list:                                    
+                if not str(i) in fullwinlock_list:
                         fullwinlock_list.append(str(i))
-                        
+
 
         winlock_folder_counter = len(fullwinlock_list)
 
@@ -1371,7 +1374,7 @@ def nokia_list(request):
                 nokia_trigger = ''
 
                 for w in fullwinlock_list:
-                        with open('polls/static/tmp/' + str(w) + '.txt', 'w', newline='') as csvfile:
+                        with open('/home/simlock/mysite/polls/static/tmp/' + str(w) + '.txt', 'w', newline='') as csvfile:
                                 filewriter = csv.writer(csvfile, delimiter=',')
                                 filewriter.writerow(['IMEI:'])
                                 for i in entry_data:
@@ -1380,7 +1383,7 @@ def nokia_list(request):
                                                 filewriter.writerow([i.imei])
                                                 item.status = '1'
                                                 item.log = str(item.log) + "imeidownloadedby_" + str(request.user.username) + "_" + str(date_now) + ";"
-                                                item.save()                               
+                                                item.save()
 
                 ### ZIPING CSV FILES ###
 
@@ -1388,7 +1391,7 @@ def nokia_list(request):
 
                 for w in fullwinlock_list:
                         # Files (local path) to put in the .zip
-                        filename = ("polls/static/tmp/" + str(w) + ".txt")
+                        filename = ("/home/simlock/mysite/polls/static/tmp/" + str(w) + ".txt")
                         filenames.append(filename)
                 # Folder name in ZIP archive which contains the above files
                 zip_subdir = "Nokia IMEI liste"
@@ -1445,18 +1448,18 @@ def upload_csv(request):
 
         if request.method == 'POST' and request.FILES['upload_csv']:
                 myfile = request.FILES['upload_csv']
-                fs = FileSystemStorage("polls/static/tmp/")
+                fs = FileSystemStorage("/home/simlock/mysite/polls/static/tmp/")
                 filename = fs.save(myfile.name, myfile)
                 uploaded_file_url = fs.url(filename)
 
                 # populate lists
-                with open('polls/static/tmp/' + filename, 'r', newline='') as csvfile:
+                with open('/home/simlock/mysite/polls/static/tmp/' + filename, 'r', newline='') as csvfile:
                         file_reader = csv.reader(csvfile)
                         for row in file_reader:
                                 s = str(row)
                                 break
                 if ',' in s:
-                        with open('polls/static/tmp/' + filename, 'r', newline='') as csvfile:
+                        with open('/home/simlock/mysite/polls/static/tmp/' + filename, 'r', newline='') as csvfile:
                                 temp_csv_list.clear()
                                 csv_list.clear()
                                 file_reader = csv.reader(csvfile, delimiter=',')
@@ -1464,7 +1467,7 @@ def upload_csv(request):
                                         temp_csv_list.append(row)
                                         csv_list.append(row)
                 elif ';' in s:
-                        with open('polls/static/tmp/' + filename, 'r', newline='') as csvfile:
+                        with open('/home/simlock/mysite/polls/static/tmp/' + filename, 'r', newline='') as csvfile:
                                 temp_csv_list.clear()
                                 csv_list.clear()
                                 file_reader = csv.reader(csvfile, delimiter=';')
@@ -1473,9 +1476,9 @@ def upload_csv(request):
                                         csv_list.append(row)
 
                 # remove uploaded file from database
-                if os.path.isfile('polls/static/tmp/' + filename):
-                        os.remove('polls/static/tmp/' + filename)
-                
+                if os.path.isfile('/home/simlock/mysite/polls/static/tmp/' + filename):
+                        os.remove('/home/simlock/mysite/polls/static/tmp/' + filename)
+
                 # paginate
                 paginator = Paginator(csv_list, 25) # Show 25 contacts per page
                 page = request.GET.get('page')
@@ -1534,8 +1537,8 @@ def csvupload(request):
 def reset_csv(request):
         csv_list.clear()
         if request.method == 'POST':
-                if os.path.isfile('polls/static/tmp/csv_temp_list.csv'):
-                        os.remove('polls/static/tmp/csv_temp_list.csv')
+                if os.path.isfile('/home/simlock/mysite/polls/static/tmp/csv_temp_list.csv'):
+                        os.remove('/home/simlock/mysite/polls/static/tmp/csv_temp_list.csv')
                 return HttpResponseRedirect('/dekodiranjeadmin/')
                 return render(request, "mysite/dekodiranjeadmin.html")
         else:
@@ -1609,7 +1612,7 @@ def validate_csv(request):
         arg = {"trigger": trigger, "ace_data": ace_data}
         return HttpResponseRedirect('/dekodiranjeadmin/')
         return render(request, "mysite/dekodiranjeadmin.html", arg)
-        
+
 
 from django.contrib import messages
 import numpy
@@ -1655,7 +1658,7 @@ def ace_list(request):
                                 else:
                                         index.append(f[0])
                                         duplicate_msisdn.append(f)
-                        
+
                         # Check if list is more or less than 500 rows
                         if len(unique_value) > 500:
                                 # determine number of max rows per file, round that number and add one
@@ -1666,21 +1669,21 @@ def ace_list(request):
                                 c = 0
                                 while c < z:
                                         value = l[c]
-                                        with open('polls/static/tmp/ACE_list_' + date_now + '-0' + str(c) + '.txt', 'w', newline='') as csvfile:
+                                        with open('/home/simlock/mysite/polls/static/tmp/ACE_list_' + date_now + '-0' + str(c) + '.txt', 'w', newline='') as csvfile:
                                                 filewriter = csv.writer(csvfile, delimiter=';')
-                                                for i in value: 
+                                                for i in value:
                                                         filewriter.writerow([str('381' + (i[0])[1:]),i[1]])
                                         name = 'ACE_list_' + date_now + '-0' + c + '.txt'
                                         name_list.append(name)
                                         c += 1
                         else:
-                                with open('polls/static/tmp/ACE_list_' + date_now + '-00.txt', 'w', newline='') as csvfile:
+                                with open('/home/simlock/mysite/polls/static/tmp/ACE_list_' + date_now + '-00.txt', 'w', newline='') as csvfile:
                                         filewriter = csv.writer(csvfile, delimiter=';')
                                         for i in unique_value:
                                                 filewriter.writerow([str('381' + (i[0])[1:]),i[1]])
                                 name = 'ACE_list_' + date_now + '-00.txt'
                                 name_list.append(name)
-                        
+
                         if len(duplicate_msisdn) == 0:
                                 pass
                         else:
@@ -1690,7 +1693,7 @@ def ace_list(request):
                                 c = 0
                                 while c < z:
                                         value = l[c]
-                                        with open('polls/static/tmp/ACE_duplicates_' + date_now + '-0' + str(c) + '.txt', 'w', newline='') as csvfile:
+                                        with open('/home/simlock/mysite/polls/static/tmp/ACE_duplicates_' + date_now + '-0' + str(c) + '.txt', 'w', newline='') as csvfile:
                                                 filewriter = csv.writer(csvfile, delimiter=';')
                                                 for i in value:
                                                         filewriter.writerow([str('381' + (i[0])[1:]),i[1]])
@@ -1704,7 +1707,7 @@ def ace_list(request):
 
                         for checked in name_list:
                                 # Files (local path) to put in the .zip
-                                filename = ("polls/static/tmp/" + str(checked))
+                                filename = ("/home/simlock/mysite/polls/static/tmp/" + str(checked))
                                 filenames.append(filename)
                                 # Folder name in ZIP archive which contains the above files
                         zip_subdir = "ACE liste " + str(date_now)
@@ -1712,7 +1715,7 @@ def ace_list(request):
 
                         # Open StringIO to grab in-memory ZIP contents
                         s = BytesIO()
-                        with open('polls/static/acebackup/' + zip_filename,'wb') as out:
+                        with open('/home/simlock/mysite/polls/static/acebackup/' + zip_filename,'wb') as out:
 
                                 # The zip compressor: out for save backup at defined folder; s for download attachment
                                 zf = zipfile.ZipFile(out, "w")
@@ -1741,8 +1744,8 @@ def ace_list(request):
                         response['Content-Disposition'] = 'attachment; filename=%s' % zip_filename
                         # delete TXT files from tmp folder
                         for checked in name_list:
-                                if os.path.isfile('polls/static/tmp/' + str(checked)):
-                                        os.remove('polls/static/tmp/' + str(checked))
+                                if os.path.isfile('/home/simlock/mysite/polls/static/tmp/' + str(checked)):
+                                        os.remove('/home/simlock/mysite/polls/static/tmp/' + str(checked))
                         for row in entry_data:
                                 if row.unlock != '' and row.status != 3:
                                         item = row.id
@@ -2093,16 +2096,16 @@ def dashboard(request):
                 requeststatus_4 = DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(status=3).count()
                 requeststatusthismonth = [requeststatus_1, requeststatus_2, requeststatus_3, requeststatus_4]
 
-                reqgroup_1 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Business Complaint and Support Team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Business Complaint and Support Team').count()					
-                reqgroup_2 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Business Contact Center').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Business Contact Center').count()					
-                reqgroup_3 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Complaint and Retention Center').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Complaint and Retention Center').count()					
-                reqgroup_4 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Online team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Online team').count()					
-                reqgroup_5 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Residental Contact Center').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Residental Contact Center').count()					
-                reqgroup_6 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Technical').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Technical').count()					
-                reqgroup_7 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='RCC TNPS team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='RCC TNPS team').count()					
-                reqgroup_8 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='Sales').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='Sales').count()					
-                reqgroup_9 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='Sales and CS content Team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='Sales and CS content Team').count()					
-                reqgroup_10 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='Telesales Team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='Telesales Team').count()					
+                reqgroup_1 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Business Complaint and Support Team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Business Complaint and Support Team').count()
+                reqgroup_2 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Business Contact Center').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Business Contact Center').count()
+                reqgroup_3 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Complaint and Retention Center').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Complaint and Retention Center').count()
+                reqgroup_4 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Online team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Online team').count()
+                reqgroup_5 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Residental Contact Center').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Residental Contact Center').count()
+                reqgroup_6 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Technical').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='CS Technical').count()
+                reqgroup_7 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='RCC TNPS team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='RCC TNPS team').count()
+                reqgroup_8 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='Sales').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='Sales').count()
+                reqgroup_9 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='Sales and CS content Team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='Sales and CS content Team').count()
+                reqgroup_10 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='Telesales Team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='Telesales Team').count()
                 reqgroup_11 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='Training Team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=thismonth).filter(createdbygroup='Training Team').count()
                 reqgroupthismonth = [reqgroup_1, reqgroup_2, reqgroup_3, reqgroup_4, reqgroup_5, reqgroup_6, reqgroup_7, reqgroup_8, reqgroup_9, reqgroup_10, reqgroup_11]
 
@@ -2139,17 +2142,17 @@ def dashboard(request):
                         requeststatus_4 = DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month=12).filter(status=3).count()
                         requeststatuslastmonth = [requeststatus_1, requeststatus_2, requeststatus_3, requeststatus_4]
 
-                        reqgroup_1 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Business Complaint and Support Team').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Business Complaint and Support Team').count()					
-                        reqgroup_2 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Business Contact Center').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Business Contact Center').count()					
-                        reqgroup_3 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Complaint and Retention Center').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Complaint and Retention Center').count()					
-                        reqgroup_4 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Online team').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Online team').count()					
-                        reqgroup_5 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Residental Contact Center').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Residental Contact Center').count()					
-                        reqgroup_6 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Technical').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Technical').count()					
-                        reqgroup_7 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='RCC TNPS team').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='RCC TNPS team').count()					
-                        reqgroup_8 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='Sales').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='Sales').count()					
-                        reqgroup_9 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='Sales and CS content Team').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='Sales and CS content Team').count()					
-                        reqgroup_10 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='Telesales Team').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='Telesales Team').count()					
-                        reqgroup_11 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='Training Team').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='Training Team').count()					                        
+                        reqgroup_1 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Business Complaint and Support Team').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Business Complaint and Support Team').count()
+                        reqgroup_2 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Business Contact Center').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Business Contact Center').count()
+                        reqgroup_3 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Complaint and Retention Center').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Complaint and Retention Center').count()
+                        reqgroup_4 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Online team').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Online team').count()
+                        reqgroup_5 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Residental Contact Center').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Residental Contact Center').count()
+                        reqgroup_6 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Technical').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='CS Technical').count()
+                        reqgroup_7 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='RCC TNPS team').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='RCC TNPS team').count()
+                        reqgroup_8 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='Sales').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='Sales').count()
+                        reqgroup_9 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='Sales and CS content Team').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='Sales and CS content Team').count()
+                        reqgroup_10 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='Telesales Team').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='Telesales Team').count()
+                        reqgroup_11 = EntryTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='Training Team').count() + DataTable.objects.filter(datecreated__year=lastyear).filter(datecreated__month='12').filter(createdbygroup='Training Team').count()
                         reqgrouplastmonth = [reqgroup_1, reqgroup_2, reqgroup_3, reqgroup_4, reqgroup_5, reqgroup_6, reqgroup_7, reqgroup_8, reqgroup_9, reqgroup_10, reqgroup_11]
 
                         searchgroup =  (group_1 + group_2 + group_3 + group_4 + group_5 + group_6 + group_7 + group_8 + group_9 + group_10 + group_11)
@@ -2184,17 +2187,17 @@ def dashboard(request):
                         requeststatus_4 = DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(status=3).count()
                         requeststatuslastmonth = [requeststatus_1, requeststatus_2, requeststatus_3, requeststatus_4]
 
-                        reqgroup_1 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Business Complaint and Support Team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Business Complaint and Support Team').count()					
-                        reqgroup_2 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Business Contact Center').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Business Contact Center').count()					
-                        reqgroup_3 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Complaint and Retention Center').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Complaint and Retention Center').count()					
-                        reqgroup_4 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Online team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Online team').count()					
-                        reqgroup_5 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Residental Contact Center').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Residental Contact Center').count()					
-                        reqgroup_6 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Technical').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Technical').count()					
-                        reqgroup_7 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='RCC TNPS team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='RCC TNPS team').count()					
-                        reqgroup_8 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='Sales').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='Sales').count()					
-                        reqgroup_9 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='Sales and CS content Team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='Sales and CS content Team').count()					
-                        reqgroup_10 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='Telesales Team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='Telesales Team').count()					
-                        reqgroup_11 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='Training Team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='Training Team').count()		
+                        reqgroup_1 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Business Complaint and Support Team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Business Complaint and Support Team').count()
+                        reqgroup_2 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Business Contact Center').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Business Contact Center').count()
+                        reqgroup_3 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Complaint and Retention Center').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Complaint and Retention Center').count()
+                        reqgroup_4 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Online team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Online team').count()
+                        reqgroup_5 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Residental Contact Center').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Residental Contact Center').count()
+                        reqgroup_6 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Technical').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='CS Technical').count()
+                        reqgroup_7 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='RCC TNPS team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='RCC TNPS team').count()
+                        reqgroup_8 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='Sales').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='Sales').count()
+                        reqgroup_9 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='Sales and CS content Team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='Sales and CS content Team').count()
+                        reqgroup_10 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='Telesales Team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='Telesales Team').count()
+                        reqgroup_11 = EntryTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='Training Team').count() + DataTable.objects.filter(datecreated__year=thisyear).filter(datecreated__month=lastmonth).filter(createdbygroup='Training Team').count()
                         reqgrouplastmonth = [reqgroup_1, reqgroup_2, reqgroup_3, reqgroup_4, reqgroup_5, reqgroup_6, reqgroup_7, reqgroup_8, reqgroup_9, reqgroup_10, reqgroup_11]
 
                         searchgroup =  (group_1 + group_2 + group_3 + group_4 + group_5 + group_6 + group_7 + group_8 + group_9 + group_10 + group_11)
@@ -2211,7 +2214,7 @@ def dashboard(request):
 
                 duzina = int(counter_sum)
                 eleven = str(counter_sum)
-                        
+
                 if duzina == 0:
                         counter_sum_1 = uri_to_iri('izvršeno')
                         counter_sum_2 = uri_to_iri('pretraga')
@@ -2245,7 +2248,7 @@ def dashboard(request):
 
                 duzina = int(entry_sum)
                 eleven = str(entry_sum)
-                        
+
                 if duzina == 0:
                         entry_sum_1 = uri_to_iri('podneto')
                         entry_sum_2 = uri_to_iri('zahteva')

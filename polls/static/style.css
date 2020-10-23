@@ -2,7 +2,7 @@
 {% load static %}
 /* MAIN */
 
-body { 
+body {
 	margin: 0;
 }
 
@@ -15,17 +15,17 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
 
 
@@ -33,15 +33,29 @@ body {
 
 
 @font-face {
-  font-family: "FuturaBold";
-  src: url('fonts/FuturaCom-Bold.ttf');
+  font-family: "ManropeBold";
+  src: url('fonts/Manrope-Bold.ttf');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "FuturaLight";
-  src: url('fonts/FuturaCom-Light.ttf');
+  font-family: "ManropeLight";
+  src: url('fonts/Manrope-Light.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "JustMeAgainDownHere";
+  src: url('fonts/JustMeAgainDownHere-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Pacifico";
+  src: url('fonts/Pacifico-Regular.ttf');
   font-weight: normal;
   font-style: normal;
 }
@@ -62,45 +76,53 @@ a:visited {
   color: #000000;
   background-color: transparent;
   text-decoration: none;
-font: 25px;
+  font: 25px;
 }
 a:hover {
   color: #000000;
   background-color: transparent;
-font: 25px;
+  font: 25px;
 }
 a:active {
   color: #000000;
   background-color: transparent;
   text-decoration: underline;
-font: 25px;
+  font: 25px;
 }
 
 /* INPUT BTN */
 
 
 
-.input-btn {;
+.input-btn {
   border: none;
   color: #000000;
+  background-color: #00000000;
   text-align: center;
-  font: 20px "FuturaLight";
-	padding: 5px 15px;
+  font: 20px "ManropeLight";
+  padding: 5px 15px;
 }
 
 .input-btn-hidden {
   border: none;
   color: #000000;
+  background-color: #00000000;
   text-align: center;
-  font: 20px "FuturaLight";
-	padding: 5px 15px;
+  font: 20px "ManropeLight";
+  padding: 5px 15px;
+}
+
+.ace-btn {
+  border: none;
+  background-color: #00000000;
+  text-align: center;
 }
 
 .chart-btn {;
   border: none;
   color: #000000;
   text-align: center;
-  font: 20px "FuturaLight";
+  font: 20px "ManropeLight";
   padding: 5px 15px;
   width: 90%;
 }
@@ -153,13 +175,13 @@ font: 25px;
 }
 
 .dropdown .dropbtn {
-  font-size: 17px;    
+  font-size: 17px;
   border: none;
   outline: none;
   color: white;
   padding: 14px 16px;
   background-color: inherit;
-  font: 14px "FuturaLight";
+  font: 14px "ManropeLight";
   margin: 0;
 }
 
@@ -193,6 +215,11 @@ font: 25px;
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.statusChart_div {
+    background-color: #ffffff;
+
 }
 
 
@@ -232,9 +259,8 @@ form.search input[type=text] {
   border: 1px solid grey;
   float: center;
   width: 50%;
-  background: #f1f1f1;
   text-align: center;
-  font: 18px "FuturaLight";
+  font: 18px "ManropeLight";
 }
 
 form.search button {
@@ -262,38 +288,40 @@ form.search::after {
 }
 
 input[type=text], select {
-	font: 18px "FuturaLight";
-    padding:5px; 
-    border:2px solid #ccc; 
+	font: 18px "ManropeLight";
+    padding:5px;
+    border:2px solid #ccc;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-  width: 200px;
-  height: 45px;
+    width: 200px;
+    height: 45px;
+    background-color: #ffffff;
+
 }
 
 input[type=submit] {
-	font: 18px "FuturaLight";
-    padding: 5px 15px; 
-    background: #8f153e; 
+	font: 18px "ManropeLight";
+    padding: 5px 15px;
+    background: #8f153e;
 	color: #ffffff;
     border: 0 none;
     cursor: pointer;
     -webkit-border-radius: 5px;
-    border-radius: 5px; 
+    border-radius: 5px;
 }
 
 input[type=password] {
-	font: 18px "FuturaLight";
-    padding:5px; 
-    border:2px solid #ccc; 
+	font: 18px "ManropeLight";
+    padding:5px;
+    border:2px solid #ccc;
     -webkit-border-radius: 5px;
     border-radius: 5px;
 }
 
 input[type=username] {
-	font: 18px "FuturaLight";
-    padding:5px; 
-    border:2px solid #ccc; 
+	font: 18px "ManropeLight";
+    padding:5px;
+    border:2px solid #ccc;
     -webkit-border-radius: 5px;
     border-radius: 5px;
 }
@@ -327,7 +355,7 @@ form.article input[type=text] {
   width: 40%;
   background: #f1f1f1;
   text-align: center;
-  font: 22px "FuturaLight";
+  font: 22px "ManropeLight";
 }
 
 
@@ -346,31 +374,34 @@ table th , table td{
   background-color: #ffffff;
   margin:0 !important;
   }
-  
+
 .column_chart {
-  width: 100%; 
+  width: 100%;
   min-height: 450px;
   }
-  
+
  .row {
   display: flex;
   flex-wrap: wrap;
-  padding: 0 4px;
   }
-  
+
 /* Create four equal columns that sits next to each other */
 .column {
   flex: 25%;
   max-width: 25%;
   padding: 0 4px;
   }
-  
+
 .columns {
     flex: 25%;
-    padding: 0 4px;
     text-align: center;
     }
-  
+
+.columns_ace {
+    flex: 5%;
+    text-align: center;
+    }
+
 .column img {
   margin-top: 8px;
   vertical-align: middle;
@@ -385,13 +416,135 @@ table th , table td{
   margin-top: -50px;
 }
 
-  
+.indexbutton{
+    border: none;
+    width: 22%;
+    height: 200px;
+    margin: 1%;
+    margin-top: 10px;
+    background-color: rgb(92, 92, 92);
+    font: 22px 'ManropeLight';
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 1s;
+}
+
+.indexbutton .test { display: none; }
+button:hover .test2 { display: none; }
+button:hover .test { display: initial; }
+.indexbutton:hover{
+    background-color: #000000;
+}
+
+.tausoftfooter{
+    text-align:center;
+    padding: 0px 0px 0px 0px;
+}
+
+.zero{
+     font: 18px "ManropeLight";
+    padding:5px;
+    border:2px solid #ccc;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    width: 200px;
+    height: 45px;
+}
+
+/* select */
+
+.select_notselected {
+    max-width: 120px;
+    min-width: 120px;
+    padding: 50px 0px 50px 0px;
+    cursor: pointer;
+    border-style: solid;
+    border-color: rgb(92, 92, 92);
+    color: #000000;
+    font: 20px "ManropeLight";
+    text-align: center;
+}
+
+.select_notselected:hover{
+    border-color: #000000;
+}
+
+.select_selected {
+    max-width: 120px;
+    min-width: 120px;
+    padding: 50px 0px 50px 0px;
+    cursor: pointer;
+    background-color: rgb(92, 92, 92);
+    border-style: solid;
+    border-color: #000000;
+    color: #ffffff;
+    font: 20px "ManropeLight";
+    text-align: center;
+}
+
+.select_selected:hover{
+    background-color: gray;
+}
+
+.selectall_notselected {
+    max-width: 120px;
+    min-width: 120px;
+    padding: 50px 0px 50px 0px;
+    cursor: pointer;
+    border-style: solid;
+    border-color: rgb(92, 92, 92);
+    color: #000000;
+    font: 20px "ManropeLight";
+    text-align: center;
+}
+
+.selectall_notselected:hover{
+    border-color: #000000;
+}
+
+.selectall_selected {
+    max-width: 120px;
+    min-width: 120px;
+    padding: 50px 0px 50px 0px;
+    cursor: pointer;
+    background-color: rgb(92, 92, 92);
+    border-style: solid;
+    border-color: #000000;
+    color: #ffffff;
+    font: 20px "ManropeLight";
+    text-align: center;
+}
+
+.selectall_selected:hover{
+    background-color: gray;
+}
+
+/* select */
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 1600px) {
+  .columns {
+    flex: 33,33%;
+  }
+    .indexbutton{
+    width: 30%;
+    margin: 1%;
+  }
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 1100px) {
+  .columns {
+    flex: 50%;
+  }
+    .indexbutton{
+    width: 47%;
+    margin: 1%;
+  }
+}
+
 /* Responsive layout - makes a two column-layout instead of four columns */
 @media screen and (max-width: 800px) {
-  .column {
-    flex: 50%;
-    max-width: 50%;
-  }
 
   .headertext {
     display: none;
@@ -400,13 +553,50 @@ table th , table td{
   .headersearch{
     margin-top: 0px;
   }
+
+  .indexbutton{
+    width: 80%;
+    margin-left: 3%;
+  }
+
+  .tausoftfooter{
+    text-align: left;
+    padding: 0px 0px 0px 5px;
+  }
+
+  .select_notselected {
+    max-width: 60px;
+    min-width: 60px;
+    padding: 25px 0px 25px 0px;
+    font: 10px "ManropeLight";
+    }
+
+    .select_selected {
+    max-width: 60px;
+    min-width: 60px;
+    padding: 25px 0px 25px 0px;
+    font: 10px "ManropeLight";
+    }
+
+    .selectall_notselected {
+    max-width: 60px;
+    min-width: 60px;
+    padding: 25px 0px 25px 0px;
+    font: 10px "ManropeLight";
+    }
+
+    .selectall_selected {
+    max-width: 60px;
+    min-width: 60px;
+    padding: 25px 0px 25px 0px;
+    font: 10px "ManropeLight";
+    }
 }
-  
+
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
-  .column {
+  .columns {
     flex: 100%;
-    max-width: 100%;
     }
 
   .headertext {
@@ -415,6 +605,11 @@ table th , table td{
 
   .headersearch{
     margin-top: 0px;
+  }
+
+  .tausoftfooter{
+    text-align: left;
+    padding: 0px 0px 0px 5px;
   }
 }
 
@@ -459,6 +654,9 @@ td, th{
   .five{
       display: none;
   }
+  .zero{
+      width: 100%;
+  }
 }
 
 table#t1 {
@@ -477,29 +675,29 @@ tr#t1:hover {
 /*table*/
 
 h2 {
-  font: 55px "FuturaLight";
+  font: 55px "ManropeLight";
   color: #ffffff;
 }
 
 h3 {
-  font: 38px "FuturaLight";
+  font: 38px "ManropeLight";
   color: #ffffff;
 }
 
 h5 {
-  font: 14px "FuturaBold";
+  font: 14px "ManropeBold";
   color: #000000;
 }
 
 p {
 
-  font: 18px "FuturaLight";
+  font: 18px "ManropeLight";
 }
 
 body, html {
   height: 100%;
   margin: 0;
-  font: 18px "FuturaLight";
+  font: 18px "ManropeLight";
   color: #000000;
 }
 
@@ -508,7 +706,7 @@ body, html {
 	position: fixed;
 	top: 0;
 	}
-	
+
 /*main*/
 
 /* The Modal (background) */
@@ -560,6 +758,10 @@ body, html {
 
 /* The Modal (background) */
 
+
+
+
+
 /*file uploader*/
 
 .file-upload {
@@ -569,14 +771,14 @@ body, html {
 }
 
 .file-upload-btn {
-  font: 20px "FuturaLight";
-  padding: 5px 15px; 
-  background: #8f153e; 
+  font: 20px "ManropeLight";
+  padding: 5px 15px;
+  background: #8f153e;
   color: #ffffff;
   border: 0 none;
   cursor: pointer;
   -webkit-border-radius: 5px;
-  border-radius: 5px; 
+  border-radius: 5px;
   width: 100%;
 }
 
@@ -642,15 +844,15 @@ body, html {
 }
 
 .remove-image {
-  font: 20px "FuturaLight";
-  padding: 5px 15px; 
-  background: #8f153e; 
+  font: 20px "ManropeLight";
+  padding: 5px 15px;
+  background: #8f153e;
   opacity: 0.3;
   color: #ffffff;
   border: 0 none;
   cursor: pointer;
   -webkit-border-radius: 5px;
-  border-radius: 5px; 
+  border-radius: 5px;
   transition: all .2s ease;
   outline: none;
   width: auto;

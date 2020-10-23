@@ -31,28 +31,53 @@
 <!-- APPS -->
 
 <!-- DOWNLOAD VENDORS LIST -->
-<div style="overflow-x:auto; padding:50px 80px; text-align: center;">
-	<h3 class="headertext" style="color: #000000;">IMEI liste</h3>
+<div style="text-align: center;">
+    <br><br>
+	<h3 style="color:#000000; padding-top: 4px">IMEI liste</h3>
+	<p style="text-align:center";>Odabirom proizvođača iz nastavka možeš preuzeti sortirane liste IMEI brojeva gde kod za dekodiranje nije dostupan.</p><br/>
 	<div class="row">
-		<div class="columns">
-			<form class="contact-form" method="POST" action="/download_list/"> 
-				{% csrf_token %}
-				<input type="checkbox" onClick="toggleAll(this)" /> Obeleži sve<br/><br/>
-				<input type="checkbox" class="select_all" name="name0" value="alcatel"/> Alcatel
-				<input type="checkbox" class="select_all" name="name1" value="htc"/> HTC
-				<input type="checkbox" class="select_all" name="name2" value="huawei"/> Huawei
-				<input type="checkbox" class="select_all" name="name3" value="lg"/> LG
-				<input type="checkbox" class="select_all" name="name4" value="lumia"/> Lumia
-				<input type="checkbox" class="select_all" name="name5" value="samsung"/> Samsung
-				<input type="checkbox" class="select_all" name="name6" value="sony"/> Sony
-				<input type="checkbox" class="select_all" name="name7" value="zte"/> ZTE
-				<br><br>
-				<button onclick="checkboxChecker();" style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
-					<p style="color:#ffffff;">preuzmi</p>
-				</button>
-			</form>
+        <div class="columns">
+            <button class="input-btn" disabled>
+                <div onclick="selectAll();" class="selectall_notselected" name="" id="selectall">Obeleži sve</div>
+            </button>
+            <button class="input-btn" disabled>
+                <div onclick="selectMeMain(this.id);" class="select_notselected" name="vendors" id="alcatel">Alcatel</div>
+            </button>
+            <button class="input-btn" disabled>
+                <div onclick="selectMeMain(this.id);" class="select_notselected" name="vendors" id="htc">HTC</div>
+            </button>
+            <button class="input-btn" disabled>
+                <div onclick="selectMeMain(this.id);" class="select_notselected" name="vendors" id="huawei">Huawei</div>
+            </button>
+            <button class="input-btn" disabled>
+                <div onclick="selectMeMain(this.id);" class="select_notselected" name="vendors" id="lg">LG</div>
+            </button>
+            <button class="input-btn" disabled>
+                <div onclick="selectMeMain(this.id);" class="select_notselected" name="vendors" id="lumia">Lumia</div>
+            </button>
+            <button class="input-btn" disabled>
+                <div onclick="selectMeMain(this.id);" class="select_notselected" name="vendors" id="samsung">Samsung</div>
+            </button>
+            <button class="input-btn" disabled>
+                <div onclick="selectMeMain(this.id);" class="select_notselected" name="vendors" id="sony">Sony</div>
+            </button>
+            <button class="input-btn" disabled>
+                <div onclick="selectMeMain(this.id);" class="select_notselected" name="vendors" id="zte">ZTE</div>
+            </button>
+        </div>
+    </div>
+	<form class="contact-form" method="POST" action="/download_list/">
+		{% csrf_token %}
+		<input id="selected" name="selected" value="" hidden></input>
+		<br><br>
+		<div class="row">
+		    <div class="columns">
+        		<button onclick="checkboxChecker();" style="background-color: rgb(92, 92, 92); border:none; width: 200px; cursor: pointer;">
+        			<p style="color:#ffffff;">preuzmi</p>
+        		</button>
+		    </div>
 		</div>
-	</div>
+	</form>
 	<div class="ace-alert" style="background-color: #f15959; text-align: center; margin-left: auto; margin-right: auto; left: 0; right: 0; margin-top: 2px;">
 		<p style="color:#ffffff; padding: 10px 0px 10px 0px;" class="checkbox-alert" hidden>Neophodno je odabrati makar jednog proizvođača!</p>
 	</div>
@@ -65,17 +90,17 @@
 		</div>
 	</div>
 	{% endif %}
-	<br><br>
+	<br/><br/>
 
 	<!-- NOKIA LIST -->
 	<h3 class="headertext" style="color: #000000;">Nokia liste</h3>
-	<p style="text-align:center";>Liste IMEI brojeva sortiranih prema tipu winlock-a:</p>
+	<p style="text-align:center";>Liste IMEI brojeva sortiranih prema tipu winlock-a.</p>
 	<div class="row">
 		<div class="columns">
-			<form class="contact-form" method="POST" action="/nokia_list/"> 
+			<form class="contact-form" method="POST" action="/nokia_list/">
 				{% csrf_token %}
 				<br>
-				<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+				<button style="background-color: rgb(92, 92, 92); border:none; width: 200px; margin-top: 5px; cursor: pointer;">
 					<p style="color:#ffffff;">preuzmi</p>
 				</button>
 			</form>
@@ -90,48 +115,54 @@
 		</div>
 	</div>
 	{% endif %}
+	<br/>
 	<!-- NOKIA LIST -->
 
 </div>
+
+
 <!-- DOWNLOAD VENDORS LIST -->
 
 <div style="background-color: #e4e4e4; overflow-x:auto; padding:50px 80px; text-align: center;"></div>
 
 <!-- UPLOAD CSV -->
-<div style="padding:50px 80px;">
-	<h3 class="headertext" style="color: #000000; text-align: center;">Unos kodova za dekodiranje</h3>
-		<form name="myWebForm" method="POST" action="/upload_csv/" enctype="multipart/form-data">
-			{% csrf_token %}
-			<div class="form-group">
-				<div class="file-upload">
-					<div class="image-upload-wrap">
-						<input class="file-upload-input" type='file' name="upload_csv" onchange="readURL(this);" accept=".csv"/>
-						<div class="drag-text">
-							<h3>Prevuci ili izaberi CSV datoteku</h3>
-						</div>
+<div>
+    <br/><br/>
+    <div style="text-align: center;">
+	    <h3 style="color:#000000; text-align: center;">Unos kodova za dekodiranje</h3>
+	    <p style="text-align:center"; hidden>Ukoliko ne želiš ručno da upisuješ kodove, moguć je i masovni unos. Potrebno je samo formirati .CSV datoteku, gde je <b>A kolona: IMEI broj</b>, <b>B kolona: Kod za dekodiranje</b>, a za delimiter možeš koristiti <b>,</b> ili <b>;</b> - npr 357889040574670;12345667</p>
+	</div>
+	<form name="myWebForm" method="POST" action="/upload_csv/" enctype="multipart/form-data">
+		{% csrf_token %}
+		<div class="form-group">
+			<div class="file-upload">
+				<div class="image-upload-wrap">
+					<input class="file-upload-input" type='file' name="upload_csv" onchange="readURL(this);" accept=".csv"/>
+					<div class="drag-text">
+						<h3>Prevuci ili izaberi CSV datoteku</h3>
 					</div>
-					<div class="file-upload-content">
-						<object data="{% static 'images/CSV_file.png' %}" type="image/png">
-							<img class="file-upload-image" src="#" alt="your image" />
-						</object>
-						<div class="image-title-wrap">
-							<p>Uspešno je učitana datoteka <span class="image-title">Uploaded Image</span></p> <br />
-							<div class="row">
-								<div class="columns">
-									<button style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
-										<p style="color:#ffffff;">učitaj datoteku</p>
-									</button>
-									<button onclick="removeUpload()" style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
-										<p style="color:#ffffff;">ukloni datoteku</p>
-									</button>
-								</div>
+				</div>
+				<div class="file-upload-content">
+					<object data="{% static 'images/CSV_file.png' %}" type="image/png">
+						<img class="file-upload-image" src="#" alt="your image" />
+					</object>
+					<div class="image-title-wrap">
+						<p>Uspešno je učitana datoteka <span class="image-title">Uploaded Image</span></p> <br />
+						<div class="row">
+							<div class="columns">
+								<button style="background-color: rgb(92, 92, 92); border:none; width: 200px; margin-top: 5px; cursor: pointer;">
+									<p style="color:#ffffff;">otvori datoteku</p>
+								</button>
+								<button onclick="removeUpload()" style="background-color: rgb(92, 92, 92); border:none; width: 200px; cursor: pointer;">
+									<p style="color:#ffffff;">ukloni datoteku</p>
+								</button>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</form>
-		<p id="test"></p>
+		</div>
+	</form>
 </div>
 
 </br>
@@ -140,13 +171,13 @@
 <div style="background-color: #e4e4e4; overflow-x:auto; padding:50px 80px; text-align: center;"></div>
 
 <!-- ACE LIST AND TABLE-->
-<div style="padding:50px 80px; text-align: center;">
-	<h3 class="headertext" style="color: #000000;">Liste za ACE</h3>
+<div style="text-align: center;">
+	<h3 style="color:#000000; padding-top: 4px">Liste za isporuku kodova ka korisnicima</h3>
 	<div class="row">
 		<div class="columns">
-			<form class="contact-form" method="POST" action="/ace_list/"> 
+			<form class="contact-form" method="POST" action="/ace_list/">
 				{% csrf_token %}
-				<button onclick="fnValidate()" style="background-color: rgb(92, 92, 92); border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
+				<button onclick="fnValidate()" style="background-color: rgb(92, 92, 92); border:none; width: 200px; cursor: pointer;">
 					<p style="color:#ffffff;">preuzmi</p>
 				</button>
 			</form>
@@ -164,38 +195,31 @@
 			-->
 		</div>
 	</div>
+	</br></br>
+	<p>Kreirane liste - preuzmi ponovo</p>
 	</br>
-	<p>Kreirane ACE liste - preuzmi ponovo</p>
-	<div class="row">
-			{% for item in ace_data reversed %}
-				{% if forloop.counter < 11 %}
-				
-					<div class="columns">
-						<button class="input-btn" disabled></button>
-						<form class="contact-form" method="POST" action="/ace_table/">
-							{% csrf_token %}
-							<button style="border:none; min-width: 312px; max-width: 312px; cursor: pointer;">
-								<input id="ace_name" type="text" name="ace_name" value="{{ item.name }}"hidden>
-								<div style="background-color: rgb(92, 92, 92); display: table; border: none; padding-top: 50px; font: 22px 'FuturaLight'; text-align:center; cursor: pointer;"> <p style="color:#ffffff;">{{ item.datecreated|date:"d.m.Y - H:i" }}</p>
-									<div style="background-color: #f1f1f1; min-width: 300px; max-width: 300px; text-align:center; padding: 1px 0px 1px 0px; cursor: pointer;">
-										<p style="color:#000000;">preuzmi</p>
-									</div>
-								</div>
-							</button>
-						</form>
-					</button>
-					
-				</div>
-				{% endif %}
-			{% endfor %}
-		</div>
+    <div class="row">
+    	{% for item in ace_data reversed %}
+    		{% if forloop.counter < 11 %}
+                <div class="columns_ace">
+    	            <form method="POST" action="/ace_table/">
+    	                {% csrf_token %}
+                        <button style="background-color: rgb(92, 92, 92); margin-top: 5px; border: none; width: 200px; cursor: pointer;">
+                            <input id="ace_name" name="ace_name" value="{{ item.name }}"hidden>
+                            <p style="color:#ffffff;">{{ item.datecreated|date:"d.m.Y - H:i" }}</p>
+                        </button>
+                    </form>
+                </div>
+    		{% endif %}
+    	{% endfor %}
+    </div>
 </div>
-<br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/></br>
 <!-- ACE LIST AND TABLE-->
 
 <!-- APPS -->
 
-  
+
 <!-- Footer -->
 
 {% include "mysite/footer.html" %}
